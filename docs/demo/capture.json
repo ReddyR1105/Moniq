@@ -1,0 +1,43 @@
+{
+  "recorded": true,
+  "elapsed_seconds": 131.751,
+  "segments": [
+    {
+      "seconds": 0,
+      "caption": "Moniq — Spending, Made Smarter. Alex is a synthetic Georgia State student; these totals are calculated from SQLite records."
+    },
+    {
+      "seconds": 15,
+      "caption": "A simulated $15.75 Chick-fil-A alert is extracted and classified Food by the local TF-IDF model. Review comes before saving; no automatic iMessage access."
+    },
+    {
+      "seconds": 34,
+      "caption": "Confirmation saved the expense and refreshed the dashboard and food budget. Weekly and monthly limits can be edited independently."
+    },
+    {
+      "seconds": 52,
+      "caption": "A $150 purchase reduces the estimated 30-day balance by exactly $150. Known bills and income are counted on due dates; forecasts remain estimates."
+    },
+    {
+      "seconds": 72,
+      "caption": "Offers match spending, interests, student eligibility and remaining budget. These are clearly labeled synthetic examples, not redeemable discounts."
+    },
+    {
+      "seconds": 90,
+      "caption": "The local assistant explains affordability using the same calculated forecast, with visible evidence. No external API key or invented financial numbers."
+    },
+    {
+      "seconds": 110,
+      "caption": "Monthly recurring services are inferred from three similar charges; review or dismiss detections. Confirmation does not cancel a subscription."
+    },
+    {
+      "seconds": 120,
+      "caption": "Transactions can be imported, searched, edited and deleted. This purchase is now a persisted record."
+    },
+    {
+      "seconds": 120,
+      "caption": "Profile, allowance and goals are editable. Export, delete and Reset Demo work. Moniq helps students see the consequence of everyday choices."
+    }
+  ],
+  "console_or_server_errors": []
+}

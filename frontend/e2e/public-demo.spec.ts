@@ -1,0 +1,63 @@
+import { test, expect, type Page } from '@playwright/test'
+
+async function nav(page: Page, name: string) {
+  if (await page.getByRole('button',{name:'Open navigation',exact:true}).isVisible()) await page.getByRole('button',{name:'Open navigation',exact:true}).click()
+  await page.getByRole('navigation',{name:'Main navigation'}).getByRole('button',{name,exact:true}).click()
+}
+
+test('production demo isolates two visitors and resets only the current session @public', async ({browser}) => {
+  const a = await browser.newContext(), b = await browser.newContext()
+  const alice = await a.newPage(), bob = await b.newPage()
+  const errors: string[] = []
+  alice.on('pageerror', e => errors.push(e.message))
+  await Promise.all([alice.goto('http://127.0.0.1:8003'), bob.goto('http://127.0.0.1:8003')])
+  await expect(alice.getByTestId('balance')).toBeVisible()
+  await expect(bob.getByTestId('balance')).toBeVisible()
+  const before = await bob.getByTestId('monthly-expenses').innerText()
+  await alice.getByRole('button',{name:'Start Demo',exact:true}).click()
+  await expect(alice.getByRole('region',{name:'Guided demo'})).toBeVisible()
+  await alice.getByRole('button',{name:'Try purchase alert',exact:true}).click()
+  await expect(alice.getByRole('dialog').locator('textarea')).toHaveAttribute('readonly','')
+  await alice.getByRole('button',{name:'Simulate a purchase alert',exact:true}).click()
+  await expect(alice.getByRole('dialog').getByLabel('Amount ($)',{exact:true})).toHaveValue('15.75')
+  await alice.getByRole('button',{name:'Confirm & save transaction',exact:true}).click()
+  await expect(alice.getByTestId('monthly-expenses')).toHaveText((Number(before.replace(/[$,]/g,''))+15.75).toLocaleString('en-US',{style:'currency',currency:'USD'}))
+  await bob.reload()
+  await expect(bob.getByTestId('monthly-expenses')).toHaveText(before)
+  await nav(alice,'AI Insights')
+  await expect(alice.getByRole('button',{name:'Retrain with corrections',exact:true})).toBeDisabled()
+  await alice.getByRole('button',{name:'Run scenario',exact:true}).click()
+  await expect(alice.getByTestId('scenario-difference')).toContainText('-$150.00')
+  await nav(alice,'Student Deals')
+  await expect(alice.locator('.deal-card').first()).toBeVisible()
+  await nav(alice,'AI Assistant')
+  await alice.getByRole('button',{name:'Can I afford a $150 purchase?',exact:true}).click()
+  await expect(alice.locator('.chat-message.assistant')).toContainText('30-day balance')
+  alice.once('dialog',d => d.accept())
+  await alice.getByRole('button',{name:'Reset Demo',exact:true}).click()
+  await expect(alice.getByTestId('monthly-expenses')).toHaveText(before)
+  await expect(bob.getByTestId('monthly-expenses')).toHaveText(before)
+  expect(errors).toEqual([])
+  await a.close();await b.close()
+})
+
+test('production demo blocks uploads, provides a synthetic import and fits mobile @public', async ({page}) => {
+  await page.goto('/demo') // Direct SPA routes must serve the actual production frontend.
+  await expect(page.getByTestId('balance')).toBeVisible()
+  expect((await page.request.get('/api/does-not-exist')).status()).toBe(404)
+  await nav(page,'Transactions')
+  await page.getByRole('button',{name:'Import CSV',exact:true}).click()
+  await expect(page.getByRole('dialog').locator('input[type=file]')).toHaveCount(0)
+  await page.getByRole('button',{name:'Import synthetic statement',exact:true}).click()
+  await expect(page.getByRole('dialog')).toHaveCount(0)
+  await expect(page.locator('.toast')).toContainText('imported')
+  await nav(page,'Settings')
+  await expect(page.getByLabel('Name',{exact:true})).toHaveAttribute('readonly','')
+  await page.setViewportSize({width:390,height:844})
+  for (const name of ['Overview','Transactions','Budgets','AI Insights','Student Deals','Subscriptions','AI Assistant','Settings']) {
+    await nav(page,name)
+    await expect(page.locator('h1')).toBeVisible()
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), name).toBeTruthy()
+    await expect(page.getByRole('alert')).toHaveCount(0)
+  }
+})

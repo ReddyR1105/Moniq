@@ -1,0 +1,83 @@
+import { test, expect } from '@playwright/test'
+import fs from 'node:fs/promises'
+import path from 'node:path'
+
+test('actual Moniq submission walkthrough @demo', async ({page, request, context}) => {
+  test.setTimeout(240000)
+  const recording = process.env.MONIQ_RECORD_DEMO === '1'
+  const destination = path.resolve('../docs/screenshots')
+  const videoDestination = path.resolve('../docs/demo')
+  await fs.mkdir(destination,{recursive:true})
+  await fs.mkdir(videoDestination,{recursive:true})
+  const errors: string[] = []
+  page.on('pageerror', e => errors.push(e.message))
+  page.on('response', r => {if (r.url().includes('/api/') && r.status() >= 500) errors.push(`${r.status()} ${r.url()}`)})
+  expect((await request.post('http://127.0.0.1:8001/api/demo/reset')).ok()).toBeTruthy()
+  await page.goto('/')
+  await expect(page.getByTestId('balance')).toBeVisible()
+  const started = Date.now()
+  const segments: {seconds:number;caption:string}[] = []
+  const stage = async (filename: string, caption: string, seconds: number) => {
+    segments.push({seconds:Math.round((Date.now()-started)/1000),caption})
+    await page.screenshot({path:path.join(destination,`${filename}.png`),fullPage:true})
+    if (recording) await page.waitForTimeout(seconds*1000)
+  }
+  const nav = async (name: string) => {
+    await page.getByRole('navigation',{name:'Main navigation'}).getByRole('button',{name,exact:true}).click()
+    await expect(page.locator('h1')).toBeVisible()
+    await page.evaluate(() => window.scrollTo(0,0))
+  }
+  await expect(page.locator('.recharts-pie')).toBeVisible()
+  const before = Number((await page.getByTestId('monthly-expenses').innerText()).replace(/[$,]/g,''))
+  await stage('01-overview','Moniq — Spending, Made Smarter. Alex is a synthetic Georgia State student; these totals are calculated from SQLite records.',15)
+  await page.getByRole('button',{name:'Try purchase alert',exact:true}).click()
+  await page.getByRole('button',{name:'Simulate a purchase alert',exact:true}).click()
+  await expect(page.getByRole('dialog').getByLabel('Category',{exact:true})).toHaveValue('food')
+  await stage('02-purchase-review','A simulated $15.75 Chick-fil-A alert is extracted and classified Food by the local TF-IDF model. Review comes before saving; no automatic iMessage access.',18)
+  await page.getByRole('button',{name:'Confirm & save transaction',exact:true}).click()
+  await expect(page.getByTestId('monthly-expenses')).toHaveText((before+15.75).toLocaleString('en-US',{style:'currency',currency:'USD'}))
+  await nav('Budgets')
+  await expect(page.getByLabel('Food monthly limit',{exact:true})).toBeVisible()
+  await stage('03-budgets','Confirmation saved the expense and refreshed the dashboard and food budget. Weekly and monthly limits can be edited independently.',17)
+  await nav('AI Insights')
+  await page.getByRole('button',{name:'Run scenario',exact:true}).click()
+  await expect(page.getByTestId('scenario-difference')).toContainText('-$150.00')
+  await stage('04-forecast','A $150 purchase reduces the estimated 30-day balance by exactly $150. Known bills and income are counted on due dates; forecasts remain estimates.',20)
+  await nav('Student Deals')
+  await expect(page.locator('.deal-card').first()).toBeVisible()
+  await page.locator('.deal-card').first().getByRole('button').click()
+  await stage('05-student-deals','Offers match spending, interests, student eligibility and remaining budget. These are clearly labeled synthetic examples, not redeemable discounts.',17)
+  await nav('AI Assistant')
+  await page.getByRole('button',{name:'Can I afford a $150 purchase?',exact:true}).click()
+  await expect(page.locator('.chat-message.assistant')).toContainText('30-day balance')
+  await page.getByText('See the calculated values',{exact:true}).click()
+  await stage('06-assistant','The local assistant explains affordability using the same calculated forecast, with visible evidence. No external API key or invented financial numbers.',20)
+  await nav('Subscriptions')
+  await expect(page.locator('.subscription-row')).toHaveCount(3)
+  await stage('07-subscriptions','Monthly recurring services are inferred from three similar charges; review or dismiss detections. Confirmation does not cancel a subscription.',10)
+  await nav('Transactions')
+  await expect(page.locator('.transactions-table')).toContainText('Chick-fil-A')
+  await stage('08-transactions','Transactions can be imported, searched, edited and deleted. This purchase is now a persisted record.',0)
+  await nav('Settings')
+  await expect(page.getByLabel('Name',{exact:true})).toHaveValue('Alex Morgan')
+  await stage('09-settings','Profile, allowance and goals are editable. Export, delete and Reset Demo work. Moniq helps students see the consequence of everyday choices.',8)
+  page.once('dialog', d => d.accept())
+  await page.getByRole('button',{name:'Reset Demo',exact:true}).click()
+  await expect(page.locator('.toast')).toContainText('Synthetic GSU demo restored')
+  await nav('Overview')
+  if (recording) await page.waitForTimeout(3000)
+  expect(errors).toEqual([])
+  const elapsed = (Date.now()-started)/1000
+  if (recording) await fs.writeFile(path.join(videoDestination,'capture.json'),JSON.stringify({recorded:recording,elapsed_seconds:elapsed,segments,console_or_server_errors:errors},null,2))
+  await page.setViewportSize({width:390,height:844})
+  await expect.poll(() => page.locator('.sidebar').evaluate(element => element.getBoundingClientRect().right)).toBeLessThanOrEqual(0)
+  const dismiss = page.getByRole('button',{name:'Dismiss notification',exact:true})
+  if (await dismiss.isVisible()) await dismiss.click()
+  await page.screenshot({path:path.join(destination,'10-mobile-overview.png'),fullPage:true})
+  if (recording) {
+    const video = page.video()
+    expect(video).not.toBeNull()
+    await context.close()
+    await video!.saveAs(path.join(videoDestination,'moniq-demo.webm'))
+  }
+})

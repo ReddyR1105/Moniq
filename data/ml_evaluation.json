@@ -1,0 +1,321 @@
+{
+  "accuracy": 0.946969696969697,
+  "classification_report": {
+    "education": {
+      "precision": 0.9230769230769231,
+      "recall": 1.0,
+      "f1-score": 0.96,
+      "support": 24.0
+    },
+    "entertainment": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 24.0
+    },
+    "food": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 24.0
+    },
+    "groceries": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 24.0
+    },
+    "healthcare": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 24.0
+    },
+    "income": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 24.0
+    },
+    "miscellaneous": {
+      "precision": 0.8571428571428571,
+      "recall": 0.5,
+      "f1-score": 0.631578947368421,
+      "support": 24.0
+    },
+    "rent": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 24.0
+    },
+    "shopping": {
+      "precision": 0.7058823529411765,
+      "recall": 1.0,
+      "f1-score": 0.8275862068965517,
+      "support": 24.0
+    },
+    "subscriptions": {
+      "precision": 1.0,
+      "recall": 0.9166666666666666,
+      "f1-score": 0.9565217391304348,
+      "support": 24.0
+    },
+    "transportation": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 24.0
+    },
+    "accuracy": 0.946969696969697,
+    "macro avg": {
+      "precision": 0.9532820121055415,
+      "recall": 0.9469696969696969,
+      "f1-score": 0.9432442630359463,
+      "support": 264.0
+    },
+    "weighted avg": {
+      "precision": 0.9532820121055415,
+      "recall": 0.946969696969697,
+      "f1-score": 0.9432442630359461,
+      "support": 264.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      24,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      24,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      24,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      24,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      24,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      24,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      12,
+      0,
+      10,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      24,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      24,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      22,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      24
+    ]
+  ],
+  "labels": [
+    "education",
+    "entertainment",
+    "food",
+    "groceries",
+    "healthcare",
+    "income",
+    "miscellaneous",
+    "rent",
+    "shopping",
+    "subscriptions",
+    "transportation"
+  ],
+  "training_rows": 792,
+  "test_rows": 264,
+  "corrections_used": 0,
+  "representative_errors": [
+    {
+      "description": "ONLINE PAYMENT Streaming service membership",
+      "expected": "subscriptions",
+      "predicted": "miscellaneous",
+      "confidence": 0.4015
+    },
+    {
+      "description": "CARD PURCHASE Streaming service membership",
+      "expected": "subscriptions",
+      "predicted": "miscellaneous",
+      "confidence": 0.4109
+    },
+    {
+      "description": "Parcel postage ATLANTA GA",
+      "expected": "miscellaneous",
+      "predicted": "shopping",
+      "confidence": 0.1163
+    },
+    {
+      "description": "POS Parcel postage ATLANTA GA",
+      "expected": "miscellaneous",
+      "predicted": "shopping",
+      "confidence": 0.1176
+    },
+    {
+      "description": "DEBIT CARD Parcel postage #104",
+      "expected": "miscellaneous",
+      "predicted": "shopping",
+      "confidence": 0.1165
+    },
+    {
+      "description": "ACH Parcel postage #104",
+      "expected": "miscellaneous",
+      "predicted": "shopping",
+      "confidence": 0.1143
+    },
+    {
+      "description": "ONLINE PAYMENT Parcel postage GSU",
+      "expected": "miscellaneous",
+      "predicted": "education",
+      "confidence": 0.1525
+    },
+    {
+      "description": "CARD PURCHASE Parcel postage GSU",
+      "expected": "miscellaneous",
+      "predicted": "education",
+      "confidence": 0.1621
+    },
+    {
+      "description": "Parcel postage MOBILE",
+      "expected": "miscellaneous",
+      "predicted": "shopping",
+      "confidence": 0.115
+    },
+    {
+      "description": "POS Parcel postage MOBILE",
+      "expected": "miscellaneous",
+      "predicted": "shopping",
+      "confidence": 0.1152
+    },
+    {
+      "description": "DEBIT CARD Parcel postage 2026",
+      "expected": "miscellaneous",
+      "predicted": "shopping",
+      "confidence": 0.1165
+    },
+    {
+      "description": "ACH Parcel postage 2026",
+      "expected": "miscellaneous",
+      "predicted": "shopping",
+      "confidence": 0.1143
+    }
+  ],
+  "split": "Six merchant families per category train; two unseen families per category test. Fixed seed 42.",
+  "limitations": "Synthetic English descriptions only. Repeated formatting variants are correlated. This measures synthetic merchant generalization, not real banking accuracy. Probabilities are uncalibrated. Ambiguous merchants and novel wording need review."
+}

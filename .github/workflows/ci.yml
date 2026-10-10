@@ -1,0 +1,68 @@
+name: Moniq CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: moniq-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CI: 'true'
+      MONIQ_BROWSER: chromium
+      PYTHONUTF8: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.14'
+          cache: pip
+          cache-dependency-path: backend/requirements-lock.txt
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install locked dependencies
+        run: |
+          python -m venv .venv
+          .venv/bin/python -m pip install -r backend/requirements-lock.txt
+          npm --prefix frontend ci
+      - name: Backend tests and Python lint
+        run: |
+          .venv/bin/python -m pytest -q
+          .venv/bin/python -m ruff check backend tests scripts
+          .venv/bin/python scripts/reproduce_ml.py --check
+      - name: Frontend types, lint and production build
+        run: |
+          npm --prefix frontend run typecheck
+          npm --prefix frontend run lint
+          npm --prefix frontend run build
+      - name: Install Chromium and system dependencies
+        working-directory: frontend
+        run: npx playwright install --with-deps chromium
+      - name: Synthetic browser journey
+        run: npm --prefix frontend run test:e2e
+      - name: Production public demo and visitor isolation
+        run: npm --prefix frontend run test:public
+      - name: Upload browser diagnostics
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: moniq-browser-results
+          path: |
+            .runtime/browser-results.json
+            .runtime/public-browser-results.json
+            .runtime/public-test-results/
+            frontend/test-results/
+          if-no-files-found: ignore
+          retention-days: 7

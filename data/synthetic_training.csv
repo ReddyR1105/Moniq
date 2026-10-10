@@ -1,0 +1,1057 @@
+description,category,merchant_family,split
+Chick-fil-A restaurant ATLANTA GA,food,Chick-fil-A restaurant,train
+POS Chick-fil-A restaurant ATLANTA GA,food,Chick-fil-A restaurant,train
+DEBIT CARD Chick-fil-A restaurant #104,food,Chick-fil-A restaurant,train
+ACH Chick-fil-A restaurant #104,food,Chick-fil-A restaurant,train
+ONLINE PAYMENT Chick-fil-A restaurant GSU,food,Chick-fil-A restaurant,train
+CARD PURCHASE Chick-fil-A restaurant GSU,food,Chick-fil-A restaurant,train
+Chick-fil-A restaurant MOBILE,food,Chick-fil-A restaurant,train
+POS Chick-fil-A restaurant MOBILE,food,Chick-fil-A restaurant,train
+DEBIT CARD Chick-fil-A restaurant 2026,food,Chick-fil-A restaurant,train
+ACH Chick-fil-A restaurant 2026,food,Chick-fil-A restaurant,train
+ONLINE PAYMENT Chick-fil-A restaurant,food,Chick-fil-A restaurant,train
+CARD PURCHASE Chick-fil-A restaurant,food,Chick-fil-A restaurant,train
+Chipotle Mexican grill ATLANTA GA,food,Chipotle Mexican grill,train
+POS Chipotle Mexican grill ATLANTA GA,food,Chipotle Mexican grill,train
+DEBIT CARD Chipotle Mexican grill #104,food,Chipotle Mexican grill,train
+ACH Chipotle Mexican grill #104,food,Chipotle Mexican grill,train
+ONLINE PAYMENT Chipotle Mexican grill GSU,food,Chipotle Mexican grill,train
+CARD PURCHASE Chipotle Mexican grill GSU,food,Chipotle Mexican grill,train
+Chipotle Mexican grill MOBILE,food,Chipotle Mexican grill,train
+POS Chipotle Mexican grill MOBILE,food,Chipotle Mexican grill,train
+DEBIT CARD Chipotle Mexican grill 2026,food,Chipotle Mexican grill,train
+ACH Chipotle Mexican grill 2026,food,Chipotle Mexican grill,train
+ONLINE PAYMENT Chipotle Mexican grill,food,Chipotle Mexican grill,train
+CARD PURCHASE Chipotle Mexican grill,food,Chipotle Mexican grill,train
+Starbucks coffee ATLANTA GA,food,Starbucks coffee,train
+POS Starbucks coffee ATLANTA GA,food,Starbucks coffee,train
+DEBIT CARD Starbucks coffee #104,food,Starbucks coffee,train
+ACH Starbucks coffee #104,food,Starbucks coffee,train
+ONLINE PAYMENT Starbucks coffee GSU,food,Starbucks coffee,train
+CARD PURCHASE Starbucks coffee GSU,food,Starbucks coffee,train
+Starbucks coffee MOBILE,food,Starbucks coffee,train
+POS Starbucks coffee MOBILE,food,Starbucks coffee,train
+DEBIT CARD Starbucks coffee 2026,food,Starbucks coffee,train
+ACH Starbucks coffee 2026,food,Starbucks coffee,train
+ONLINE PAYMENT Starbucks coffee,food,Starbucks coffee,train
+CARD PURCHASE Starbucks coffee,food,Starbucks coffee,train
+Panera cafe ATLANTA GA,food,Panera cafe,train
+POS Panera cafe ATLANTA GA,food,Panera cafe,train
+DEBIT CARD Panera cafe #104,food,Panera cafe,train
+ACH Panera cafe #104,food,Panera cafe,train
+ONLINE PAYMENT Panera cafe GSU,food,Panera cafe,train
+CARD PURCHASE Panera cafe GSU,food,Panera cafe,train
+Panera cafe MOBILE,food,Panera cafe,train
+POS Panera cafe MOBILE,food,Panera cafe,train
+DEBIT CARD Panera cafe 2026,food,Panera cafe,train
+ACH Panera cafe 2026,food,Panera cafe,train
+ONLINE PAYMENT Panera cafe,food,Panera cafe,train
+CARD PURCHASE Panera cafe,food,Panera cafe,train
+Campus dining ATLANTA GA,food,Campus dining,train
+POS Campus dining ATLANTA GA,food,Campus dining,train
+DEBIT CARD Campus dining #104,food,Campus dining,train
+ACH Campus dining #104,food,Campus dining,train
+ONLINE PAYMENT Campus dining GSU,food,Campus dining,train
+CARD PURCHASE Campus dining GSU,food,Campus dining,train
+Campus dining MOBILE,food,Campus dining,train
+POS Campus dining MOBILE,food,Campus dining,train
+DEBIT CARD Campus dining 2026,food,Campus dining,train
+ACH Campus dining 2026,food,Campus dining,train
+ONLINE PAYMENT Campus dining,food,Campus dining,train
+CARD PURCHASE Campus dining,food,Campus dining,train
+Pizza Hut restaurant ATLANTA GA,food,Pizza Hut restaurant,train
+POS Pizza Hut restaurant ATLANTA GA,food,Pizza Hut restaurant,train
+DEBIT CARD Pizza Hut restaurant #104,food,Pizza Hut restaurant,train
+ACH Pizza Hut restaurant #104,food,Pizza Hut restaurant,train
+ONLINE PAYMENT Pizza Hut restaurant GSU,food,Pizza Hut restaurant,train
+CARD PURCHASE Pizza Hut restaurant GSU,food,Pizza Hut restaurant,train
+Pizza Hut restaurant MOBILE,food,Pizza Hut restaurant,train
+POS Pizza Hut restaurant MOBILE,food,Pizza Hut restaurant,train
+DEBIT CARD Pizza Hut restaurant 2026,food,Pizza Hut restaurant,train
+ACH Pizza Hut restaurant 2026,food,Pizza Hut restaurant,train
+ONLINE PAYMENT Pizza Hut restaurant,food,Pizza Hut restaurant,train
+CARD PURCHASE Pizza Hut restaurant,food,Pizza Hut restaurant,train
+Local burger grill ATLANTA GA,food,Local burger grill,test
+POS Local burger grill ATLANTA GA,food,Local burger grill,test
+DEBIT CARD Local burger grill #104,food,Local burger grill,test
+ACH Local burger grill #104,food,Local burger grill,test
+ONLINE PAYMENT Local burger grill GSU,food,Local burger grill,test
+CARD PURCHASE Local burger grill GSU,food,Local burger grill,test
+Local burger grill MOBILE,food,Local burger grill,test
+POS Local burger grill MOBILE,food,Local burger grill,test
+DEBIT CARD Local burger grill 2026,food,Local burger grill,test
+ACH Local burger grill 2026,food,Local burger grill,test
+ONLINE PAYMENT Local burger grill,food,Local burger grill,test
+CARD PURCHASE Local burger grill,food,Local burger grill,test
+Peachtree coffee cafe ATLANTA GA,food,Peachtree coffee cafe,test
+POS Peachtree coffee cafe ATLANTA GA,food,Peachtree coffee cafe,test
+DEBIT CARD Peachtree coffee cafe #104,food,Peachtree coffee cafe,test
+ACH Peachtree coffee cafe #104,food,Peachtree coffee cafe,test
+ONLINE PAYMENT Peachtree coffee cafe GSU,food,Peachtree coffee cafe,test
+CARD PURCHASE Peachtree coffee cafe GSU,food,Peachtree coffee cafe,test
+Peachtree coffee cafe MOBILE,food,Peachtree coffee cafe,test
+POS Peachtree coffee cafe MOBILE,food,Peachtree coffee cafe,test
+DEBIT CARD Peachtree coffee cafe 2026,food,Peachtree coffee cafe,test
+ACH Peachtree coffee cafe 2026,food,Peachtree coffee cafe,test
+ONLINE PAYMENT Peachtree coffee cafe,food,Peachtree coffee cafe,test
+CARD PURCHASE Peachtree coffee cafe,food,Peachtree coffee cafe,test
+Kroger grocery ATLANTA GA,groceries,Kroger grocery,train
+POS Kroger grocery ATLANTA GA,groceries,Kroger grocery,train
+DEBIT CARD Kroger grocery #104,groceries,Kroger grocery,train
+ACH Kroger grocery #104,groceries,Kroger grocery,train
+ONLINE PAYMENT Kroger grocery GSU,groceries,Kroger grocery,train
+CARD PURCHASE Kroger grocery GSU,groceries,Kroger grocery,train
+Kroger grocery MOBILE,groceries,Kroger grocery,train
+POS Kroger grocery MOBILE,groceries,Kroger grocery,train
+DEBIT CARD Kroger grocery 2026,groceries,Kroger grocery,train
+ACH Kroger grocery 2026,groceries,Kroger grocery,train
+ONLINE PAYMENT Kroger grocery,groceries,Kroger grocery,train
+CARD PURCHASE Kroger grocery,groceries,Kroger grocery,train
+Publix supermarket ATLANTA GA,groceries,Publix supermarket,train
+POS Publix supermarket ATLANTA GA,groceries,Publix supermarket,train
+DEBIT CARD Publix supermarket #104,groceries,Publix supermarket,train
+ACH Publix supermarket #104,groceries,Publix supermarket,train
+ONLINE PAYMENT Publix supermarket GSU,groceries,Publix supermarket,train
+CARD PURCHASE Publix supermarket GSU,groceries,Publix supermarket,train
+Publix supermarket MOBILE,groceries,Publix supermarket,train
+POS Publix supermarket MOBILE,groceries,Publix supermarket,train
+DEBIT CARD Publix supermarket 2026,groceries,Publix supermarket,train
+ACH Publix supermarket 2026,groceries,Publix supermarket,train
+ONLINE PAYMENT Publix supermarket,groceries,Publix supermarket,train
+CARD PURCHASE Publix supermarket,groceries,Publix supermarket,train
+Aldi groceries ATLANTA GA,groceries,Aldi groceries,train
+POS Aldi groceries ATLANTA GA,groceries,Aldi groceries,train
+DEBIT CARD Aldi groceries #104,groceries,Aldi groceries,train
+ACH Aldi groceries #104,groceries,Aldi groceries,train
+ONLINE PAYMENT Aldi groceries GSU,groceries,Aldi groceries,train
+CARD PURCHASE Aldi groceries GSU,groceries,Aldi groceries,train
+Aldi groceries MOBILE,groceries,Aldi groceries,train
+POS Aldi groceries MOBILE,groceries,Aldi groceries,train
+DEBIT CARD Aldi groceries 2026,groceries,Aldi groceries,train
+ACH Aldi groceries 2026,groceries,Aldi groceries,train
+ONLINE PAYMENT Aldi groceries,groceries,Aldi groceries,train
+CARD PURCHASE Aldi groceries,groceries,Aldi groceries,train
+Trader Joe's market ATLANTA GA,groceries,Trader Joe's market,train
+POS Trader Joe's market ATLANTA GA,groceries,Trader Joe's market,train
+DEBIT CARD Trader Joe's market #104,groceries,Trader Joe's market,train
+ACH Trader Joe's market #104,groceries,Trader Joe's market,train
+ONLINE PAYMENT Trader Joe's market GSU,groceries,Trader Joe's market,train
+CARD PURCHASE Trader Joe's market GSU,groceries,Trader Joe's market,train
+Trader Joe's market MOBILE,groceries,Trader Joe's market,train
+POS Trader Joe's market MOBILE,groceries,Trader Joe's market,train
+DEBIT CARD Trader Joe's market 2026,groceries,Trader Joe's market,train
+ACH Trader Joe's market 2026,groceries,Trader Joe's market,train
+ONLINE PAYMENT Trader Joe's market,groceries,Trader Joe's market,train
+CARD PURCHASE Trader Joe's market,groceries,Trader Joe's market,train
+Lidl food market ATLANTA GA,groceries,Lidl food market,train
+POS Lidl food market ATLANTA GA,groceries,Lidl food market,train
+DEBIT CARD Lidl food market #104,groceries,Lidl food market,train
+ACH Lidl food market #104,groceries,Lidl food market,train
+ONLINE PAYMENT Lidl food market GSU,groceries,Lidl food market,train
+CARD PURCHASE Lidl food market GSU,groceries,Lidl food market,train
+Lidl food market MOBILE,groceries,Lidl food market,train
+POS Lidl food market MOBILE,groceries,Lidl food market,train
+DEBIT CARD Lidl food market 2026,groceries,Lidl food market,train
+ACH Lidl food market 2026,groceries,Lidl food market,train
+ONLINE PAYMENT Lidl food market,groceries,Lidl food market,train
+CARD PURCHASE Lidl food market,groceries,Lidl food market,train
+Fresh grocery store ATLANTA GA,groceries,Fresh grocery store,train
+POS Fresh grocery store ATLANTA GA,groceries,Fresh grocery store,train
+DEBIT CARD Fresh grocery store #104,groceries,Fresh grocery store,train
+ACH Fresh grocery store #104,groceries,Fresh grocery store,train
+ONLINE PAYMENT Fresh grocery store GSU,groceries,Fresh grocery store,train
+CARD PURCHASE Fresh grocery store GSU,groceries,Fresh grocery store,train
+Fresh grocery store MOBILE,groceries,Fresh grocery store,train
+POS Fresh grocery store MOBILE,groceries,Fresh grocery store,train
+DEBIT CARD Fresh grocery store 2026,groceries,Fresh grocery store,train
+ACH Fresh grocery store 2026,groceries,Fresh grocery store,train
+ONLINE PAYMENT Fresh grocery store,groceries,Fresh grocery store,train
+CARD PURCHASE Fresh grocery store,groceries,Fresh grocery store,train
+Neighborhood supermarket ATLANTA GA,groceries,Neighborhood supermarket,test
+POS Neighborhood supermarket ATLANTA GA,groceries,Neighborhood supermarket,test
+DEBIT CARD Neighborhood supermarket #104,groceries,Neighborhood supermarket,test
+ACH Neighborhood supermarket #104,groceries,Neighborhood supermarket,test
+ONLINE PAYMENT Neighborhood supermarket GSU,groceries,Neighborhood supermarket,test
+CARD PURCHASE Neighborhood supermarket GSU,groceries,Neighborhood supermarket,test
+Neighborhood supermarket MOBILE,groceries,Neighborhood supermarket,test
+POS Neighborhood supermarket MOBILE,groceries,Neighborhood supermarket,test
+DEBIT CARD Neighborhood supermarket 2026,groceries,Neighborhood supermarket,test
+ACH Neighborhood supermarket 2026,groceries,Neighborhood supermarket,test
+ONLINE PAYMENT Neighborhood supermarket,groceries,Neighborhood supermarket,test
+CARD PURCHASE Neighborhood supermarket,groceries,Neighborhood supermarket,test
+Whole Foods grocery ATLANTA GA,groceries,Whole Foods grocery,test
+POS Whole Foods grocery ATLANTA GA,groceries,Whole Foods grocery,test
+DEBIT CARD Whole Foods grocery #104,groceries,Whole Foods grocery,test
+ACH Whole Foods grocery #104,groceries,Whole Foods grocery,test
+ONLINE PAYMENT Whole Foods grocery GSU,groceries,Whole Foods grocery,test
+CARD PURCHASE Whole Foods grocery GSU,groceries,Whole Foods grocery,test
+Whole Foods grocery MOBILE,groceries,Whole Foods grocery,test
+POS Whole Foods grocery MOBILE,groceries,Whole Foods grocery,test
+DEBIT CARD Whole Foods grocery 2026,groceries,Whole Foods grocery,test
+ACH Whole Foods grocery 2026,groceries,Whole Foods grocery,test
+ONLINE PAYMENT Whole Foods grocery,groceries,Whole Foods grocery,test
+CARD PURCHASE Whole Foods grocery,groceries,Whole Foods grocery,test
+Target clothing ATLANTA GA,shopping,Target clothing,train
+POS Target clothing ATLANTA GA,shopping,Target clothing,train
+DEBIT CARD Target clothing #104,shopping,Target clothing,train
+ACH Target clothing #104,shopping,Target clothing,train
+ONLINE PAYMENT Target clothing GSU,shopping,Target clothing,train
+CARD PURCHASE Target clothing GSU,shopping,Target clothing,train
+Target clothing MOBILE,shopping,Target clothing,train
+POS Target clothing MOBILE,shopping,Target clothing,train
+DEBIT CARD Target clothing 2026,shopping,Target clothing,train
+ACH Target clothing 2026,shopping,Target clothing,train
+ONLINE PAYMENT Target clothing,shopping,Target clothing,train
+CARD PURCHASE Target clothing,shopping,Target clothing,train
+Amazon retail ATLANTA GA,shopping,Amazon retail,train
+POS Amazon retail ATLANTA GA,shopping,Amazon retail,train
+DEBIT CARD Amazon retail #104,shopping,Amazon retail,train
+ACH Amazon retail #104,shopping,Amazon retail,train
+ONLINE PAYMENT Amazon retail GSU,shopping,Amazon retail,train
+CARD PURCHASE Amazon retail GSU,shopping,Amazon retail,train
+Amazon retail MOBILE,shopping,Amazon retail,train
+POS Amazon retail MOBILE,shopping,Amazon retail,train
+DEBIT CARD Amazon retail 2026,shopping,Amazon retail,train
+ACH Amazon retail 2026,shopping,Amazon retail,train
+ONLINE PAYMENT Amazon retail,shopping,Amazon retail,train
+CARD PURCHASE Amazon retail,shopping,Amazon retail,train
+Walmart shopping ATLANTA GA,shopping,Walmart shopping,train
+POS Walmart shopping ATLANTA GA,shopping,Walmart shopping,train
+DEBIT CARD Walmart shopping #104,shopping,Walmart shopping,train
+ACH Walmart shopping #104,shopping,Walmart shopping,train
+ONLINE PAYMENT Walmart shopping GSU,shopping,Walmart shopping,train
+CARD PURCHASE Walmart shopping GSU,shopping,Walmart shopping,train
+Walmart shopping MOBILE,shopping,Walmart shopping,train
+POS Walmart shopping MOBILE,shopping,Walmart shopping,train
+DEBIT CARD Walmart shopping 2026,shopping,Walmart shopping,train
+ACH Walmart shopping 2026,shopping,Walmart shopping,train
+ONLINE PAYMENT Walmart shopping,shopping,Walmart shopping,train
+CARD PURCHASE Walmart shopping,shopping,Walmart shopping,train
+H&M apparel ATLANTA GA,shopping,H&M apparel,train
+POS H&M apparel ATLANTA GA,shopping,H&M apparel,train
+DEBIT CARD H&M apparel #104,shopping,H&M apparel,train
+ACH H&M apparel #104,shopping,H&M apparel,train
+ONLINE PAYMENT H&M apparel GSU,shopping,H&M apparel,train
+CARD PURCHASE H&M apparel GSU,shopping,H&M apparel,train
+H&M apparel MOBILE,shopping,H&M apparel,train
+POS H&M apparel MOBILE,shopping,H&M apparel,train
+DEBIT CARD H&M apparel 2026,shopping,H&M apparel,train
+ACH H&M apparel 2026,shopping,H&M apparel,train
+ONLINE PAYMENT H&M apparel,shopping,H&M apparel,train
+CARD PURCHASE H&M apparel,shopping,H&M apparel,train
+Nike shoes ATLANTA GA,shopping,Nike shoes,train
+POS Nike shoes ATLANTA GA,shopping,Nike shoes,train
+DEBIT CARD Nike shoes #104,shopping,Nike shoes,train
+ACH Nike shoes #104,shopping,Nike shoes,train
+ONLINE PAYMENT Nike shoes GSU,shopping,Nike shoes,train
+CARD PURCHASE Nike shoes GSU,shopping,Nike shoes,train
+Nike shoes MOBILE,shopping,Nike shoes,train
+POS Nike shoes MOBILE,shopping,Nike shoes,train
+DEBIT CARD Nike shoes 2026,shopping,Nike shoes,train
+ACH Nike shoes 2026,shopping,Nike shoes,train
+ONLINE PAYMENT Nike shoes,shopping,Nike shoes,train
+CARD PURCHASE Nike shoes,shopping,Nike shoes,train
+Campus clothing store ATLANTA GA,shopping,Campus clothing store,train
+POS Campus clothing store ATLANTA GA,shopping,Campus clothing store,train
+DEBIT CARD Campus clothing store #104,shopping,Campus clothing store,train
+ACH Campus clothing store #104,shopping,Campus clothing store,train
+ONLINE PAYMENT Campus clothing store GSU,shopping,Campus clothing store,train
+CARD PURCHASE Campus clothing store GSU,shopping,Campus clothing store,train
+Campus clothing store MOBILE,shopping,Campus clothing store,train
+POS Campus clothing store MOBILE,shopping,Campus clothing store,train
+DEBIT CARD Campus clothing store 2026,shopping,Campus clothing store,train
+ACH Campus clothing store 2026,shopping,Campus clothing store,train
+ONLINE PAYMENT Campus clothing store,shopping,Campus clothing store,train
+CARD PURCHASE Campus clothing store,shopping,Campus clothing store,train
+Downtown apparel ATLANTA GA,shopping,Downtown apparel,test
+POS Downtown apparel ATLANTA GA,shopping,Downtown apparel,test
+DEBIT CARD Downtown apparel #104,shopping,Downtown apparel,test
+ACH Downtown apparel #104,shopping,Downtown apparel,test
+ONLINE PAYMENT Downtown apparel GSU,shopping,Downtown apparel,test
+CARD PURCHASE Downtown apparel GSU,shopping,Downtown apparel,test
+Downtown apparel MOBILE,shopping,Downtown apparel,test
+POS Downtown apparel MOBILE,shopping,Downtown apparel,test
+DEBIT CARD Downtown apparel 2026,shopping,Downtown apparel,test
+ACH Downtown apparel 2026,shopping,Downtown apparel,test
+ONLINE PAYMENT Downtown apparel,shopping,Downtown apparel,test
+CARD PURCHASE Downtown apparel,shopping,Downtown apparel,test
+Online shoe store ATLANTA GA,shopping,Online shoe store,test
+POS Online shoe store ATLANTA GA,shopping,Online shoe store,test
+DEBIT CARD Online shoe store #104,shopping,Online shoe store,test
+ACH Online shoe store #104,shopping,Online shoe store,test
+ONLINE PAYMENT Online shoe store GSU,shopping,Online shoe store,test
+CARD PURCHASE Online shoe store GSU,shopping,Online shoe store,test
+Online shoe store MOBILE,shopping,Online shoe store,test
+POS Online shoe store MOBILE,shopping,Online shoe store,test
+DEBIT CARD Online shoe store 2026,shopping,Online shoe store,test
+ACH Online shoe store 2026,shopping,Online shoe store,test
+ONLINE PAYMENT Online shoe store,shopping,Online shoe store,test
+CARD PURCHASE Online shoe store,shopping,Online shoe store,test
+MARTA transit ATLANTA GA,transportation,MARTA transit,train
+POS MARTA transit ATLANTA GA,transportation,MARTA transit,train
+DEBIT CARD MARTA transit #104,transportation,MARTA transit,train
+ACH MARTA transit #104,transportation,MARTA transit,train
+ONLINE PAYMENT MARTA transit GSU,transportation,MARTA transit,train
+CARD PURCHASE MARTA transit GSU,transportation,MARTA transit,train
+MARTA transit MOBILE,transportation,MARTA transit,train
+POS MARTA transit MOBILE,transportation,MARTA transit,train
+DEBIT CARD MARTA transit 2026,transportation,MARTA transit,train
+ACH MARTA transit 2026,transportation,MARTA transit,train
+ONLINE PAYMENT MARTA transit,transportation,MARTA transit,train
+CARD PURCHASE MARTA transit,transportation,MARTA transit,train
+Uber ride ATLANTA GA,transportation,Uber ride,train
+POS Uber ride ATLANTA GA,transportation,Uber ride,train
+DEBIT CARD Uber ride #104,transportation,Uber ride,train
+ACH Uber ride #104,transportation,Uber ride,train
+ONLINE PAYMENT Uber ride GSU,transportation,Uber ride,train
+CARD PURCHASE Uber ride GSU,transportation,Uber ride,train
+Uber ride MOBILE,transportation,Uber ride,train
+POS Uber ride MOBILE,transportation,Uber ride,train
+DEBIT CARD Uber ride 2026,transportation,Uber ride,train
+ACH Uber ride 2026,transportation,Uber ride,train
+ONLINE PAYMENT Uber ride,transportation,Uber ride,train
+CARD PURCHASE Uber ride,transportation,Uber ride,train
+Lyft trip ATLANTA GA,transportation,Lyft trip,train
+POS Lyft trip ATLANTA GA,transportation,Lyft trip,train
+DEBIT CARD Lyft trip #104,transportation,Lyft trip,train
+ACH Lyft trip #104,transportation,Lyft trip,train
+ONLINE PAYMENT Lyft trip GSU,transportation,Lyft trip,train
+CARD PURCHASE Lyft trip GSU,transportation,Lyft trip,train
+Lyft trip MOBILE,transportation,Lyft trip,train
+POS Lyft trip MOBILE,transportation,Lyft trip,train
+DEBIT CARD Lyft trip 2026,transportation,Lyft trip,train
+ACH Lyft trip 2026,transportation,Lyft trip,train
+ONLINE PAYMENT Lyft trip,transportation,Lyft trip,train
+CARD PURCHASE Lyft trip,transportation,Lyft trip,train
+Shell fuel ATLANTA GA,transportation,Shell fuel,train
+POS Shell fuel ATLANTA GA,transportation,Shell fuel,train
+DEBIT CARD Shell fuel #104,transportation,Shell fuel,train
+ACH Shell fuel #104,transportation,Shell fuel,train
+ONLINE PAYMENT Shell fuel GSU,transportation,Shell fuel,train
+CARD PURCHASE Shell fuel GSU,transportation,Shell fuel,train
+Shell fuel MOBILE,transportation,Shell fuel,train
+POS Shell fuel MOBILE,transportation,Shell fuel,train
+DEBIT CARD Shell fuel 2026,transportation,Shell fuel,train
+ACH Shell fuel 2026,transportation,Shell fuel,train
+ONLINE PAYMENT Shell fuel,transportation,Shell fuel,train
+CARD PURCHASE Shell fuel,transportation,Shell fuel,train
+Campus parking ATLANTA GA,transportation,Campus parking,train
+POS Campus parking ATLANTA GA,transportation,Campus parking,train
+DEBIT CARD Campus parking #104,transportation,Campus parking,train
+ACH Campus parking #104,transportation,Campus parking,train
+ONLINE PAYMENT Campus parking GSU,transportation,Campus parking,train
+CARD PURCHASE Campus parking GSU,transportation,Campus parking,train
+Campus parking MOBILE,transportation,Campus parking,train
+POS Campus parking MOBILE,transportation,Campus parking,train
+DEBIT CARD Campus parking 2026,transportation,Campus parking,train
+ACH Campus parking 2026,transportation,Campus parking,train
+ONLINE PAYMENT Campus parking,transportation,Campus parking,train
+CARD PURCHASE Campus parking,transportation,Campus parking,train
+Chevron gas ATLANTA GA,transportation,Chevron gas,train
+POS Chevron gas ATLANTA GA,transportation,Chevron gas,train
+DEBIT CARD Chevron gas #104,transportation,Chevron gas,train
+ACH Chevron gas #104,transportation,Chevron gas,train
+ONLINE PAYMENT Chevron gas GSU,transportation,Chevron gas,train
+CARD PURCHASE Chevron gas GSU,transportation,Chevron gas,train
+Chevron gas MOBILE,transportation,Chevron gas,train
+POS Chevron gas MOBILE,transportation,Chevron gas,train
+DEBIT CARD Chevron gas 2026,transportation,Chevron gas,train
+ACH Chevron gas 2026,transportation,Chevron gas,train
+ONLINE PAYMENT Chevron gas,transportation,Chevron gas,train
+CARD PURCHASE Chevron gas,transportation,Chevron gas,train
+City transit pass ATLANTA GA,transportation,City transit pass,test
+POS City transit pass ATLANTA GA,transportation,City transit pass,test
+DEBIT CARD City transit pass #104,transportation,City transit pass,test
+ACH City transit pass #104,transportation,City transit pass,test
+ONLINE PAYMENT City transit pass GSU,transportation,City transit pass,test
+CARD PURCHASE City transit pass GSU,transportation,City transit pass,test
+City transit pass MOBILE,transportation,City transit pass,test
+POS City transit pass MOBILE,transportation,City transit pass,test
+DEBIT CARD City transit pass 2026,transportation,City transit pass,test
+ACH City transit pass 2026,transportation,City transit pass,test
+ONLINE PAYMENT City transit pass,transportation,City transit pass,test
+CARD PURCHASE City transit pass,transportation,City transit pass,test
+Airport taxi ride ATLANTA GA,transportation,Airport taxi ride,test
+POS Airport taxi ride ATLANTA GA,transportation,Airport taxi ride,test
+DEBIT CARD Airport taxi ride #104,transportation,Airport taxi ride,test
+ACH Airport taxi ride #104,transportation,Airport taxi ride,test
+ONLINE PAYMENT Airport taxi ride GSU,transportation,Airport taxi ride,test
+CARD PURCHASE Airport taxi ride GSU,transportation,Airport taxi ride,test
+Airport taxi ride MOBILE,transportation,Airport taxi ride,test
+POS Airport taxi ride MOBILE,transportation,Airport taxi ride,test
+DEBIT CARD Airport taxi ride 2026,transportation,Airport taxi ride,test
+ACH Airport taxi ride 2026,transportation,Airport taxi ride,test
+ONLINE PAYMENT Airport taxi ride,transportation,Airport taxi ride,test
+CARD PURCHASE Airport taxi ride,transportation,Airport taxi ride,test
+Campus apartment rent ATLANTA GA,rent,Campus apartment rent,train
+POS Campus apartment rent ATLANTA GA,rent,Campus apartment rent,train
+DEBIT CARD Campus apartment rent #104,rent,Campus apartment rent,train
+ACH Campus apartment rent #104,rent,Campus apartment rent,train
+ONLINE PAYMENT Campus apartment rent GSU,rent,Campus apartment rent,train
+CARD PURCHASE Campus apartment rent GSU,rent,Campus apartment rent,train
+Campus apartment rent MOBILE,rent,Campus apartment rent,train
+POS Campus apartment rent MOBILE,rent,Campus apartment rent,train
+DEBIT CARD Campus apartment rent 2026,rent,Campus apartment rent,train
+ACH Campus apartment rent 2026,rent,Campus apartment rent,train
+ONLINE PAYMENT Campus apartment rent,rent,Campus apartment rent,train
+CARD PURCHASE Campus apartment rent,rent,Campus apartment rent,train
+Student housing lease ATLANTA GA,rent,Student housing lease,train
+POS Student housing lease ATLANTA GA,rent,Student housing lease,train
+DEBIT CARD Student housing lease #104,rent,Student housing lease,train
+ACH Student housing lease #104,rent,Student housing lease,train
+ONLINE PAYMENT Student housing lease GSU,rent,Student housing lease,train
+CARD PURCHASE Student housing lease GSU,rent,Student housing lease,train
+Student housing lease MOBILE,rent,Student housing lease,train
+POS Student housing lease MOBILE,rent,Student housing lease,train
+DEBIT CARD Student housing lease 2026,rent,Student housing lease,train
+ACH Student housing lease 2026,rent,Student housing lease,train
+ONLINE PAYMENT Student housing lease,rent,Student housing lease,train
+CARD PURCHASE Student housing lease,rent,Student housing lease,train
+Peachtree rental ATLANTA GA,rent,Peachtree rental,train
+POS Peachtree rental ATLANTA GA,rent,Peachtree rental,train
+DEBIT CARD Peachtree rental #104,rent,Peachtree rental,train
+ACH Peachtree rental #104,rent,Peachtree rental,train
+ONLINE PAYMENT Peachtree rental GSU,rent,Peachtree rental,train
+CARD PURCHASE Peachtree rental GSU,rent,Peachtree rental,train
+Peachtree rental MOBILE,rent,Peachtree rental,train
+POS Peachtree rental MOBILE,rent,Peachtree rental,train
+DEBIT CARD Peachtree rental 2026,rent,Peachtree rental,train
+ACH Peachtree rental 2026,rent,Peachtree rental,train
+ONLINE PAYMENT Peachtree rental,rent,Peachtree rental,train
+CARD PURCHASE Peachtree rental,rent,Peachtree rental,train
+University housing rent ATLANTA GA,rent,University housing rent,train
+POS University housing rent ATLANTA GA,rent,University housing rent,train
+DEBIT CARD University housing rent #104,rent,University housing rent,train
+ACH University housing rent #104,rent,University housing rent,train
+ONLINE PAYMENT University housing rent GSU,rent,University housing rent,train
+CARD PURCHASE University housing rent GSU,rent,University housing rent,train
+University housing rent MOBILE,rent,University housing rent,train
+POS University housing rent MOBILE,rent,University housing rent,train
+DEBIT CARD University housing rent 2026,rent,University housing rent,train
+ACH University housing rent 2026,rent,University housing rent,train
+ONLINE PAYMENT University housing rent,rent,University housing rent,train
+CARD PURCHASE University housing rent,rent,University housing rent,train
+Downtown apartment lease ATLANTA GA,rent,Downtown apartment lease,train
+POS Downtown apartment lease ATLANTA GA,rent,Downtown apartment lease,train
+DEBIT CARD Downtown apartment lease #104,rent,Downtown apartment lease,train
+ACH Downtown apartment lease #104,rent,Downtown apartment lease,train
+ONLINE PAYMENT Downtown apartment lease GSU,rent,Downtown apartment lease,train
+CARD PURCHASE Downtown apartment lease GSU,rent,Downtown apartment lease,train
+Downtown apartment lease MOBILE,rent,Downtown apartment lease,train
+POS Downtown apartment lease MOBILE,rent,Downtown apartment lease,train
+DEBIT CARD Downtown apartment lease 2026,rent,Downtown apartment lease,train
+ACH Downtown apartment lease 2026,rent,Downtown apartment lease,train
+ONLINE PAYMENT Downtown apartment lease,rent,Downtown apartment lease,train
+CARD PURCHASE Downtown apartment lease,rent,Downtown apartment lease,train
+Monthly housing payment ATLANTA GA,rent,Monthly housing payment,train
+POS Monthly housing payment ATLANTA GA,rent,Monthly housing payment,train
+DEBIT CARD Monthly housing payment #104,rent,Monthly housing payment,train
+ACH Monthly housing payment #104,rent,Monthly housing payment,train
+ONLINE PAYMENT Monthly housing payment GSU,rent,Monthly housing payment,train
+CARD PURCHASE Monthly housing payment GSU,rent,Monthly housing payment,train
+Monthly housing payment MOBILE,rent,Monthly housing payment,train
+POS Monthly housing payment MOBILE,rent,Monthly housing payment,train
+DEBIT CARD Monthly housing payment 2026,rent,Monthly housing payment,train
+ACH Monthly housing payment 2026,rent,Monthly housing payment,train
+ONLINE PAYMENT Monthly housing payment,rent,Monthly housing payment,train
+CARD PURCHASE Monthly housing payment,rent,Monthly housing payment,train
+Parkside rental apartment ATLANTA GA,rent,Parkside rental apartment,test
+POS Parkside rental apartment ATLANTA GA,rent,Parkside rental apartment,test
+DEBIT CARD Parkside rental apartment #104,rent,Parkside rental apartment,test
+ACH Parkside rental apartment #104,rent,Parkside rental apartment,test
+ONLINE PAYMENT Parkside rental apartment GSU,rent,Parkside rental apartment,test
+CARD PURCHASE Parkside rental apartment GSU,rent,Parkside rental apartment,test
+Parkside rental apartment MOBILE,rent,Parkside rental apartment,test
+POS Parkside rental apartment MOBILE,rent,Parkside rental apartment,test
+DEBIT CARD Parkside rental apartment 2026,rent,Parkside rental apartment,test
+ACH Parkside rental apartment 2026,rent,Parkside rental apartment,test
+ONLINE PAYMENT Parkside rental apartment,rent,Parkside rental apartment,test
+CARD PURCHASE Parkside rental apartment,rent,Parkside rental apartment,test
+Oak Street housing lease ATLANTA GA,rent,Oak Street housing lease,test
+POS Oak Street housing lease ATLANTA GA,rent,Oak Street housing lease,test
+DEBIT CARD Oak Street housing lease #104,rent,Oak Street housing lease,test
+ACH Oak Street housing lease #104,rent,Oak Street housing lease,test
+ONLINE PAYMENT Oak Street housing lease GSU,rent,Oak Street housing lease,test
+CARD PURCHASE Oak Street housing lease GSU,rent,Oak Street housing lease,test
+Oak Street housing lease MOBILE,rent,Oak Street housing lease,test
+POS Oak Street housing lease MOBILE,rent,Oak Street housing lease,test
+DEBIT CARD Oak Street housing lease 2026,rent,Oak Street housing lease,test
+ACH Oak Street housing lease 2026,rent,Oak Street housing lease,test
+ONLINE PAYMENT Oak Street housing lease,rent,Oak Street housing lease,test
+CARD PURCHASE Oak Street housing lease,rent,Oak Street housing lease,test
+GSU tuition ATLANTA GA,education,GSU tuition,train
+POS GSU tuition ATLANTA GA,education,GSU tuition,train
+DEBIT CARD GSU tuition #104,education,GSU tuition,train
+ACH GSU tuition #104,education,GSU tuition,train
+ONLINE PAYMENT GSU tuition GSU,education,GSU tuition,train
+CARD PURCHASE GSU tuition GSU,education,GSU tuition,train
+GSU tuition MOBILE,education,GSU tuition,train
+POS GSU tuition MOBILE,education,GSU tuition,train
+DEBIT CARD GSU tuition 2026,education,GSU tuition,train
+ACH GSU tuition 2026,education,GSU tuition,train
+ONLINE PAYMENT GSU tuition,education,GSU tuition,train
+CARD PURCHASE GSU tuition,education,GSU tuition,train
+University bookstore ATLANTA GA,education,University bookstore,train
+POS University bookstore ATLANTA GA,education,University bookstore,train
+DEBIT CARD University bookstore #104,education,University bookstore,train
+ACH University bookstore #104,education,University bookstore,train
+ONLINE PAYMENT University bookstore GSU,education,University bookstore,train
+CARD PURCHASE University bookstore GSU,education,University bookstore,train
+University bookstore MOBILE,education,University bookstore,train
+POS University bookstore MOBILE,education,University bookstore,train
+DEBIT CARD University bookstore 2026,education,University bookstore,train
+ACH University bookstore 2026,education,University bookstore,train
+ONLINE PAYMENT University bookstore,education,University bookstore,train
+CARD PURCHASE University bookstore,education,University bookstore,train
+Pearson textbook ATLANTA GA,education,Pearson textbook,train
+POS Pearson textbook ATLANTA GA,education,Pearson textbook,train
+DEBIT CARD Pearson textbook #104,education,Pearson textbook,train
+ACH Pearson textbook #104,education,Pearson textbook,train
+ONLINE PAYMENT Pearson textbook GSU,education,Pearson textbook,train
+CARD PURCHASE Pearson textbook GSU,education,Pearson textbook,train
+Pearson textbook MOBILE,education,Pearson textbook,train
+POS Pearson textbook MOBILE,education,Pearson textbook,train
+DEBIT CARD Pearson textbook 2026,education,Pearson textbook,train
+ACH Pearson textbook 2026,education,Pearson textbook,train
+ONLINE PAYMENT Pearson textbook,education,Pearson textbook,train
+CARD PURCHASE Pearson textbook,education,Pearson textbook,train
+Coursera course ATLANTA GA,education,Coursera course,train
+POS Coursera course ATLANTA GA,education,Coursera course,train
+DEBIT CARD Coursera course #104,education,Coursera course,train
+ACH Coursera course #104,education,Coursera course,train
+ONLINE PAYMENT Coursera course GSU,education,Coursera course,train
+CARD PURCHASE Coursera course GSU,education,Coursera course,train
+Coursera course MOBILE,education,Coursera course,train
+POS Coursera course MOBILE,education,Coursera course,train
+DEBIT CARD Coursera course 2026,education,Coursera course,train
+ACH Coursera course 2026,education,Coursera course,train
+ONLINE PAYMENT Coursera course,education,Coursera course,train
+CARD PURCHASE Coursera course,education,Coursera course,train
+Campus lab fee ATLANTA GA,education,Campus lab fee,train
+POS Campus lab fee ATLANTA GA,education,Campus lab fee,train
+DEBIT CARD Campus lab fee #104,education,Campus lab fee,train
+ACH Campus lab fee #104,education,Campus lab fee,train
+ONLINE PAYMENT Campus lab fee GSU,education,Campus lab fee,train
+CARD PURCHASE Campus lab fee GSU,education,Campus lab fee,train
+Campus lab fee MOBILE,education,Campus lab fee,train
+POS Campus lab fee MOBILE,education,Campus lab fee,train
+DEBIT CARD Campus lab fee 2026,education,Campus lab fee,train
+ACH Campus lab fee 2026,education,Campus lab fee,train
+ONLINE PAYMENT Campus lab fee,education,Campus lab fee,train
+CARD PURCHASE Campus lab fee,education,Campus lab fee,train
+College course supplies ATLANTA GA,education,College course supplies,train
+POS College course supplies ATLANTA GA,education,College course supplies,train
+DEBIT CARD College course supplies #104,education,College course supplies,train
+ACH College course supplies #104,education,College course supplies,train
+ONLINE PAYMENT College course supplies GSU,education,College course supplies,train
+CARD PURCHASE College course supplies GSU,education,College course supplies,train
+College course supplies MOBILE,education,College course supplies,train
+POS College course supplies MOBILE,education,College course supplies,train
+DEBIT CARD College course supplies 2026,education,College course supplies,train
+ACH College course supplies 2026,education,College course supplies,train
+ONLINE PAYMENT College course supplies,education,College course supplies,train
+CARD PURCHASE College course supplies,education,College course supplies,train
+Academic textbook store ATLANTA GA,education,Academic textbook store,test
+POS Academic textbook store ATLANTA GA,education,Academic textbook store,test
+DEBIT CARD Academic textbook store #104,education,Academic textbook store,test
+ACH Academic textbook store #104,education,Academic textbook store,test
+ONLINE PAYMENT Academic textbook store GSU,education,Academic textbook store,test
+CARD PURCHASE Academic textbook store GSU,education,Academic textbook store,test
+Academic textbook store MOBILE,education,Academic textbook store,test
+POS Academic textbook store MOBILE,education,Academic textbook store,test
+DEBIT CARD Academic textbook store 2026,education,Academic textbook store,test
+ACH Academic textbook store 2026,education,Academic textbook store,test
+ONLINE PAYMENT Academic textbook store,education,Academic textbook store,test
+CARD PURCHASE Academic textbook store,education,Academic textbook store,test
+Student tuition payment ATLANTA GA,education,Student tuition payment,test
+POS Student tuition payment ATLANTA GA,education,Student tuition payment,test
+DEBIT CARD Student tuition payment #104,education,Student tuition payment,test
+ACH Student tuition payment #104,education,Student tuition payment,test
+ONLINE PAYMENT Student tuition payment GSU,education,Student tuition payment,test
+CARD PURCHASE Student tuition payment GSU,education,Student tuition payment,test
+Student tuition payment MOBILE,education,Student tuition payment,test
+POS Student tuition payment MOBILE,education,Student tuition payment,test
+DEBIT CARD Student tuition payment 2026,education,Student tuition payment,test
+ACH Student tuition payment 2026,education,Student tuition payment,test
+ONLINE PAYMENT Student tuition payment,education,Student tuition payment,test
+CARD PURCHASE Student tuition payment,education,Student tuition payment,test
+Spotify premium ATLANTA GA,subscriptions,Spotify premium,train
+POS Spotify premium ATLANTA GA,subscriptions,Spotify premium,train
+DEBIT CARD Spotify premium #104,subscriptions,Spotify premium,train
+ACH Spotify premium #104,subscriptions,Spotify premium,train
+ONLINE PAYMENT Spotify premium GSU,subscriptions,Spotify premium,train
+CARD PURCHASE Spotify premium GSU,subscriptions,Spotify premium,train
+Spotify premium MOBILE,subscriptions,Spotify premium,train
+POS Spotify premium MOBILE,subscriptions,Spotify premium,train
+DEBIT CARD Spotify premium 2026,subscriptions,Spotify premium,train
+ACH Spotify premium 2026,subscriptions,Spotify premium,train
+ONLINE PAYMENT Spotify premium,subscriptions,Spotify premium,train
+CARD PURCHASE Spotify premium,subscriptions,Spotify premium,train
+Netflix subscription ATLANTA GA,subscriptions,Netflix subscription,train
+POS Netflix subscription ATLANTA GA,subscriptions,Netflix subscription,train
+DEBIT CARD Netflix subscription #104,subscriptions,Netflix subscription,train
+ACH Netflix subscription #104,subscriptions,Netflix subscription,train
+ONLINE PAYMENT Netflix subscription GSU,subscriptions,Netflix subscription,train
+CARD PURCHASE Netflix subscription GSU,subscriptions,Netflix subscription,train
+Netflix subscription MOBILE,subscriptions,Netflix subscription,train
+POS Netflix subscription MOBILE,subscriptions,Netflix subscription,train
+DEBIT CARD Netflix subscription 2026,subscriptions,Netflix subscription,train
+ACH Netflix subscription 2026,subscriptions,Netflix subscription,train
+ONLINE PAYMENT Netflix subscription,subscriptions,Netflix subscription,train
+CARD PURCHASE Netflix subscription,subscriptions,Netflix subscription,train
+Adobe membership ATLANTA GA,subscriptions,Adobe membership,train
+POS Adobe membership ATLANTA GA,subscriptions,Adobe membership,train
+DEBIT CARD Adobe membership #104,subscriptions,Adobe membership,train
+ACH Adobe membership #104,subscriptions,Adobe membership,train
+ONLINE PAYMENT Adobe membership GSU,subscriptions,Adobe membership,train
+CARD PURCHASE Adobe membership GSU,subscriptions,Adobe membership,train
+Adobe membership MOBILE,subscriptions,Adobe membership,train
+POS Adobe membership MOBILE,subscriptions,Adobe membership,train
+DEBIT CARD Adobe membership 2026,subscriptions,Adobe membership,train
+ACH Adobe membership 2026,subscriptions,Adobe membership,train
+ONLINE PAYMENT Adobe membership,subscriptions,Adobe membership,train
+CARD PURCHASE Adobe membership,subscriptions,Adobe membership,train
+Apple music ATLANTA GA,subscriptions,Apple music,train
+POS Apple music ATLANTA GA,subscriptions,Apple music,train
+DEBIT CARD Apple music #104,subscriptions,Apple music,train
+ACH Apple music #104,subscriptions,Apple music,train
+ONLINE PAYMENT Apple music GSU,subscriptions,Apple music,train
+CARD PURCHASE Apple music GSU,subscriptions,Apple music,train
+Apple music MOBILE,subscriptions,Apple music,train
+POS Apple music MOBILE,subscriptions,Apple music,train
+DEBIT CARD Apple music 2026,subscriptions,Apple music,train
+ACH Apple music 2026,subscriptions,Apple music,train
+ONLINE PAYMENT Apple music,subscriptions,Apple music,train
+CARD PURCHASE Apple music,subscriptions,Apple music,train
+YouTube premium ATLANTA GA,subscriptions,YouTube premium,train
+POS YouTube premium ATLANTA GA,subscriptions,YouTube premium,train
+DEBIT CARD YouTube premium #104,subscriptions,YouTube premium,train
+ACH YouTube premium #104,subscriptions,YouTube premium,train
+ONLINE PAYMENT YouTube premium GSU,subscriptions,YouTube premium,train
+CARD PURCHASE YouTube premium GSU,subscriptions,YouTube premium,train
+YouTube premium MOBILE,subscriptions,YouTube premium,train
+POS YouTube premium MOBILE,subscriptions,YouTube premium,train
+DEBIT CARD YouTube premium 2026,subscriptions,YouTube premium,train
+ACH YouTube premium 2026,subscriptions,YouTube premium,train
+ONLINE PAYMENT YouTube premium,subscriptions,YouTube premium,train
+CARD PURCHASE YouTube premium,subscriptions,YouTube premium,train
+Notion monthly subscription ATLANTA GA,subscriptions,Notion monthly subscription,train
+POS Notion monthly subscription ATLANTA GA,subscriptions,Notion monthly subscription,train
+DEBIT CARD Notion monthly subscription #104,subscriptions,Notion monthly subscription,train
+ACH Notion monthly subscription #104,subscriptions,Notion monthly subscription,train
+ONLINE PAYMENT Notion monthly subscription GSU,subscriptions,Notion monthly subscription,train
+CARD PURCHASE Notion monthly subscription GSU,subscriptions,Notion monthly subscription,train
+Notion monthly subscription MOBILE,subscriptions,Notion monthly subscription,train
+POS Notion monthly subscription MOBILE,subscriptions,Notion monthly subscription,train
+DEBIT CARD Notion monthly subscription 2026,subscriptions,Notion monthly subscription,train
+ACH Notion monthly subscription 2026,subscriptions,Notion monthly subscription,train
+ONLINE PAYMENT Notion monthly subscription,subscriptions,Notion monthly subscription,train
+CARD PURCHASE Notion monthly subscription,subscriptions,Notion monthly subscription,train
+Streaming service membership ATLANTA GA,subscriptions,Streaming service membership,test
+POS Streaming service membership ATLANTA GA,subscriptions,Streaming service membership,test
+DEBIT CARD Streaming service membership #104,subscriptions,Streaming service membership,test
+ACH Streaming service membership #104,subscriptions,Streaming service membership,test
+ONLINE PAYMENT Streaming service membership GSU,subscriptions,Streaming service membership,test
+CARD PURCHASE Streaming service membership GSU,subscriptions,Streaming service membership,test
+Streaming service membership MOBILE,subscriptions,Streaming service membership,test
+POS Streaming service membership MOBILE,subscriptions,Streaming service membership,test
+DEBIT CARD Streaming service membership 2026,subscriptions,Streaming service membership,test
+ACH Streaming service membership 2026,subscriptions,Streaming service membership,test
+ONLINE PAYMENT Streaming service membership,subscriptions,Streaming service membership,test
+CARD PURCHASE Streaming service membership,subscriptions,Streaming service membership,test
+Cloud monthly subscription ATLANTA GA,subscriptions,Cloud monthly subscription,test
+POS Cloud monthly subscription ATLANTA GA,subscriptions,Cloud monthly subscription,test
+DEBIT CARD Cloud monthly subscription #104,subscriptions,Cloud monthly subscription,test
+ACH Cloud monthly subscription #104,subscriptions,Cloud monthly subscription,test
+ONLINE PAYMENT Cloud monthly subscription GSU,subscriptions,Cloud monthly subscription,test
+CARD PURCHASE Cloud monthly subscription GSU,subscriptions,Cloud monthly subscription,test
+Cloud monthly subscription MOBILE,subscriptions,Cloud monthly subscription,test
+POS Cloud monthly subscription MOBILE,subscriptions,Cloud monthly subscription,test
+DEBIT CARD Cloud monthly subscription 2026,subscriptions,Cloud monthly subscription,test
+ACH Cloud monthly subscription 2026,subscriptions,Cloud monthly subscription,test
+ONLINE PAYMENT Cloud monthly subscription,subscriptions,Cloud monthly subscription,test
+CARD PURCHASE Cloud monthly subscription,subscriptions,Cloud monthly subscription,test
+AMC cinema ATLANTA GA,entertainment,AMC cinema,train
+POS AMC cinema ATLANTA GA,entertainment,AMC cinema,train
+DEBIT CARD AMC cinema #104,entertainment,AMC cinema,train
+ACH AMC cinema #104,entertainment,AMC cinema,train
+ONLINE PAYMENT AMC cinema GSU,entertainment,AMC cinema,train
+CARD PURCHASE AMC cinema GSU,entertainment,AMC cinema,train
+AMC cinema MOBILE,entertainment,AMC cinema,train
+POS AMC cinema MOBILE,entertainment,AMC cinema,train
+DEBIT CARD AMC cinema 2026,entertainment,AMC cinema,train
+ACH AMC cinema 2026,entertainment,AMC cinema,train
+ONLINE PAYMENT AMC cinema,entertainment,AMC cinema,train
+CARD PURCHASE AMC cinema,entertainment,AMC cinema,train
+Regal movie theater ATLANTA GA,entertainment,Regal movie theater,train
+POS Regal movie theater ATLANTA GA,entertainment,Regal movie theater,train
+DEBIT CARD Regal movie theater #104,entertainment,Regal movie theater,train
+ACH Regal movie theater #104,entertainment,Regal movie theater,train
+ONLINE PAYMENT Regal movie theater GSU,entertainment,Regal movie theater,train
+CARD PURCHASE Regal movie theater GSU,entertainment,Regal movie theater,train
+Regal movie theater MOBILE,entertainment,Regal movie theater,train
+POS Regal movie theater MOBILE,entertainment,Regal movie theater,train
+DEBIT CARD Regal movie theater 2026,entertainment,Regal movie theater,train
+ACH Regal movie theater 2026,entertainment,Regal movie theater,train
+ONLINE PAYMENT Regal movie theater,entertainment,Regal movie theater,train
+CARD PURCHASE Regal movie theater,entertainment,Regal movie theater,train
+Bowling game ATLANTA GA,entertainment,Bowling game,train
+POS Bowling game ATLANTA GA,entertainment,Bowling game,train
+DEBIT CARD Bowling game #104,entertainment,Bowling game,train
+ACH Bowling game #104,entertainment,Bowling game,train
+ONLINE PAYMENT Bowling game GSU,entertainment,Bowling game,train
+CARD PURCHASE Bowling game GSU,entertainment,Bowling game,train
+Bowling game MOBILE,entertainment,Bowling game,train
+POS Bowling game MOBILE,entertainment,Bowling game,train
+DEBIT CARD Bowling game 2026,entertainment,Bowling game,train
+ACH Bowling game 2026,entertainment,Bowling game,train
+ONLINE PAYMENT Bowling game,entertainment,Bowling game,train
+CARD PURCHASE Bowling game,entertainment,Bowling game,train
+Concert ticket ATLANTA GA,entertainment,Concert ticket,train
+POS Concert ticket ATLANTA GA,entertainment,Concert ticket,train
+DEBIT CARD Concert ticket #104,entertainment,Concert ticket,train
+ACH Concert ticket #104,entertainment,Concert ticket,train
+ONLINE PAYMENT Concert ticket GSU,entertainment,Concert ticket,train
+CARD PURCHASE Concert ticket GSU,entertainment,Concert ticket,train
+Concert ticket MOBILE,entertainment,Concert ticket,train
+POS Concert ticket MOBILE,entertainment,Concert ticket,train
+DEBIT CARD Concert ticket 2026,entertainment,Concert ticket,train
+ACH Concert ticket 2026,entertainment,Concert ticket,train
+ONLINE PAYMENT Concert ticket,entertainment,Concert ticket,train
+CARD PURCHASE Concert ticket,entertainment,Concert ticket,train
+Museum admission ATLANTA GA,entertainment,Museum admission,train
+POS Museum admission ATLANTA GA,entertainment,Museum admission,train
+DEBIT CARD Museum admission #104,entertainment,Museum admission,train
+ACH Museum admission #104,entertainment,Museum admission,train
+ONLINE PAYMENT Museum admission GSU,entertainment,Museum admission,train
+CARD PURCHASE Museum admission GSU,entertainment,Museum admission,train
+Museum admission MOBILE,entertainment,Museum admission,train
+POS Museum admission MOBILE,entertainment,Museum admission,train
+DEBIT CARD Museum admission 2026,entertainment,Museum admission,train
+ACH Museum admission 2026,entertainment,Museum admission,train
+ONLINE PAYMENT Museum admission,entertainment,Museum admission,train
+CARD PURCHASE Museum admission,entertainment,Museum admission,train
+Arcade games ATLANTA GA,entertainment,Arcade games,train
+POS Arcade games ATLANTA GA,entertainment,Arcade games,train
+DEBIT CARD Arcade games #104,entertainment,Arcade games,train
+ACH Arcade games #104,entertainment,Arcade games,train
+ONLINE PAYMENT Arcade games GSU,entertainment,Arcade games,train
+CARD PURCHASE Arcade games GSU,entertainment,Arcade games,train
+Arcade games MOBILE,entertainment,Arcade games,train
+POS Arcade games MOBILE,entertainment,Arcade games,train
+DEBIT CARD Arcade games 2026,entertainment,Arcade games,train
+ACH Arcade games 2026,entertainment,Arcade games,train
+ONLINE PAYMENT Arcade games,entertainment,Arcade games,train
+CARD PURCHASE Arcade games,entertainment,Arcade games,train
+Live music ticket ATLANTA GA,entertainment,Live music ticket,test
+POS Live music ticket ATLANTA GA,entertainment,Live music ticket,test
+DEBIT CARD Live music ticket #104,entertainment,Live music ticket,test
+ACH Live music ticket #104,entertainment,Live music ticket,test
+ONLINE PAYMENT Live music ticket GSU,entertainment,Live music ticket,test
+CARD PURCHASE Live music ticket GSU,entertainment,Live music ticket,test
+Live music ticket MOBILE,entertainment,Live music ticket,test
+POS Live music ticket MOBILE,entertainment,Live music ticket,test
+DEBIT CARD Live music ticket 2026,entertainment,Live music ticket,test
+ACH Live music ticket 2026,entertainment,Live music ticket,test
+ONLINE PAYMENT Live music ticket,entertainment,Live music ticket,test
+CARD PURCHASE Live music ticket,entertainment,Live music ticket,test
+City cinema admission ATLANTA GA,entertainment,City cinema admission,test
+POS City cinema admission ATLANTA GA,entertainment,City cinema admission,test
+DEBIT CARD City cinema admission #104,entertainment,City cinema admission,test
+ACH City cinema admission #104,entertainment,City cinema admission,test
+ONLINE PAYMENT City cinema admission GSU,entertainment,City cinema admission,test
+CARD PURCHASE City cinema admission GSU,entertainment,City cinema admission,test
+City cinema admission MOBILE,entertainment,City cinema admission,test
+POS City cinema admission MOBILE,entertainment,City cinema admission,test
+DEBIT CARD City cinema admission 2026,entertainment,City cinema admission,test
+ACH City cinema admission 2026,entertainment,City cinema admission,test
+ONLINE PAYMENT City cinema admission,entertainment,City cinema admission,test
+CARD PURCHASE City cinema admission,entertainment,City cinema admission,test
+CVS pharmacy ATLANTA GA,healthcare,CVS pharmacy,train
+POS CVS pharmacy ATLANTA GA,healthcare,CVS pharmacy,train
+DEBIT CARD CVS pharmacy #104,healthcare,CVS pharmacy,train
+ACH CVS pharmacy #104,healthcare,CVS pharmacy,train
+ONLINE PAYMENT CVS pharmacy GSU,healthcare,CVS pharmacy,train
+CARD PURCHASE CVS pharmacy GSU,healthcare,CVS pharmacy,train
+CVS pharmacy MOBILE,healthcare,CVS pharmacy,train
+POS CVS pharmacy MOBILE,healthcare,CVS pharmacy,train
+DEBIT CARD CVS pharmacy 2026,healthcare,CVS pharmacy,train
+ACH CVS pharmacy 2026,healthcare,CVS pharmacy,train
+ONLINE PAYMENT CVS pharmacy,healthcare,CVS pharmacy,train
+CARD PURCHASE CVS pharmacy,healthcare,CVS pharmacy,train
+Walgreens prescription ATLANTA GA,healthcare,Walgreens prescription,train
+POS Walgreens prescription ATLANTA GA,healthcare,Walgreens prescription,train
+DEBIT CARD Walgreens prescription #104,healthcare,Walgreens prescription,train
+ACH Walgreens prescription #104,healthcare,Walgreens prescription,train
+ONLINE PAYMENT Walgreens prescription GSU,healthcare,Walgreens prescription,train
+CARD PURCHASE Walgreens prescription GSU,healthcare,Walgreens prescription,train
+Walgreens prescription MOBILE,healthcare,Walgreens prescription,train
+POS Walgreens prescription MOBILE,healthcare,Walgreens prescription,train
+DEBIT CARD Walgreens prescription 2026,healthcare,Walgreens prescription,train
+ACH Walgreens prescription 2026,healthcare,Walgreens prescription,train
+ONLINE PAYMENT Walgreens prescription,healthcare,Walgreens prescription,train
+CARD PURCHASE Walgreens prescription,healthcare,Walgreens prescription,train
+Student health clinic ATLANTA GA,healthcare,Student health clinic,train
+POS Student health clinic ATLANTA GA,healthcare,Student health clinic,train
+DEBIT CARD Student health clinic #104,healthcare,Student health clinic,train
+ACH Student health clinic #104,healthcare,Student health clinic,train
+ONLINE PAYMENT Student health clinic GSU,healthcare,Student health clinic,train
+CARD PURCHASE Student health clinic GSU,healthcare,Student health clinic,train
+Student health clinic MOBILE,healthcare,Student health clinic,train
+POS Student health clinic MOBILE,healthcare,Student health clinic,train
+DEBIT CARD Student health clinic 2026,healthcare,Student health clinic,train
+ACH Student health clinic 2026,healthcare,Student health clinic,train
+ONLINE PAYMENT Student health clinic,healthcare,Student health clinic,train
+CARD PURCHASE Student health clinic,healthcare,Student health clinic,train
+Dental appointment ATLANTA GA,healthcare,Dental appointment,train
+POS Dental appointment ATLANTA GA,healthcare,Dental appointment,train
+DEBIT CARD Dental appointment #104,healthcare,Dental appointment,train
+ACH Dental appointment #104,healthcare,Dental appointment,train
+ONLINE PAYMENT Dental appointment GSU,healthcare,Dental appointment,train
+CARD PURCHASE Dental appointment GSU,healthcare,Dental appointment,train
+Dental appointment MOBILE,healthcare,Dental appointment,train
+POS Dental appointment MOBILE,healthcare,Dental appointment,train
+DEBIT CARD Dental appointment 2026,healthcare,Dental appointment,train
+ACH Dental appointment 2026,healthcare,Dental appointment,train
+ONLINE PAYMENT Dental appointment,healthcare,Dental appointment,train
+CARD PURCHASE Dental appointment,healthcare,Dental appointment,train
+Medical copay ATLANTA GA,healthcare,Medical copay,train
+POS Medical copay ATLANTA GA,healthcare,Medical copay,train
+DEBIT CARD Medical copay #104,healthcare,Medical copay,train
+ACH Medical copay #104,healthcare,Medical copay,train
+ONLINE PAYMENT Medical copay GSU,healthcare,Medical copay,train
+CARD PURCHASE Medical copay GSU,healthcare,Medical copay,train
+Medical copay MOBILE,healthcare,Medical copay,train
+POS Medical copay MOBILE,healthcare,Medical copay,train
+DEBIT CARD Medical copay 2026,healthcare,Medical copay,train
+ACH Medical copay 2026,healthcare,Medical copay,train
+ONLINE PAYMENT Medical copay,healthcare,Medical copay,train
+CARD PURCHASE Medical copay,healthcare,Medical copay,train
+Urgent care clinic ATLANTA GA,healthcare,Urgent care clinic,train
+POS Urgent care clinic ATLANTA GA,healthcare,Urgent care clinic,train
+DEBIT CARD Urgent care clinic #104,healthcare,Urgent care clinic,train
+ACH Urgent care clinic #104,healthcare,Urgent care clinic,train
+ONLINE PAYMENT Urgent care clinic GSU,healthcare,Urgent care clinic,train
+CARD PURCHASE Urgent care clinic GSU,healthcare,Urgent care clinic,train
+Urgent care clinic MOBILE,healthcare,Urgent care clinic,train
+POS Urgent care clinic MOBILE,healthcare,Urgent care clinic,train
+DEBIT CARD Urgent care clinic 2026,healthcare,Urgent care clinic,train
+ACH Urgent care clinic 2026,healthcare,Urgent care clinic,train
+ONLINE PAYMENT Urgent care clinic,healthcare,Urgent care clinic,train
+CARD PURCHASE Urgent care clinic,healthcare,Urgent care clinic,train
+Local pharmacy prescription ATLANTA GA,healthcare,Local pharmacy prescription,test
+POS Local pharmacy prescription ATLANTA GA,healthcare,Local pharmacy prescription,test
+DEBIT CARD Local pharmacy prescription #104,healthcare,Local pharmacy prescription,test
+ACH Local pharmacy prescription #104,healthcare,Local pharmacy prescription,test
+ONLINE PAYMENT Local pharmacy prescription GSU,healthcare,Local pharmacy prescription,test
+CARD PURCHASE Local pharmacy prescription GSU,healthcare,Local pharmacy prescription,test
+Local pharmacy prescription MOBILE,healthcare,Local pharmacy prescription,test
+POS Local pharmacy prescription MOBILE,healthcare,Local pharmacy prescription,test
+DEBIT CARD Local pharmacy prescription 2026,healthcare,Local pharmacy prescription,test
+ACH Local pharmacy prescription 2026,healthcare,Local pharmacy prescription,test
+ONLINE PAYMENT Local pharmacy prescription,healthcare,Local pharmacy prescription,test
+CARD PURCHASE Local pharmacy prescription,healthcare,Local pharmacy prescription,test
+Campus medical visit ATLANTA GA,healthcare,Campus medical visit,test
+POS Campus medical visit ATLANTA GA,healthcare,Campus medical visit,test
+DEBIT CARD Campus medical visit #104,healthcare,Campus medical visit,test
+ACH Campus medical visit #104,healthcare,Campus medical visit,test
+ONLINE PAYMENT Campus medical visit GSU,healthcare,Campus medical visit,test
+CARD PURCHASE Campus medical visit GSU,healthcare,Campus medical visit,test
+Campus medical visit MOBILE,healthcare,Campus medical visit,test
+POS Campus medical visit MOBILE,healthcare,Campus medical visit,test
+DEBIT CARD Campus medical visit 2026,healthcare,Campus medical visit,test
+ACH Campus medical visit 2026,healthcare,Campus medical visit,test
+ONLINE PAYMENT Campus medical visit,healthcare,Campus medical visit,test
+CARD PURCHASE Campus medical visit,healthcare,Campus medical visit,test
+Campus job payroll ATLANTA GA,income,Campus job payroll,train
+POS Campus job payroll ATLANTA GA,income,Campus job payroll,train
+DEBIT CARD Campus job payroll #104,income,Campus job payroll,train
+ACH Campus job payroll #104,income,Campus job payroll,train
+ONLINE PAYMENT Campus job payroll GSU,income,Campus job payroll,train
+CARD PURCHASE Campus job payroll GSU,income,Campus job payroll,train
+Campus job payroll MOBILE,income,Campus job payroll,train
+POS Campus job payroll MOBILE,income,Campus job payroll,train
+DEBIT CARD Campus job payroll 2026,income,Campus job payroll,train
+ACH Campus job payroll 2026,income,Campus job payroll,train
+ONLINE PAYMENT Campus job payroll,income,Campus job payroll,train
+CARD PURCHASE Campus job payroll,income,Campus job payroll,train
+Family allowance ATLANTA GA,income,Family allowance,train
+POS Family allowance ATLANTA GA,income,Family allowance,train
+DEBIT CARD Family allowance #104,income,Family allowance,train
+ACH Family allowance #104,income,Family allowance,train
+ONLINE PAYMENT Family allowance GSU,income,Family allowance,train
+CARD PURCHASE Family allowance GSU,income,Family allowance,train
+Family allowance MOBILE,income,Family allowance,train
+POS Family allowance MOBILE,income,Family allowance,train
+DEBIT CARD Family allowance 2026,income,Family allowance,train
+ACH Family allowance 2026,income,Family allowance,train
+ONLINE PAYMENT Family allowance,income,Family allowance,train
+CARD PURCHASE Family allowance,income,Family allowance,train
+Scholarship deposit ATLANTA GA,income,Scholarship deposit,train
+POS Scholarship deposit ATLANTA GA,income,Scholarship deposit,train
+DEBIT CARD Scholarship deposit #104,income,Scholarship deposit,train
+ACH Scholarship deposit #104,income,Scholarship deposit,train
+ONLINE PAYMENT Scholarship deposit GSU,income,Scholarship deposit,train
+CARD PURCHASE Scholarship deposit GSU,income,Scholarship deposit,train
+Scholarship deposit MOBILE,income,Scholarship deposit,train
+POS Scholarship deposit MOBILE,income,Scholarship deposit,train
+DEBIT CARD Scholarship deposit 2026,income,Scholarship deposit,train
+ACH Scholarship deposit 2026,income,Scholarship deposit,train
+ONLINE PAYMENT Scholarship deposit,income,Scholarship deposit,train
+CARD PURCHASE Scholarship deposit,income,Scholarship deposit,train
+Financial aid disbursement ATLANTA GA,income,Financial aid disbursement,train
+POS Financial aid disbursement ATLANTA GA,income,Financial aid disbursement,train
+DEBIT CARD Financial aid disbursement #104,income,Financial aid disbursement,train
+ACH Financial aid disbursement #104,income,Financial aid disbursement,train
+ONLINE PAYMENT Financial aid disbursement GSU,income,Financial aid disbursement,train
+CARD PURCHASE Financial aid disbursement GSU,income,Financial aid disbursement,train
+Financial aid disbursement MOBILE,income,Financial aid disbursement,train
+POS Financial aid disbursement MOBILE,income,Financial aid disbursement,train
+DEBIT CARD Financial aid disbursement 2026,income,Financial aid disbursement,train
+ACH Financial aid disbursement 2026,income,Financial aid disbursement,train
+ONLINE PAYMENT Financial aid disbursement,income,Financial aid disbursement,train
+CARD PURCHASE Financial aid disbursement,income,Financial aid disbursement,train
+Tutoring wages ATLANTA GA,income,Tutoring wages,train
+POS Tutoring wages ATLANTA GA,income,Tutoring wages,train
+DEBIT CARD Tutoring wages #104,income,Tutoring wages,train
+ACH Tutoring wages #104,income,Tutoring wages,train
+ONLINE PAYMENT Tutoring wages GSU,income,Tutoring wages,train
+CARD PURCHASE Tutoring wages GSU,income,Tutoring wages,train
+Tutoring wages MOBILE,income,Tutoring wages,train
+POS Tutoring wages MOBILE,income,Tutoring wages,train
+DEBIT CARD Tutoring wages 2026,income,Tutoring wages,train
+ACH Tutoring wages 2026,income,Tutoring wages,train
+ONLINE PAYMENT Tutoring wages,income,Tutoring wages,train
+CARD PURCHASE Tutoring wages,income,Tutoring wages,train
+Part-time salary ATLANTA GA,income,Part-time salary,train
+POS Part-time salary ATLANTA GA,income,Part-time salary,train
+DEBIT CARD Part-time salary #104,income,Part-time salary,train
+ACH Part-time salary #104,income,Part-time salary,train
+ONLINE PAYMENT Part-time salary GSU,income,Part-time salary,train
+CARD PURCHASE Part-time salary GSU,income,Part-time salary,train
+Part-time salary MOBILE,income,Part-time salary,train
+POS Part-time salary MOBILE,income,Part-time salary,train
+DEBIT CARD Part-time salary 2026,income,Part-time salary,train
+ACH Part-time salary 2026,income,Part-time salary,train
+ONLINE PAYMENT Part-time salary,income,Part-time salary,train
+CARD PURCHASE Part-time salary,income,Part-time salary,train
+Student job paycheck ATLANTA GA,income,Student job paycheck,test
+POS Student job paycheck ATLANTA GA,income,Student job paycheck,test
+DEBIT CARD Student job paycheck #104,income,Student job paycheck,test
+ACH Student job paycheck #104,income,Student job paycheck,test
+ONLINE PAYMENT Student job paycheck GSU,income,Student job paycheck,test
+CARD PURCHASE Student job paycheck GSU,income,Student job paycheck,test
+Student job paycheck MOBILE,income,Student job paycheck,test
+POS Student job paycheck MOBILE,income,Student job paycheck,test
+DEBIT CARD Student job paycheck 2026,income,Student job paycheck,test
+ACH Student job paycheck 2026,income,Student job paycheck,test
+ONLINE PAYMENT Student job paycheck,income,Student job paycheck,test
+CARD PURCHASE Student job paycheck,income,Student job paycheck,test
+Monthly allowance deposit ATLANTA GA,income,Monthly allowance deposit,test
+POS Monthly allowance deposit ATLANTA GA,income,Monthly allowance deposit,test
+DEBIT CARD Monthly allowance deposit #104,income,Monthly allowance deposit,test
+ACH Monthly allowance deposit #104,income,Monthly allowance deposit,test
+ONLINE PAYMENT Monthly allowance deposit GSU,income,Monthly allowance deposit,test
+CARD PURCHASE Monthly allowance deposit GSU,income,Monthly allowance deposit,test
+Monthly allowance deposit MOBILE,income,Monthly allowance deposit,test
+POS Monthly allowance deposit MOBILE,income,Monthly allowance deposit,test
+DEBIT CARD Monthly allowance deposit 2026,income,Monthly allowance deposit,test
+ACH Monthly allowance deposit 2026,income,Monthly allowance deposit,test
+ONLINE PAYMENT Monthly allowance deposit,income,Monthly allowance deposit,test
+CARD PURCHASE Monthly allowance deposit,income,Monthly allowance deposit,test
+Post office stamps ATLANTA GA,miscellaneous,Post office stamps,train
+POS Post office stamps ATLANTA GA,miscellaneous,Post office stamps,train
+DEBIT CARD Post office stamps #104,miscellaneous,Post office stamps,train
+ACH Post office stamps #104,miscellaneous,Post office stamps,train
+ONLINE PAYMENT Post office stamps GSU,miscellaneous,Post office stamps,train
+CARD PURCHASE Post office stamps GSU,miscellaneous,Post office stamps,train
+Post office stamps MOBILE,miscellaneous,Post office stamps,train
+POS Post office stamps MOBILE,miscellaneous,Post office stamps,train
+DEBIT CARD Post office stamps 2026,miscellaneous,Post office stamps,train
+ACH Post office stamps 2026,miscellaneous,Post office stamps,train
+ONLINE PAYMENT Post office stamps,miscellaneous,Post office stamps,train
+CARD PURCHASE Post office stamps,miscellaneous,Post office stamps,train
+Laundry service ATLANTA GA,miscellaneous,Laundry service,train
+POS Laundry service ATLANTA GA,miscellaneous,Laundry service,train
+DEBIT CARD Laundry service #104,miscellaneous,Laundry service,train
+ACH Laundry service #104,miscellaneous,Laundry service,train
+ONLINE PAYMENT Laundry service GSU,miscellaneous,Laundry service,train
+CARD PURCHASE Laundry service GSU,miscellaneous,Laundry service,train
+Laundry service MOBILE,miscellaneous,Laundry service,train
+POS Laundry service MOBILE,miscellaneous,Laundry service,train
+DEBIT CARD Laundry service 2026,miscellaneous,Laundry service,train
+ACH Laundry service 2026,miscellaneous,Laundry service,train
+ONLINE PAYMENT Laundry service,miscellaneous,Laundry service,train
+CARD PURCHASE Laundry service,miscellaneous,Laundry service,train
+Bank service fee ATLANTA GA,miscellaneous,Bank service fee,train
+POS Bank service fee ATLANTA GA,miscellaneous,Bank service fee,train
+DEBIT CARD Bank service fee #104,miscellaneous,Bank service fee,train
+ACH Bank service fee #104,miscellaneous,Bank service fee,train
+ONLINE PAYMENT Bank service fee GSU,miscellaneous,Bank service fee,train
+CARD PURCHASE Bank service fee GSU,miscellaneous,Bank service fee,train
+Bank service fee MOBILE,miscellaneous,Bank service fee,train
+POS Bank service fee MOBILE,miscellaneous,Bank service fee,train
+DEBIT CARD Bank service fee 2026,miscellaneous,Bank service fee,train
+ACH Bank service fee 2026,miscellaneous,Bank service fee,train
+ONLINE PAYMENT Bank service fee,miscellaneous,Bank service fee,train
+CARD PURCHASE Bank service fee,miscellaneous,Bank service fee,train
+Charity donation ATLANTA GA,miscellaneous,Charity donation,train
+POS Charity donation ATLANTA GA,miscellaneous,Charity donation,train
+DEBIT CARD Charity donation #104,miscellaneous,Charity donation,train
+ACH Charity donation #104,miscellaneous,Charity donation,train
+ONLINE PAYMENT Charity donation GSU,miscellaneous,Charity donation,train
+CARD PURCHASE Charity donation GSU,miscellaneous,Charity donation,train
+Charity donation MOBILE,miscellaneous,Charity donation,train
+POS Charity donation MOBILE,miscellaneous,Charity donation,train
+DEBIT CARD Charity donation 2026,miscellaneous,Charity donation,train
+ACH Charity donation 2026,miscellaneous,Charity donation,train
+ONLINE PAYMENT Charity donation,miscellaneous,Charity donation,train
+CARD PURCHASE Charity donation,miscellaneous,Charity donation,train
+Document notary ATLANTA GA,miscellaneous,Document notary,train
+POS Document notary ATLANTA GA,miscellaneous,Document notary,train
+DEBIT CARD Document notary #104,miscellaneous,Document notary,train
+ACH Document notary #104,miscellaneous,Document notary,train
+ONLINE PAYMENT Document notary GSU,miscellaneous,Document notary,train
+CARD PURCHASE Document notary GSU,miscellaneous,Document notary,train
+Document notary MOBILE,miscellaneous,Document notary,train
+POS Document notary MOBILE,miscellaneous,Document notary,train
+DEBIT CARD Document notary 2026,miscellaneous,Document notary,train
+ACH Document notary 2026,miscellaneous,Document notary,train
+ONLINE PAYMENT Document notary,miscellaneous,Document notary,train
+CARD PURCHASE Document notary,miscellaneous,Document notary,train
+Storage locker fee ATLANTA GA,miscellaneous,Storage locker fee,train
+POS Storage locker fee ATLANTA GA,miscellaneous,Storage locker fee,train
+DEBIT CARD Storage locker fee #104,miscellaneous,Storage locker fee,train
+ACH Storage locker fee #104,miscellaneous,Storage locker fee,train
+ONLINE PAYMENT Storage locker fee GSU,miscellaneous,Storage locker fee,train
+CARD PURCHASE Storage locker fee GSU,miscellaneous,Storage locker fee,train
+Storage locker fee MOBILE,miscellaneous,Storage locker fee,train
+POS Storage locker fee MOBILE,miscellaneous,Storage locker fee,train
+DEBIT CARD Storage locker fee 2026,miscellaneous,Storage locker fee,train
+ACH Storage locker fee 2026,miscellaneous,Storage locker fee,train
+ONLINE PAYMENT Storage locker fee,miscellaneous,Storage locker fee,train
+CARD PURCHASE Storage locker fee,miscellaneous,Storage locker fee,train
+Parcel postage ATLANTA GA,miscellaneous,Parcel postage,test
+POS Parcel postage ATLANTA GA,miscellaneous,Parcel postage,test
+DEBIT CARD Parcel postage #104,miscellaneous,Parcel postage,test
+ACH Parcel postage #104,miscellaneous,Parcel postage,test
+ONLINE PAYMENT Parcel postage GSU,miscellaneous,Parcel postage,test
+CARD PURCHASE Parcel postage GSU,miscellaneous,Parcel postage,test
+Parcel postage MOBILE,miscellaneous,Parcel postage,test
+POS Parcel postage MOBILE,miscellaneous,Parcel postage,test
+DEBIT CARD Parcel postage 2026,miscellaneous,Parcel postage,test
+ACH Parcel postage 2026,miscellaneous,Parcel postage,test
+ONLINE PAYMENT Parcel postage,miscellaneous,Parcel postage,test
+CARD PURCHASE Parcel postage,miscellaneous,Parcel postage,test
+Coin laundry wash ATLANTA GA,miscellaneous,Coin laundry wash,test
+POS Coin laundry wash ATLANTA GA,miscellaneous,Coin laundry wash,test
+DEBIT CARD Coin laundry wash #104,miscellaneous,Coin laundry wash,test
+ACH Coin laundry wash #104,miscellaneous,Coin laundry wash,test
+ONLINE PAYMENT Coin laundry wash GSU,miscellaneous,Coin laundry wash,test
+CARD PURCHASE Coin laundry wash GSU,miscellaneous,Coin laundry wash,test
+Coin laundry wash MOBILE,miscellaneous,Coin laundry wash,test
+POS Coin laundry wash MOBILE,miscellaneous,Coin laundry wash,test
+DEBIT CARD Coin laundry wash 2026,miscellaneous,Coin laundry wash,test
+ACH Coin laundry wash 2026,miscellaneous,Coin laundry wash,test
+ONLINE PAYMENT Coin laundry wash,miscellaneous,Coin laundry wash,test
+CARD PURCHASE Coin laundry wash,miscellaneous,Coin laundry wash,test

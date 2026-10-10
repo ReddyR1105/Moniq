@@ -1,0 +1,243 @@
+{
+  "method": "Independent fit from saved synthetic CSV; no application classifier import or joblib reuse",
+  "training_rows": 792,
+  "test_rows": 264,
+  "merchant_families_disjoint": true,
+  "raw_accuracy": 0.946969696969697,
+  "raw_correct": 250,
+  "raw_macro_f1": 0.9432442630359463,
+  "raw_errors": 14,
+  "saved_baseline_matches": true,
+  "classification_report": {
+    "education": {
+      "precision": 0.9230769230769231,
+      "recall": 1.0,
+      "f1-score": 0.96,
+      "support": 24.0
+    },
+    "entertainment": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 24.0
+    },
+    "food": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 24.0
+    },
+    "groceries": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 24.0
+    },
+    "healthcare": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 24.0
+    },
+    "income": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 24.0
+    },
+    "miscellaneous": {
+      "precision": 0.8571428571428571,
+      "recall": 0.5,
+      "f1-score": 0.631578947368421,
+      "support": 24.0
+    },
+    "rent": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 24.0
+    },
+    "shopping": {
+      "precision": 0.7058823529411765,
+      "recall": 1.0,
+      "f1-score": 0.8275862068965517,
+      "support": 24.0
+    },
+    "subscriptions": {
+      "precision": 1.0,
+      "recall": 0.9166666666666666,
+      "f1-score": 0.9565217391304348,
+      "support": 24.0
+    },
+    "transportation": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 24.0
+    },
+    "accuracy": 0.946969696969697,
+    "macro avg": {
+      "precision": 0.9532820121055415,
+      "recall": 0.9469696969696969,
+      "f1-score": 0.9432442630359463,
+      "support": 264.0
+    },
+    "weighted avg": {
+      "precision": 0.9532820121055415,
+      "recall": 0.946969696969697,
+      "f1-score": 0.9432442630359461,
+      "support": 264.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      24,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      24,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      24,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      24,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      24,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      24,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      12,
+      0,
+      10,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      24,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      24,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      22,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      24
+    ]
+  ],
+  "review_threshold": 0.45,
+  "review_rows": 109,
+  "automatic_coverage": 0.5871212121212122,
+  "accuracy_after_miscellaneous_fallback": 0.6363636363636364,
+  "automatic_only_accuracy": 1.0,
+  "limitations": "Synthetic English descriptions with correlated formatting variants. Not real-bank accuracy; confidence is uncalibrated. Corrections are excluded from this baseline."
+}

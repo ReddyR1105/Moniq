@@ -1,0 +1,22 @@
+# Create this only after GitHub publication and deployment approval.
+services:
+  - type: web
+    name: moniq
+    runtime: docker
+    plan: free
+    numInstances: 1
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    autoDeployTrigger: "off"
+    envVars:
+      - key: MONIQ_PUBLIC_DEMO
+        value: "true"
+      - key: MONIQ_SERVE_FRONTEND
+        value: "true"
+      - key: MONIQ_COOKIE_SECURE
+        value: "true"
+      - key: MONIQ_SESSION_TTL_SECONDS
+        value: "7200"
+      - key: MONIQ_MAX_DEMO_SESSIONS
+        value: "100"
