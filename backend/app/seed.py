@@ -5,14 +5,14 @@ from datetime import date, timedelta
 from sqlalchemy import delete, select
 
 from .config import today
-from .models import Account, Budget, Correction, Deal, Goal, Notification, Profile, RecurringPayment, Transaction
+from .models import Account, Base, Budget, Deal, Goal, Profile, RecurringPayment, Transaction
 from .transactions import fingerprint
 
 
 def seed_demo(db, reset=False):
     if reset:
-        for model in (Notification, Correction, Transaction, Budget, RecurringPayment, Deal, Goal, Account, Profile):
-            db.execute(delete(model))
+        for table in reversed(Base.metadata.sorted_tables):
+            db.execute(delete(table))
         db.flush()
     if db.scalar(select(Profile.id)):
         return

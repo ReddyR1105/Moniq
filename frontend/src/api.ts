@@ -20,11 +20,12 @@ export async function api<T>(path: string, options: RequestInit = {}): Promise<T
   return response.json() as Promise<T>
 }
 
-export function useResource<T>(path: string, revision: number) {
+export function useResource<T>(path: string | null, revision = 0) {
   const [data, setData] = useState<T | null>(null)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(true)
   useEffect(() => {
+    if (path === null) {setData(null); setLoading(false); return}
     const controller = new AbortController()
     setLoading(true)
     setError('')

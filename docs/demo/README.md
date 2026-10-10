@@ -1,3 +1,16 @@
+# Moniq final demonstration media
+
+| File | Duration | Format |
+| --- | --- | --- |
+| [Moniq_Hacklanta_Final.mp4](Moniq_Hacklanta_Final.mp4) | 2:21.32 | H.264, 1920x1080, 25 fps, narrated AAC |
+| [Moniq_All_Features.mp4](Moniq_All_Features.mp4) | 6:38.64 | H.264, 1920x1080, 25 fps, narrated AAC |
+
+Both are actual Chromium recordings of isolated synthetic app workspaces. They include feature captions, local Microsoft Zira narration, beginning/end fades and no music. Matching SRT/VTT and `_NARRATION.md` files are in this folder. The entire video/audio streams decode successfully; actual Chromium playback and seeking passed with no errors, and representative frames were inspected. No personal messages, real financial transactions, tokens or credentials are captured. The owner's separate Gmail connection remains intact.
+
+[Scripts and upload instructions](../DEMO_SCRIPT.md); [current QA and limitations](../QA_REPORT.md). Local files are verified and available. Public video upload and signed-out accessibility verification remain owner tasks; no public video URL is claimed.
+
+## Preserved earlier recordings
+
 # Moniq actual application recording
 
 - `moniq-demo.webm`: **2:14.16**, VP9, 1440 × 1000, 25 fps; actual Playwright Chromium recording of the running React/FastAPI application.
@@ -9,3 +22,7 @@ The recording uses isolated synthetic data and a real trained classifier. It dem
 Regenerate using `../DEMO_WALKTHROUGH.md`. Do not claim live bank linking, automatic iMessage access, real discounts, production authentication or real-bank model accuracy from this footage.
 
 Final refresh: October 10, 2026. The restaurant sample is $15.75. All ten PNG files were decoded in Chromium; the WebM loaded and sought to 60 seconds without media errors. FFmpeg independently decoded a frame at 60 seconds. Local accessibility is verified; upload to a public player and signed-out playback remain owner tasks. Previous media is preserved in an ignored .runtime backup.
+
+## Additional upgrade evidence
+
+`moniq-circles-demo.webm` is a short silent recording of the tested SmartApprove + Circles scenario using real backend logic. It is supplemental evidence, not a narrated final submission video. The original `moniq-demo.webm` and its captions are preserved unchanged. See [the walkthrough](../CIRCLES_SMARTAPPROVE.md) for exact steps.

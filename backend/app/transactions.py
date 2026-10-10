@@ -16,20 +16,23 @@ MAX_CSV_BYTES = 2 * 1024 * 1024
 MAX_CSV_ROWS = 10000
 
 
-def fingerprint(day, merchant, amount_cents):
+def fingerprint(day, merchant, amount_cents, account_id=1):
     canonical = re.sub(r"\s+", " ", merchant.strip().casefold())
-    return hashlib.sha256(f"{day}|{canonical}|{amount_cents}".encode()).hexdigest()
+    key = f"{day}|{canonical}|{amount_cents}"
+    if account_id != 1:
+        key += f"|account:{account_id}"
+    return hashlib.sha256(key.encode()).hexdigest()
 
 
 def serialize_transaction(row):
     return {"id": row.id, "date": row.date.isoformat(), "description": row.description,
             "merchant": row.merchant, "amount": row.amount_cents / 100, "kind": row.kind,
-            "category": row.category, "confidence": row.confidence, "source": row.source}
+            "category": row.category, "confidence": row.confidence, "source": row.source, "account_id": row.account_id}
 
 
 def prepare_transaction(payload: TransactionIn, classifier, source="manual"):
     prediction = classifier.classify(payload.description)
-    amount = abs(cents(payload.amount)) * (-1 if payload.kind == "expense" else 1)
+    amount = abs(cents(payload.amount)) * (-1 if payload.kind in {"expense", "settlement"} else 1)
     category = "income" if payload.kind == "income" else (payload.category.value if payload.category else prediction["category"])
     if category == "income" and payload.kind != "income":
         category = "miscellaneous"
@@ -37,14 +40,17 @@ def prepare_transaction(payload: TransactionIn, classifier, source="manual"):
     return {"date": payload.date, "description": payload.description, "merchant": merchant,
             "amount_cents": amount, "kind": payload.kind, "category": category,
             "confidence": prediction["confidence"], "source": source,
-            "fingerprint": fingerprint(payload.date, merchant, amount)}
+            "account_id": payload.account_id,
+            "fingerprint": fingerprint(payload.date, merchant, amount, payload.account_id)}
 
 
 def add_transaction(db, payload, classifier, source="manual"):
     values = prepare_transaction(payload, classifier, source)
     if db.scalar(select(Transaction.id).where(Transaction.fingerprint == values["fingerprint"])):
         return None
-    if not db.get(Account, 1):
+    if not db.get(Account, payload.account_id):
+        if payload.account_id != 1:
+            raise ValueError("Choose a registered account.")
         db.add(Account(id=1, opening_balance_cents=0))
         db.flush()
     row = Transaction(**values)
@@ -137,9 +143,9 @@ def csv_payloads(frame, mapping, convention, day_first=False):
             kind = "expense" if amount < 0 else "income"
             if mapping.get("kind"):
                 raw_kind = row[mapping["kind"]].strip().lower()
-                aliases = {"debit": "expense", "credit": "income", "refund": "refund", "expense": "expense", "income": "income"}
+                aliases = {"debit": "expense", "credit": "income", "refund": "refund", "expense": "expense", "income": "income", "reimbursement": "reimbursement", "settlement": "settlement"}
                 if raw_kind not in aliases:
-                    raise ValueError("Type must be expense, income, refund, debit or credit.")
+                    raise ValueError("Type must be expense, income, refund, reimbursement, settlement, debit or credit.")
                 kind = aliases[raw_kind]
             category = row[mapping["category"]].strip().lower() if mapping.get("category") else None
             payloads.append(TransactionIn(date=parse_date(row[mapping["date"]], day_first), description=row[mapping["description"]], amount=amount, kind=kind, category=category or None))

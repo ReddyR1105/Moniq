@@ -14,19 +14,26 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from starlette.exceptions import HTTPException as StaticHTTPException
 
+from .circles import guard_transaction, router as circles_router
 from .assistant import answer_question
 from .config import COOKIE_SECURE, CORS_ORIGINS, MAX_DEMO_SESSIONS, PUBLIC_DEMO, PUBLIC_MODEL_DIR, PUBLIC_ORIGIN, ROOT, RUNTIME, SERVE_FRONTEND, SESSION_TTL_SECONDS
 from .database import engine, get_db
 from .demo_policy import SCHEDULE_MERCHANTS, check_profile, check_question, check_transaction, descriptions, require_sample, sample_messages
 from .demo_sessions import COOKIE_NAME, DemoSessionStore
 from .finance import budgets, dashboard, deal_recommendations, detect_subscriptions, forecast, insights, money
+from .gmail_routes import require_local, router as gmail_router, validate_personal_transaction
 from .integrations import integration_status
 from .ml import Classifier
-from .models import Account, Base, Budget, Correction, Deal, Goal, Notification, Profile, RecurringPayment, Transaction
+from .models import Account, AccountDetails, Base, Budget, Correction, Deal, GmailItem, Goal, Notification, Profile, RecurringPayment, Transaction
 from .notifications import parse_message
 from .schemas import BudgetIn, Category, ClassifyIn, GoalIn, MessageIn, ProfileIn, ScenarioIn, ScheduleIn, SubscriptionIn, TransactionIn, cents
 from .seed import seed_demo
 from .transactions import MAX_CSV_BYTES, add_transaction, csv_payloads, prepare_transaction, read_csv, serialize_transaction
+from .workspace import workspace_classifier
+from .smartapprove import router as smart_router
+from .upgrade_scenario import approvals_router, router as upgrade_router
+from .account_tools import router as account_router
+from .goals import goal_rows, router as goal_router
 
 classifier = None
 
@@ -34,6 +41,11 @@ classifier = None
 @asynccontextmanager
 async def lifespan(app):
     global classifier
+    app.state.public_demo = PUBLIC_DEMO
+    app.state.gmail = None
+    app.state.personal_engine = None
+    app.state.scenario_engine = None
+    app.state.personal_classifier = None
     if PUBLIC_DEMO:
         classifier = Classifier(model_dir=PUBLIC_MODEL_DIR)
         classifier.train()  # Public inference uses a separate immutable synthetic baseline.
@@ -46,10 +58,16 @@ async def lifespan(app):
             if not db.scalar(select(Account.id)):
                 seed_demo(db)
     try:
+        app.state.classifier = classifier
         yield
     finally:
         if PUBLIC_DEMO:
             app.state.demo_store.close()
+        else:
+            if app.state.personal_engine is not None:
+                app.state.personal_engine.dispose()
+            if app.state.scenario_engine is not None:
+                app.state.scenario_engine.dispose()
 
 
 app = FastAPI(title="Moniq", version="0.2.0", lifespan=lifespan, description="Student finance MVP with local persistence and isolated public synthetic sessions.",
@@ -60,6 +78,13 @@ Db = Depends(get_db)
 
 @app.middleware("http")
 async def private_response_headers(request: Request, call_next):
+    if PUBLIC_DEMO and (request.url.path.startswith("/api/gmail/") or request.url.path == "/api/workspace"):
+        return JSONResponse({"detail": "Gmail and personal workspaces are unavailable in public demo sessions."}, status_code=403)
+    if not PUBLIC_DEMO and request.cookies.get("moniq_workspace") in {"personal", "scenario"}:
+        try:
+            require_local(request)
+        except HTTPException as exc:
+            return JSONResponse({"detail": exc.detail}, status_code=exc.status_code)
     origin = request.headers.get("origin")
     expected_origin = PUBLIC_ORIGIN or str(request.base_url).rstrip("/")
     if PUBLIC_DEMO and request.url.path.startswith("/api/") and (request.headers.get("sec-fetch-site") == "cross-site" or (origin and origin != expected_origin)):
@@ -107,9 +132,10 @@ def health():
 
 
 @app.get("/api/config")
-def runtime_config():
+def runtime_config(request: Request):
     return {"public_demo": PUBLIC_DEMO, "session_ttl_minutes": SESSION_TTL_SECONDS // 60,
-            "upload_enabled": not PUBLIC_DEMO, "retrain_enabled": not PUBLIC_DEMO}
+            "upload_enabled": not PUBLIC_DEMO, "retrain_enabled": not PUBLIC_DEMO,
+            "workspace": request.cookies.get("moniq_workspace", "demo") if not PUBLIC_DEMO and request.cookies.get("moniq_workspace") in {"personal", "scenario"} else "demo"}
 
 
 @app.get("/api/dashboard")
@@ -119,7 +145,7 @@ def get_dashboard(db: Session = Db):
 
 @app.get("/api/transactions")
 def get_transactions(q: str = Query(default="", max_length=200), category: Category | None = None,
-                     kind: str | None = Query(default=None, pattern="^(expense|income|refund)$"),
+                     kind: str | None = Query(default=None, pattern="^(expense|income|refund|reimbursement|settlement)$"),
                      start: str | None = None, end: str | None = None,
                      offset: int = Query(default=0, ge=0), limit: int = Query(default=500, ge=1, le=1000), db: Session = Db):
     query = select(Transaction)
@@ -144,28 +170,41 @@ def get_transactions(q: str = Query(default="", max_length=200), category: Categ
 
 
 @app.post("/api/transactions", status_code=201)
-def create_transaction(payload: TransactionIn, db: Session = Db):
+def create_transaction(payload: TransactionIn, request: Request, db: Session = Db):
+    validate_personal_transaction(request, payload, db)
     if PUBLIC_DEMO:
         check_transaction(payload)
     try:
-        row = add_transaction(db, payload, classifier, "notification" if payload.notification_text else "manual")
+        row = add_transaction(db, payload, workspace_classifier(request), "notification" if payload.notification_text else "manual")
         if row is None:
             raise HTTPException(409, "Duplicate transaction: same date, merchant, and signed amount.")
         db.commit()
     except IntegrityError as exc:
         db.rollback()
         raise HTTPException(409, "Duplicate transaction.") from exc
+    except ValueError as exc:
+        db.rollback()
+        raise HTTPException(422, str(exc)) from exc
     return serialize_transaction(row)
 
 
 @app.put("/api/transactions/{transaction_id}")
-def update_transaction(transaction_id: int, payload: TransactionIn, db: Session = Db):
+def update_transaction(transaction_id: int, payload: TransactionIn, request: Request, db: Session = Db):
+    validate_personal_transaction(request, payload, db)
     if PUBLIC_DEMO:
         check_transaction(payload)
     row = db.get(Transaction, transaction_id)
     if not row:
         raise HTTPException(404, "Transaction not found.")
-    values = prepare_transaction(payload, classifier, row.source)
+    if not db.get(Account, payload.account_id):
+        raise HTTPException(422, "Choose an existing account.")
+    guard_transaction(db, transaction_id)
+    from .models import ApprovalAudit
+    if row.source == "smartapprove-adjustment" or db.scalar(select(ApprovalAudit.id).where(ApprovalAudit.transaction_id == row.id, ApprovalAudit.action == "reversed")):
+        raise HTTPException(409, "Reversed approvals and their adjustments remain immutable audit records.")
+    before = {"amount_cents": row.amount_cents, "kind": row.kind, "category": row.category, "account_id": row.account_id, "date": row.date.isoformat()}
+    from .smartapprove import record_correction
+    values = prepare_transaction(payload, workspace_classifier(request), row.source)
     duplicate = db.scalar(select(Transaction.id).where(Transaction.fingerprint == values["fingerprint"], Transaction.id != transaction_id))
     if duplicate:
         raise HTTPException(409, "This edit would create a duplicate transaction.")
@@ -173,6 +212,7 @@ def update_transaction(transaction_id: int, payload: TransactionIn, db: Session 
         db.add(Correction(description=payload.description, previous_category=row.category, corrected_category=values["category"]))
     for key, value in values.items():
         setattr(row, key, value)
+    record_correction(db, row, before)
     try:
         db.commit()
     except IntegrityError as exc:
@@ -186,7 +226,13 @@ def remove_transaction(transaction_id: int, db: Session = Db):
     row = db.get(Transaction, transaction_id)
     if not row:
         raise HTTPException(404, "Transaction not found.")
+    guard_transaction(db, transaction_id)
+    from .smartapprove import auto_record
+    if auto_record(db, transaction_id) or row.source == "smartapprove-adjustment":
+        raise HTTPException(409, "Use the auditable SmartApprove reversal instead of deleting approval history.")
     db.execute(delete(Notification).where(Notification.transaction_id == transaction_id))
+    for email in db.scalars(select(GmailItem).where(GmailItem.transaction_id == transaction_id)):
+        email.transaction_id = None  # Preserve reviewed message IDs so a deleted import is not resynced.
     db.delete(row)
     db.commit()
     return Response(status_code=204)
@@ -208,18 +254,21 @@ async def preview_csv(file: UploadFile = File(...)):
 
 
 @app.post("/api/imports/csv")
-async def import_csv(file: UploadFile = File(...), mapping: str = Form(...), convention: str = Form("negative_expense"),
-                     day_first: bool = Form(False), db: Session = Db):
+async def import_csv(request: Request, file: UploadFile = File(...), mapping: str = Form(...), convention: str = Form("negative_expense"),
+                     day_first: bool = Form(False), account_id: int = Form(1), db: Session = Db):
     frame = await uploaded_csv(file)
     try:
         parsed = json.loads(mapping)
         payloads = csv_payloads(frame, parsed, convention, day_first)
+        for payload in payloads:
+            payload.account_id = account_id
+            validate_personal_transaction(request, payload, db)
     except (ValueError, TypeError) as exc:
         raise HTTPException(422, str(exc)) from exc
     imported = duplicates = 0
     try:
         for payload in payloads:
-            row = add_transaction(db, payload, classifier, "csv")
+            row = add_transaction(db, payload, workspace_classifier(request), "csv")
             if row:
                 imported += 1
             else:
@@ -233,30 +282,30 @@ async def import_csv(file: UploadFile = File(...), mapping: str = Form(...), con
 
 
 @app.post("/api/classify")
-def classify(payload: ClassifyIn):
+def classify(payload: ClassifyIn, request: Request):
     if PUBLIC_DEMO:
         require_sample(payload.description in descriptions())
-    return classifier.classify(payload.description)
+    return workspace_classifier(request).classify(payload.description)
 
 
 @app.get("/api/ml/metrics")
-def model_metrics(db: Session = Db):
-    return {**classifier.report, "stored_corrections": len(list(db.scalars(select(Correction.id))))}
+def model_metrics(request: Request, db: Session = Db):
+    return {**workspace_classifier(request).report, "stored_corrections": len(list(db.scalars(select(Correction.id))))}
 
 
 @app.post("/api/ml/retrain")
-def retrain(db: Session = Db):
+def retrain(request: Request, db: Session = Db):
     if PUBLIC_DEMO:
         raise HTTPException(403, "Public predictions use an immutable baseline. Corrections stay in your session; retraining is available in local mode.")
-    return classifier.train(list(db.scalars(select(Correction))))
+    return workspace_classifier(request).train(list(db.scalars(select(Correction))))
 
 
 @app.post("/api/notifications/parse")
-def parse_notification(payload: MessageIn):
+def parse_notification(payload: MessageIn, request: Request):
     if PUBLIC_DEMO:
         require_sample(payload.text in sample_messages())
     try:
-        return parse_message(payload.text, classifier)
+        return parse_message(payload.text, workspace_classifier(request))
     except ValueError as exc:
         raise HTTPException(422, str(exc)) from exc
 
@@ -267,7 +316,9 @@ def message_examples():
 
 
 @app.post("/api/demo/import-sample")
-def import_demo_statement(db: Session = Db):
+def import_demo_statement(request: Request, db: Session = Db):
+    if request.cookies.get("moniq_workspace") == "personal":
+        raise HTTPException(409, "Sample statements are available in the synthetic demo workspace only.")
     frame = read_csv((ROOT / "data/sample_statement.csv").read_bytes(), "sample_statement.csv")
     payloads = csv_payloads(frame, {"date": "Date", "description": "Description", "amount": "Amount", "kind": "Kind", "category": "Category"}, "negative_expense")
     imported = sum(add_transaction(db, payload, classifier, "csv") is not None for payload in payloads)
@@ -429,7 +480,7 @@ def save_profile(payload: ProfileIn, db: Session = Db):
 
 @app.get("/api/goals")
 def get_goals(db: Session = Db):
-    return [{"id": g.id, "name": g.name, "target": money(g.target_cents), "saved": money(g.saved_cents)} for g in db.scalars(select(Goal))]
+    return goal_rows(db)
 
 
 @app.put("/api/goals/{goal_id}")
@@ -446,7 +497,7 @@ def save_goal(goal_id: int, payload: GoalIn, db: Session = Db):
 
 
 @app.get("/api/export")
-def export_data(format: str = Query(default="json", pattern="^(json|csv)$"), db: Session = Db):
+def export_data(request: Request, format: str = Query(default="json", pattern="^(json|csv)$"), db: Session = Db):
     transactions = [serialize_transaction(t) for t in db.scalars(select(Transaction).order_by(Transaction.date))]
     if format == "csv":
         output = io.StringIO(newline="")
@@ -465,28 +516,47 @@ def export_data(format: str = Query(default="json", pattern="^(json|csv)$"), db:
                 for row in db.scalars(select(model))]
     payload = {"profile": serialize_profile(db.get(Profile, 1)), "accounts": rows(Account), "transactions": transactions,
                "budgets": rows(Budget), "goals": rows(Goal), "recurring_payments": rows(RecurringPayment),
-               "deals": rows(Deal), "notifications": rows(Notification), "corrections": rows(Correction), "synthetic": True}
+               "deals": rows(Deal), "notifications": rows(Notification), "corrections": rows(Correction),
+               "synthetic": PUBLIC_DEMO or request.cookies.get("moniq_workspace") != "personal",
+               "registered_account_details": rows(AccountDetails), "gmail_review_items": rows(GmailItem)}
+    from .models import Circle, CircleMember, CircleExpense, CircleShare, CircleSettlement, LedgerAudit, TrustedSender, ApprovalAudit, GmailEvidence, DebitCard, AccountTransfer, GoalPlan, GoalContribution
+    for model in (Circle, CircleMember, CircleExpense, CircleShare, CircleSettlement, LedgerAudit, TrustedSender, ApprovalAudit, GmailEvidence, DebitCard, AccountTransfer, GoalPlan, GoalContribution):
+        payload[model.__tablename__] = rows(model)
     return Response(json.dumps(payload, indent=2), media_type="application/json", headers={"Content-Disposition": 'attachment; filename="moniq-data.json"'})
 
 
 @app.delete("/api/data", status_code=204)
-def delete_data(db: Session = Db):
-    for model in (Notification, Correction, Transaction, Budget, RecurringPayment, Deal, Goal, Profile, Account):
-        db.execute(delete(model))
+def delete_data(request: Request, db: Session = Db):
+    if request.cookies.get("moniq_workspace") == "personal" and not PUBLIC_DEMO:
+        from .gmail_routes import manager
+        manager(request).disconnect()
+    for table in reversed(Base.metadata.sorted_tables):
+        db.execute(delete(table))
     # Retain an empty account as the persistent deletion marker.
     db.add(Account(id=1, name="Empty local account", opening_balance_cents=0))
     db.commit()
     if not PUBLIC_DEMO:
-        classifier.train()  # Remove local correction effects from the saved model too.
+        workspace_classifier(request).train()  # Reset only this workspace's correction-trained model.
     return Response(status_code=204)
 
 
 @app.post("/api/demo/reset")
-def reset_demo(db: Session = Db):
+def reset_demo(request: Request, db: Session = Db):
+    if request.cookies.get("moniq_workspace") == "personal" and not PUBLIC_DEMO:
+        raise HTTPException(409, "Switch to the synthetic workspace before Reset Demo. Personal records are preserved.")
     seed_demo(db, reset=True)
     if not PUBLIC_DEMO:
         classifier.train()
     return {"status": "reset", "message": "Synthetic student demo restored. Personal changes and corrections removed."}
+
+
+app.include_router(gmail_router)
+app.include_router(circles_router)
+app.include_router(smart_router)
+app.include_router(upgrade_router)
+app.include_router(approvals_router)
+app.include_router(account_router)
+app.include_router(goal_router)
 
 
 class FrontendFiles(StaticFiles):

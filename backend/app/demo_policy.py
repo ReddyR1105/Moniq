@@ -9,6 +9,8 @@ from .ml import MERCHANTS
 from .notifications import EXAMPLES
 
 ASSISTANT_QUESTIONS = [
+    "When was my last confirmed paycheck?", "How much money do I have left?", "Am I on track with my savings goal?", "Can I afford a $100 purchase?",
+    "How much do my roommates owe me?", "How much have I spent on shared meals?", "What shared subscriptions are recurring?", "How much should I reserve for shared rent?", "Which shared expenses affect my budget?",
     "How much did I spend this week?", "Can I afford a $150 purchase?",
     "How much will I have left after rent?", "Where can I save money?",
     "Which expenses increased recently?", "Which student deals are relevant to me?",
@@ -40,7 +42,7 @@ def descriptions():
 
 def check_transaction(payload):
     allowed = descriptions()
-    require_sample(payload.description in allowed and (not payload.merchant or payload.merchant in allowed))
+    require_sample(payload.account_id == 1 and payload.description in allowed and (not payload.merchant or payload.merchant in allowed))
     require_sample(not payload.notification_text or payload.notification_text in sample_messages())
 
 

@@ -7,7 +7,7 @@
 - Date supplied by the client: October 9, 2026, America/New_York. That date alone does not prove that development occurred after the official hacking start.
 - OpenAI Codex generated and integrated the backend, frontend, synthetic data generator, ML training/evaluation, tests, setup scripts, and documentation. Codex also debugged test failures and ran validation. No separate development agents were used.
 - Preexisting materials: user requirements and ideas; installed development tools; external open-source frameworks and packages. No unrelated private startup concepts or coursework code were incorporated.
-- Project records and offer examples are synthetic. No real bank/student data, secret keys, or private account credentials were used.
+- Public/demo/training records and offer examples are synthetic. Later local Gmail integration uses owner-provided OAuth settings and preserves an authorized secondary account. Secrets and private runtime databases are excluded from Git and submission media; final recordings use separate synthetic databases with Gmail disabled.
 
 ## Complete manually before claiming eligibility
 
@@ -20,4 +20,8 @@
 | Prior reusable code/templates beyond dependencies | None copied into this project; team must confirm any later additions |
 | Additional AI tools or sponsor APIs actually used | None established beyond Codex; update if later used |
 
-Do not submit a blanket assertion that all substantial work occurred during Hacklanta until verified. If any of this build predates the official hacking start, disclose that component as preexisting and confirm eligibility with organizers. No repository or Devpost publication has been performed.
+Do not submit a blanket assertion that all substantial work occurred during Hacklanta until verified. If any of this build predates the official hacking start, disclose that component as preexisting and confirm eligibility with organizers. Repository baseline `8ac182f` was previously published. This finalization extends that baseline; the new local release requires separate push approval. No Devpost submission or deployment is claimed.
+
+## Finalization disclosure
+
+The existing Gmail, SmartApprove and Circles upgrade was preserved. Finalization added dashboard approvals, explicit account movements/debit aliases, savings contributions/projections, grounded assistant intents, regression tests and actual narrated recordings. Codex produced code, tests, documentation and media using Playwright, FFmpeg and local Windows speech synthesis. The team must verify which changes occurred in the official hacking period before making eligibility claims.

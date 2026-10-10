@@ -24,3 +24,10 @@
 .table-scroll{position:relative}
 .table-scroll th{position:relative}
 .table-scroll .sr-only{left:0;top:0}
+
+.gmail-review {padding: 20px 0; border-top: 1px solid #e5e9e2;}
+.gmail-review fieldset {border: 0; padding: 0; margin: 0; min-width: 0; display: grid; gap: 16px;}
+.gmail-reasons {color: #745326; font-size: 13px; line-height: 1.6; padding-left: 20px;}
+
+/* Original Moniq Circles ledger layout. */
+.circles-layout{display:grid;grid-template-columns:minmax(220px,1fr) minmax(0,3fr);gap:24px;margin-top:24px;align-items:start}.circle-detail{display:grid;gap:24px;min-width:0}.circle-selector{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:transparent;border:1px solid var(--border,#e3e9e4);padding:16px;border-radius:14px;margin:10px 0}.circle-selector.selected{background:#eaf4ec;border-color:#176c54}.circle-selector span{display:grid;gap:5px}.circle-selector small,.circle-expense p{color:#68766c}.circle-totals{display:flex;flex-wrap:wrap;gap:24px;margin-bottom:24px}.circle-totals div{display:grid;gap:8px;flex:1;min-width:120px}.circle-totals span{font-size:13px;color:#68766c}.circle-totals strong{font-size:24px}.circle-expense{padding:18px 0;border-top:1px solid #e3e9e4}.circle-expense-heading{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.circle-expense-heading>div{flex:1}.circle-share{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;flex-wrap:wrap;border-top:1px solid #eef1ed;font-size:13px}.circle-participants{padding:14px;border:1px solid #e3e9e4;border-radius:12px;display:grid;gap:14px}.circle-detail label>select{width:100%;margin:8px 0 14px}.page-content>.panel{margin-bottom:24px}@media(max-width:800px){.circles-layout{grid-template-columns:1fr}.circle-totals strong{font-size:21px}.row-actions{flex-wrap:wrap}}

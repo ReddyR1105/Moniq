@@ -1,16 +1,28 @@
-# Moniq — 2–3 minute demonstration
+# Final Moniq demo scripts and media
 
-Use the actual local app, with **Settings → Reset Demo** completed before recording. Keep both servers running. A silent recording of the actual app is included at `docs/demo/moniq-demo.webm`, with caption text in `moniq-demo.vtt`. Its actions run in about 2 minutes 15 seconds; this table is a longer narration alternative. Add narration or captions before uploading. Values depend on the current date; read them from the screen. No bank account, API key, or judge credentials are required.
+The final presentation and full walkthrough are actual Playwright/Chromium recordings at 1920 x 1080, encoded as H.264 MP4 with AAC local Windows narration. Captions are burned into the recording and also available as SRT/VTT. No music or personal Gmail content is used.
 
-| Time | Screen and action | Suggested narration |
-| --- | --- | --- |
-| 0:00–0:20 | Overview; point to balance and budget | “This is Moniq: Spending, Made Smarter. We help college students understand their money without maintaining a spreadsheet. Here’s our synthetic Georgia State student. Every total is calculated from stored records.” |
-| 0:20–0:55 | Try purchase alert → Simulate a purchase alert | “Students already receive purchase notifications. This demo accepts user-pasted alerts; it does not access texts. Moniq extracts Chick-fil-A and $15.75, and our trained scikit-learn model suggests Food with visible confidence. The student can correct any field.” |
-| 0:55–1:10 | Confirm & save; show Overview and Budgets | “Once confirmed, the transaction is persisted in SQLite. Spending rises by $15.75 and the food budget updates. Repeating the same alert is safely detected as a duplicate.” |
-| 1:10–1:30 | AI Assistant → How much did I spend this week? | “The local assistant retrieves calculated financial values rather than asking a language model to invent numbers. Here’s the spending total and the supporting evidence.” |
-| 1:30–1:55 | AI Insights → $150 purchase → Run scenario | “The next 30 days combine historical variable spending, scheduled pay, and upcoming bills. A $150 purchase lowers the projected ending balance by exactly $150. These are estimates with assumptions, not promises.” |
-| 1:55–2:15 | Student Deals; inspect top match | “Sample student offers are ranked by spending, interests, eligibility, and remaining budget. We avoid unaffordable offers and unnecessary purchases. These are synthetic examples, not live discounts.” |
-| 2:15–2:35 | Subscriptions; confirm Spotify | “Repeated service charges reveal possible subscriptions, renewal dates, and annualized cost. Students confirm or dismiss patterns. Moniq does not claim to cancel services.” |
-| 2:35–2:50 | AI Insights ML evaluation; closing | “We trained a real TF-IDF/logistic regression pipeline and measured about 94.7% accuracy on synthetic held-out merchant families. Corrections are saved for retraining. Moniq makes student spending easier to understand and plan.” |
+- `docs/demo/Moniq_Hacklanta_Final.mp4`: concise Hacklanta presentation.
+- `docs/demo/Moniq_All_Features.mp4`: complete feature walkthrough.
+- Matching `_NARRATION.md`, `.srt` and `.vtt` files contain the actual timed scene text.
+- `QA_REPORT.md` records measured media durations and full decoding checks.
 
-For a short alternative, omit subscription review and use the in-app guided tour. Use actual screen recordings; don't portray Plaid, Gemini, real offers, message synchronization, or production authentication as available. Mention that optional integrations are future work if asked.
+## Story and operator cues
+
+Start the explicitly isolated scenario with $10. Use the dashboard's synthetic $400 paycheck and $15 purchase buttons. Read extracted fields, verify posted status and confirm each; show $410 then $395. Open Settings to show trusted-sender restrictions and audit history. Process the controlled $40 dinner, link it to an equal two-person Circle, and record the $20 confirmed repayment. The resulting checking cash is $375, monthly personal spending $35 and paycheck income $400; debt is zero. The earlier $395 figure precedes the dinner and repayment.
+
+The extended recording also demonstrates disconnected Gmail controls, savings account setup, a linked debit card, internal transfer/reconciliation, actual transactions, synthetic CSV preview/import, category correction, monthly/weekly budgets, forecasts/scenario assumptions, contribution plans, subscriptions, grounded questions, sample offers and safe reset. Returning to the ordinary synthetic demo loads its separate seeded student history; do not compare that balance to the controlled scenario.
+
+## Reproducing media safely
+
+Use `scripts/start-backend.ps1 -Port 8004` and `scripts/start-frontend.ps1 -Port 5175 -ApiTarget http://127.0.0.1:8004` with recording-specific database/model/token directories under `.runtime/final-recording*`, `CORS_ORIGINS=http://127.0.0.1:5175`, `GMAIL_FRONTEND_URL=http://127.0.0.1:5175` and **MONIQ_GMAIL_DISABLED=true**. Never reuse the owner's databases or token directory for recording. The recorder checks that Gmail is unconfigured and disconnected before resetting only its synthetic workspace.
+
+`node scripts/record-final-demo.mjs presentation` or `walkthrough` captures real navigation and backend responses. `MONIQ_RECORD_FAST=1` is preflight only; the finishing scripts refuse to publish fast footage. `scripts/narrate-demo.ps1 -Mode presentation` creates local speech; `scripts/finish-demo-video.py presentation --ffmpeg <local-ffmpeg-path>` encodes and completely decodes the result. Repeat for walkthrough. Windows speech voices/FFmpeg are optional media tools, not application runtime dependencies. Raw browser footage and WAV intermediates remain ignored in `.runtime/`.
+
+## Upload and Devpost instructions
+
+1. Review both MP4s and their captions locally. Use the short presentation as the main Devpost demo; the longer walkthrough can be supplementary.
+2. Sign into your own YouTube or another Devpost-supported video host. Upload the MP4 as Public or Unlisted, with title "Moniq - Spending, Made Smarter. | Hacklanta 2026 Fintech". Avoid Private visibility.
+3. Add the supplied SRT captions if the host supports them. Description: actual prototype, synthetic data, estimated balances, no banking/payment service. Link the official repository.
+4. Wait for processing. Open the video URL in a signed-out/private browser and verify playback, readability and audio. Confirm the repository's final approved source is accessible too.
+5. Paste the actual video URL into Devpost. Keep media accessible through judging, complete all fields, and verify submission receipt before the deadline. No upload or submission has been performed by Codex.

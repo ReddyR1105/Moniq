@@ -9,7 +9,7 @@ from threading import RLock
 from sqlalchemy import select
 
 from .config import today
-from .models import Account, Budget, Deal, Profile, RecurringPayment, Transaction
+from .models import Account, AccountDetails, Budget, Deal, Profile, RecurringPayment, Transaction
 
 _recurring_lock = RLock()
 
@@ -33,17 +33,21 @@ def records(db, start=None, end=None):
     return list(db.scalars(query.order_by(Transaction.date, Transaction.id)))
 
 
-def spending(rows):
+def spending(rows, db=None, start=None, end=None):
+    if db is not None:
+        from .circles import allocated_rows
+        rows = allocated_rows(db, rows, start, end)
     totals = defaultdict(int)
     for row in rows:
-        if row.kind != "income":
+        if row.kind not in {"income", "reimbursement", "settlement", "transfer", "adjustment"}:
             totals[row.category] -= row.amount_cents
     return dict(totals)
 
 
 def balance_cents(db):
-    opening = sum(a.opening_balance_cents for a in db.scalars(select(Account)))
-    return opening + sum(t.amount_cents for t in records(db))
+    credit = set(db.scalars(select(AccountDetails.account_id).where(AccountDetails.account_type == "credit")))
+    opening = sum(a.opening_balance_cents for a in db.scalars(select(Account)) if a.id not in credit)
+    return opening + sum(t.amount_cents for t in records(db) if t.account_id not in credit)
 
 
 def period_start(period, now=None):
@@ -54,7 +58,7 @@ def period_start(period, now=None):
 def budgets(db):
     result = []
     for row in db.scalars(select(Budget).order_by(Budget.period, Budget.category)):
-        used = spending(records(db, period_start(row.period))).get(row.category, 0)
+        used = spending(records(db, period_start(row.period)), db, period_start(row.period)).get(row.category, 0)
         result.append({"id": row.id, "category": row.category, "period": row.period,
                        "limit": money(row.limit_cents), "spent": money(used), "remaining": money(row.limit_cents - used),
                        "progress": round(max(0, used) / row.limit_cents, 4) if row.limit_cents else (1 if used > 0 else 0),
@@ -156,7 +160,9 @@ def forecast(db, scenario=None):
     earliest = min((r.date for r in history), default=now)
     observed_days = max(1, (now - max(start, earliest)).days + 1)
     recurring_merchants = {r.merchant for r in db.scalars(select(RecurringPayment).where(RecurringPayment.status != "incorrect")) if r.interval_days or r.next_due > now}
-    discretionary_cents = max(0, -sum(r.amount_cents for r in history if r.kind != "income" and r.merchant not in recurring_merchants))
+    # Forecast bank cash from full historical cash charges, never anticipated reimbursements.
+    credit = set(db.scalars(select(AccountDetails.account_id).where(AccountDetails.account_type == "credit")))
+    discretionary_cents = max(0, -sum(r.amount_cents for r in history if r.kind in {"expense", "refund"} and r.account_id not in credit and r.merchant not in recurring_merchants))
     expected_cents = round(discretionary_cents * 30 / observed_days)
     events = scheduled_events(db)
     by_date = defaultdict(list)
@@ -206,13 +212,14 @@ def forecast(db, scenario=None):
                             "Scheduled merchants are excluded from the daily average and counted on their due dates once.",
                             "Monthly charges follow calendar months; payroll repeats every 14 days. Candidate subscriptions are included until marked incorrect.",
                             "Only stored income schedules are included; no hypothetical scholarship or earnings are assumed.",
+                            "Shared purchases retain their full bank cash charge. Outstanding reimbursements are never assumed to arrive.",
                             "Scenarios apply extra income tomorrow and distribute spending reductions across 30 days, capped at estimated variable spending.",
                             "Forecasts are estimates, not guarantees. Sparse or irregular history can distort the average."]}
 
 
 def deal_recommendations(db):
     profile = db.get(Profile, 1)
-    totals = spending(records(db, today() - timedelta(days=29)))
+    totals = spending(records(db, today() - timedelta(days=29)), db, today() - timedelta(days=29))
     limits = {b["category"]: b for b in budgets(db) if b["period"] == "monthly"}
     interests = {interest.strip() for interest in (profile.interests if profile else "").lower().split(",") if interest.strip()}
     if "technology" in interests or "clothing" in interests:
@@ -249,7 +256,7 @@ def insights(db):
     now = today()
     recent = records(db, now - timedelta(days=29))
     prior = records(db, now - timedelta(days=59), now - timedelta(days=30))
-    recent_totals, prior_totals = spending(recent), spending(prior)
+    recent_totals, prior_totals = spending(recent, db, now - timedelta(days=29)), spending(prior, db, now - timedelta(days=59), now - timedelta(days=30))
     increases = [{"category": cat, "change": money(total - prior_totals.get(cat, 0)), "recent": money(total)}
                  for cat, total in recent_totals.items() if total - prior_totals.get(cat, 0) > 1000]
     history = records(db, now - timedelta(days=90), now - timedelta(days=7))
@@ -277,19 +284,22 @@ def insights(db):
 def dashboard(db):
     now = today()
     month = records(db, now.replace(day=1))
-    totals = spending(month)
+    totals = spending(month, db, now.replace(day=1))
     income = sum(t.amount_cents for t in month if t.kind == "income")
     expense = sum(totals.values())
     monthly_limits = sum(b.limit_cents for b in db.scalars(select(Budget).where(Budget.period == "monthly")))
     weekly = []
     for offset in range(6, -1, -1):
         day = now - timedelta(days=offset)
-        weekly.append({"date": day.isoformat(), "day": day.strftime("%a"), "amount": money(sum(spending(records(db, day, day)).values()))})
+        weekly.append({"date": day.isoformat(), "day": day.strftime("%a"), "amount": money(sum(spending(records(db, day, day), db, day, day).values()))})
     subscriptions = detect_subscriptions(db)
     deals = deal_recommendations(db)
-    return {"as_of": now.isoformat(), "balance": money(balance_cents(db)), "income": money(income),
+    from .circles import summary as circles_summary
+    credit = set(db.scalars(select(AccountDetails.account_id).where(AccountDetails.account_type == "credit")))
+    credit_debt = sum(max(0, -a.opening_balance_cents - sum(t.amount_cents for t in records(db) if t.account_id == a.id)) for a in db.scalars(select(Account)) if a.id in credit)
+    return {"credit_outstanding": money(credit_debt), "estimated": any(a.mode in {"registered", "scenario"} for a in db.scalars(select(Account))), "circles": circles_summary(db), "cash_expenses": money(-sum(t.amount_cents for t in month if t.amount_cents < 0 and t.account_id not in credit and t.kind not in {"transfer", "adjustment"})), "as_of": now.isoformat(), "balance": money(balance_cents(db)), "income": money(income),
             "expenses": money(expense), "remaining_budget": money(monthly_limits - expense), "budget_total": money(monthly_limits),
-            "weekly_spending": weekly, "week_total": money(sum(spending(records(db, period_start("weekly"))).values())),
+            "weekly_spending": weekly, "week_total": money(sum(spending(records(db, period_start("weekly")), db, period_start("weekly")).values())),
             "categories": [{"category": c, "amount": money(v)} for c, v in sorted(totals.items(), key=lambda pair: -pair[1])],
             "subscriptions_total": subscriptions["monthly_total"], "potential_savings": deals["potential_savings"],
             "upcoming_bills": [event for event in scheduled_events(db) if event["kind"] == "expense"],

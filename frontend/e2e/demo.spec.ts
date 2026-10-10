@@ -69,6 +69,95 @@ test.beforeEach(async ({request, page}) => {
   await expect(page.getByTestId('balance')).toBeVisible()
 })
 
+test('Gmail settings and registered account balance updates preserve the synthetic demo', async ({page}) => {
+  const demoBalance = await page.getByTestId('balance').innerText()
+  await navigate(page,'Settings')
+  await expect(page.getByRole('button',{name:'Connect Gmail',exact:true})).toBeDisabled()
+  await expect(page.getByRole('button',{name:'Sync Now',exact:true})).toBeVisible()
+  await expect(page.getByRole('button',{name:'Disconnect Gmail',exact:true})).toBeVisible()
+  await page.getByRole('button',{name:'Open personal workspace',exact:true}).click()
+  await expect(page.getByRole('button',{name:'Use synthetic demo',exact:true})).toBeVisible()
+  const origin = {Origin:'http://127.0.0.1:5174'}
+  expect((await page.request.delete('/api/data',{headers:origin})).status()).toBe(204)
+  await page.reload()
+  await page.getByLabel('Personal account name',{exact:true}).fill('Checking test account')
+  await page.getByLabel('Account or card last four',{exact:true}).fill('1234')
+  await page.getByLabel('Starting balance ($)',{exact:true}).fill('10')
+  await page.getByRole('button',{name:'Register account',exact:true}).click()
+  await expect(page.locator('.toast')).toContainText('Personal account saved')
+  await navigate(page,'Overview')
+  await expect(page.getByTestId('balance')).toHaveText('$10.00')
+  for (const entry of [{description:'Campus job payroll',amount:'400',kind:'income',balance:'$410.00'}, {description:'Chick-fil-A',amount:'15',kind:'expense',balance:'$395.00'}]) {
+    await page.getByRole('button',{name:'Add transaction',exact:true}).click()
+    const dialog = page.getByRole('dialog')
+    await dialog.getByLabel('Registered account',{exact:true}).selectOption({label:'Checking test account'})
+    await dialog.getByLabel('Description',{exact:true}).fill(entry.description)
+    await dialog.getByLabel('Amount ($)',{exact:true}).fill(entry.amount)
+    await dialog.getByLabel('Transaction type',{exact:true}).selectOption(entry.kind)
+    await dialog.getByRole('button',{name:'Confirm & save transaction',exact:true}).click()
+    await expect(dialog).toHaveCount(0)
+    await expect(page.getByTestId('balance')).toHaveText(entry.balance)
+  }
+  await expect(page.getByRole('button',{name:'Reset Demo',exact:true})).toHaveCount(0)
+  await page.getByRole('button',{name:'Open synthetic demo',exact:true}).click()
+  await expect(page.getByTestId('balance')).toHaveText(demoBalance)
+})
+
+test('connected Gmail controls review mocked alerts and update actual personal balances', async ({page}) => {
+  let connected = false, synced = false, accountId = 0
+  const reviewed = new Set<number>()
+  const today = new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'}).format(new Date())
+  const alerts = [
+    {id:901,subject:'Synthetic confirmed paycheck',event_type:'income',merchant:'Campus job payroll',amount:400,category:'income'},
+    {id:902,subject:'Synthetic purchase alert',event_type:'purchase',merchant:'Chick-fil-A',amount:15,category:'food'},
+  ]
+  await page.route('**/api/gmail/**',async route => {
+    const url = new URL(route.request().url())
+    const path = url.pathname
+    if (path === '/api/gmail/status') return route.fulfill({json:{configured:true,connected,tokens_present:connected,connection_error:null,email:connected?'synthetic@example.test':null,scope:'https://www.googleapis.com/auth/gmail.readonly'}})
+    if (path === '/api/gmail/connect') {connected=true; return route.fulfill({json:{authorization_url:'http://127.0.0.1:5174/?gmail=connected#settings'}})}
+    if (path === '/api/gmail/sync') {synced=true; return route.fulfill({json:{queued:2,more_available:false}})}
+    if (path === '/api/gmail/items') return route.fulfill({json:synced?alerts.map(a=>({...a,sender:'Synthetic Bank <alerts@example.test>',date:today,last_four:'1234',confidence:.95,reasons:[],account_id:accountId,status:reviewed.has(a.id)?'confirmed':'review'})):[]})
+    if (path.endsWith('/confirm')) {
+      const payload = route.request().postDataJSON()
+      expect(payload.posted_confirmed).toBe(true)
+      expect(payload.account_id).toBe(accountId)
+      const saved = await page.request.post('/api/transactions',{headers:{Origin:'http://127.0.0.1:5174'},data:payload})
+      expect(saved.status()).toBe(201)
+      reviewed.add(Number(path.split('/')[4]))
+      return route.fulfill({json:{status:'confirmed',transaction:await saved.json()}})
+    }
+    if (path === '/api/gmail/disconnect') {connected=false; return route.fulfill({json:{connected:false,message:'Local tokens removed. Confirmed records remain.'}})}
+    return route.continue()
+  })
+  await navigate(page,'Settings')
+  await page.getByRole('button',{name:'Open personal workspace',exact:true}).click()
+  await expect(page.getByRole('button',{name:'Use synthetic demo',exact:true})).toBeVisible()
+  expect((await page.request.delete('/api/data',{headers:{Origin:'http://127.0.0.1:5174'}})).status()).toBe(204)
+  await page.reload()
+  await page.getByLabel('Personal account name',{exact:true}).fill('Gmail checking test')
+  await page.getByLabel('Account or card last four',{exact:true}).fill('1234')
+  await page.getByRole('button',{name:'Register account',exact:true}).click()
+  await expect(page.locator('.toast')).toContainText('Personal account saved')
+  accountId = (await (await page.request.get('/api/gmail/accounts')).json()).find((a:{name:string})=>a.name==='Gmail checking test').id
+  await page.getByRole('button',{name:'Connect Gmail',exact:true}).click()
+  await expect(page.getByRole('button',{name:'Reconnect Gmail',exact:true})).toBeEnabled()
+  await page.getByRole('button',{name:'Sync Now',exact:true}).click()
+  await expect(page.locator('.gmail-review')).toHaveCount(2)
+  expect((await (await page.request.get('/api/dashboard')).json()).balance).toBe(10)
+  for (const [subject,balance] of [['Synthetic confirmed paycheck',410],['Synthetic purchase alert',395]] as const) {
+    const item = page.locator('.gmail-review').filter({has:page.getByRole('heading',{name:subject,exact:true})})
+    await expect(item.getByRole('button',{name:'Confirm email transaction',exact:true})).toBeDisabled()
+    await item.getByRole('checkbox').check()
+    await item.getByRole('button',{name:'Confirm email transaction',exact:true}).click()
+    await expect(item).toHaveCount(0)
+    expect((await (await page.request.get('/api/dashboard')).json()).balance).toBe(balance)
+  }
+  await page.getByRole('button',{name:'Disconnect Gmail',exact:true}).click()
+  await expect(page.getByRole('button',{name:'Sync Now',exact:true})).toBeDisabled()
+  expect((await (await page.request.get('/api/dashboard')).json()).balance).toBe(395)
+})
+
 test('judge walkthrough: alert → classification → budget → assistant → forecast → deals', async ({page}) => {
   const consoleErrors: string[] = []
   page.on('pageerror', e => consoleErrors.push(e.message))
@@ -173,7 +262,7 @@ test('mobile layout, navigation, keyboard dialog, and screenshot', async ({page}
   await page.setViewportSize({width:1440,height:1000})
   await navigate(page,'Overview')
   await expect(page.locator('.recharts-pie')).toBeVisible()
-  await page.screenshot({path:'../docs/moniq-overview.png',fullPage:true})
+  await page.screenshot({path:'../.runtime/verification-overview.png',fullPage:true})
 })
 
 test('students can add and edit upcoming tuition or income schedules', async ({page}) => {

@@ -6,7 +6,7 @@ import type { AssistantReply } from '../types'
 import { useRuntime } from '../runtime'
 
 type Chat = {role: 'user' | 'assistant'; text: string; evidence?: AssistantReply['evidence']}
-const questions = ['How much did I spend this week?', 'Can I afford a $150 purchase?', 'How much will I have left after rent?', 'Where can I save money?', 'Which expenses increased recently?', 'Which student deals are relevant to me?', 'Which subscriptions am I paying for?', 'How much should I save this month?']
+const questions = ['When was my last confirmed paycheck?', 'How much money do I have left?', 'Am I on track with my savings goal?', 'Can I afford a $100 purchase?', 'How much did I spend this week?', 'Can I afford a $150 purchase?', 'How much will I have left after rent?', 'Where can I save money?', 'Which expenses increased recently?', 'Which student deals are relevant to me?', 'Which subscriptions am I paying for?', 'How much should I save this month?', 'How much do my roommates owe me?', 'How much have I spent on shared meals?', 'What shared subscriptions are recurring?', 'How much should I reserve for shared rent?', 'Which shared expenses affect my budget?']
 
 export function AssistantPage() {
   const {public_demo} = useRuntime()

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ArrowRight, Bell, BookOpen, Check, ChevronLeft, ChevronRight, CircleHelp, Coffee, LayoutDashboard, Menu, MessageCircle, Play, Repeat2, Settings, Sparkles, Tag, TrendingUp, Wallet, X } from 'lucide-react'
+import { ArrowRight, Bell, BookOpen, Check, ChevronLeft, ChevronRight, CircleHelp, Coffee, LayoutDashboard, Menu, MessageCircle, Play, Repeat2, Settings, Sparkles, Tag, TrendingUp, Wallet, Users, X } from 'lucide-react'
 import { api, errorText, prettyDate, useResource } from './api'
 import { useRuntime } from './runtime'
 import { ErrorNotice, Loading } from './components'
@@ -11,13 +11,14 @@ import { InsightsPage } from './pages/Insights'
 import { Overview } from './pages/Overview'
 import { SettingsPage } from './pages/Settings'
 import { SubscriptionsPage } from './pages/Subscriptions'
+import { CirclesPage } from './pages/Circles'
 import { TransactionsPage } from './pages/Transactions'
 import type { Dashboard, Page, Profile, Transaction } from './types'
 
 const navigation = [
   {name:'Overview', icon:LayoutDashboard}, {name:'Transactions', icon:Wallet}, {name:'Budgets', icon:BookOpen},
   {name:'AI Insights', icon:Sparkles}, {name:'Student Deals', icon:Tag}, {name:'Subscriptions', icon:Repeat2},
-  {name:'AI Assistant', icon:MessageCircle}, {name:'Settings', icon:Settings},
+  {name:'Circles', icon:Users}, {name:'AI Assistant', icon:MessageCircle}, {name:'Settings', icon:Settings},
 ] as const
 const pageFromHash = (): Page => navigation.find(n => n.name.toLowerCase().replaceAll(' ', '-') === window.location.hash.slice(1))?.name || 'Overview'
 const guideSteps = [
@@ -32,12 +33,13 @@ const guideSteps = [
 ] as const
 
 export default function App() {
-  const {public_demo} = useRuntime()
+  const {public_demo,workspace} = useRuntime()
   const [page, setPage] = useState<Page>(pageFromHash)
   const [revision, setRevision] = useState(0)
   const [mobile, setMobile] = useState(false)
   const [dialog, setDialog] = useState<'purchase' | 'import' | 'transaction' | null>(null)
   const [editing, setEditing] = useState<Transaction | undefined>()
+  const [splitTransaction,setSplitTransaction] = useState<Transaction>()
   const [toast, setToast] = useState('')
   const [guide, setGuide] = useState<number | null>(null)
   const [alertsOpen, setAlertsOpen] = useState(false)
@@ -69,21 +71,22 @@ export default function App() {
   const notifications = profile.data?.notifications !== false
   return <div className="app-shell">
     {mobile && <button className="sidebar-overlay" aria-label="Close navigation" onClick={() => setMobile(false)}/>}
-    <aside className={`sidebar ${mobile ? 'open' : ''}`}><a className="brand" href="#overview" onClick={() => navigate('Overview')} aria-label="Moniq overview"><span className="brand-mark">m<span>•</span></span><span>moniq<span className="brand-ai">AI</span></span></a><p className="brand-tagline">Spending, Made Smarter.</p><div className="workspace-label">YOUR FINANCIAL SPACE</div><nav aria-label="Main navigation">{navigation.map(({name,icon:Icon},i) => <button key={name} aria-label={name} className={`nav-item ${page === name ? 'active' : ''} ${i === 7 ? 'settings-nav' : ''}`} aria-current={page === name ? 'page' : undefined} onClick={() => navigate(name)}><Icon size={19} strokeWidth={1.7}/><span>{name}</span>{name === 'AI Insights' && <span className="nav-new">NEW</span>}</button>)}</nav>
-      <div className="sidebar-bottom"><div className="demo-card"><span className="demo-card-icon"><Coffee size={20}/></span><h3>Your future starts small.</h3><p>Take a two-minute tour of a smarter student budget.</p><button onClick={() => {setGuide(0); navigate('Overview')}}>Start guided demo <ArrowRight size={15}/></button></div><div className="prototype-label"><span className="status-dot"/> SYNTHETIC DEMO · PROTOTYPE</div><button className="profile-mini" onClick={() => navigate('Settings')}><span className="avatar">{firstName.charAt(0)}</span><span><strong>{profile.data?.name || 'Student profile'}</strong><small>{profile.data?.university === 'Georgia State University' ? 'Georgia State University' : profile.data?.university || 'Local demo'}</small></span><ChevronRight size={15}/></button></div>
+    <aside className={`sidebar ${mobile ? 'open' : ''}`}><a className="brand" href="#overview" onClick={() => navigate('Overview')} aria-label="Moniq overview"><span className="brand-mark">m<span>•</span></span><span>moniq</span></a><p className="brand-tagline">Spending, Made Smarter.</p><div className="workspace-label">YOUR FINANCIAL SPACE</div><nav aria-label="Main navigation">{navigation.map(({name,icon:Icon}) => <button key={name} aria-label={name} className={`nav-item ${page === name ? 'active' : ''} ${name === 'Settings' ? 'settings-nav' : ''}`} aria-current={page === name ? 'page' : undefined} onClick={() => navigate(name)}><Icon size={19} strokeWidth={1.7}/><span>{name}</span>{name === 'AI Insights' && <span className="nav-new">NEW</span>}</button>)}</nav>
+      <div className="sidebar-bottom"><div className="demo-card"><span className="demo-card-icon"><Coffee size={20}/></span><h3>Your future starts small.</h3><p>Take a two-minute tour of a smarter student budget.</p><button onClick={() => {setGuide(0); navigate('Overview')}}>Start guided demo <ArrowRight size={15}/></button></div><div className="prototype-label"><span className="status-dot"/> {workspace === 'personal' ? 'PERSONAL WORKSPACE' : 'SYNTHETIC DEMO · PROTOTYPE'}</div><button className="profile-mini" onClick={() => navigate('Settings')}><span className="avatar">{firstName.charAt(0)}</span><span><strong>{profile.data?.name || 'Student profile'}</strong><small>{profile.data?.university === 'Georgia State University' ? 'Georgia State University' : profile.data?.university || 'Local demo'}</small></span><ChevronRight size={15}/></button></div>
     </aside>
     <div className="main-shell"><header className="topbar"><div className="topbar-location"><button className="icon-button mobile-menu" aria-label="Open navigation" onClick={() => setMobile(true)}><Menu size={22}/></button><span>Your space</span><ChevronRight size={14}/><strong>{page}</strong></div><div className="topbar-right"><span className="today-date">{data ? prettyDate(data.as_of,{weekday:'short', month:'short', day:'numeric', year:'numeric'}) : 'Local student demo'}</span><button className="icon-button help-button" aria-label="Start guided demo" onClick={() => {setGuide(0); navigate('Overview')}}><CircleHelp size={20}/></button><div className="alerts-wrap"><button className="icon-button" aria-label="Financial notifications" aria-expanded={alertsOpen} onClick={() => setAlertsOpen(v => !v)}><Bell size={20}/>{notifications && data?.insights.warnings.length ? <span className="notification-dot"/> : null}</button>{alertsOpen && <div className="alerts-popover"><strong>Financial notifications</strong><button className="icon-button" aria-label="Close notifications" onClick={() => setAlertsOpen(false)}><X size={15}/></button>{!notifications ? <p>In-app alerts are disabled in Settings.</p> : data?.insights.warnings.length ? data.insights.warnings.map(w => <p key={w}>{w}</p>) : <p>No overspending alerts right now.</p>}</div>}</div><button className="avatar small-avatar" onClick={() => navigate('Settings')} aria-label="Open student settings">{firstName.charAt(0)}</button></div></header>
-      <main id="main-content"><div className="demo-ribbon"><span><span className="status-dot"/> DEMO MODE</span><p>{public_demo ? "Your isolated synthetic session. No personal statements or bank credentials. Resets on expiry or restart." : "Synthetic student data. Real calculations. No bank account needed."}</p><button className="text-button" onClick={() => {setGuide(0);navigate('Overview')}}>Start Demo</button>{page !== 'Settings' && <button className="text-button" disabled={resetting} onClick={() => void reset()}>Reset Demo</button>}<button className="text-button" onClick={() => setDialog('purchase')}><Play size={13}/> Try purchase alert</button></div>
+      <main id="main-content">{workspace === 'scenario' ? <div className="demo-ribbon"><span>ISOLATED SYNTHETIC SCENARIO</span><p>Real ledger calculations. No real Gmail access.</p><button className="text-button" onClick={async()=>{await api('/workspace',{method:'POST',body:JSON.stringify({workspace:'demo'})});window.location.reload()}}>Return to synthetic demo</button></div> : workspace === 'personal' ? <div className="demo-ribbon"><span><span className="status-dot"/> PERSONAL WORKSPACE</span><p>Local private records. Confirmed transactions update your plan.</p><button className="text-button" onClick={() => navigate('Settings')}>Gmail &amp; accounts</button><button className="text-button" onClick={async () => {try {await api('/workspace',{method:'POST',body:JSON.stringify({workspace:'demo'})});window.location.reload()} catch(e) {setResetError(errorText(e))}}}>Open synthetic demo</button></div> : <div className="demo-ribbon"><span><span className="status-dot"/> DEMO MODE</span><p>{public_demo ? "Your isolated synthetic session. No personal statements or bank credentials. Resets on expiry or restart." : "Synthetic student data. Real calculations. No bank account needed."}</p><button className="text-button" onClick={() => {setGuide(0);navigate('Overview')}}>Start Demo</button>{page !== 'Settings' && <button className="text-button" disabled={resetting} onClick={() => void reset()}>Reset Demo</button>}<button className="text-button" onClick={() => setDialog('purchase')}><Play size={13}/> Try purchase alert</button></div>}
         {guide !== null && <section className="guide-panel" aria-label="Guided demo"><span className="guide-number">{guide+1}/8</span><div><h3>{guideSteps[guide].title}</h3><p>{guideSteps[guide].text}</p></div><div className="guide-actions"><button className="button secondary small" onClick={() => doGuideStep(guide)}>Open step <ArrowRight size={14}/></button><button className="icon-button" aria-label="Previous demo step" disabled={guide === 0} onClick={() => setGuide(g => Math.max(0,(g || 0)-1))}><ChevronLeft size={18}/></button><button className="icon-button" aria-label={guide === 7 ? 'Finish guided demo' : 'Next demo step'} onClick={() => setGuide(g => g === 7 ? null : (g || 0)+1)}>{guide === 7 ? <Check size={18}/> : <ChevronRight size={18}/>}</button><button className="icon-button" aria-label="Close guided demo" onClick={() => setGuide(null)}><X size={17}/></button></div></section>}
         <ErrorNotice message={dashboard.error || profile.error || resetError}/>{dashboard.error && <button className="button secondary" onClick={() => public_demo ? window.location.reload() : setRevision(v => v+1)}>Retry connection</button>}
         {!data && dashboard.loading ? <Loading/> : data && <div className="page-content" key={page}>
-          {page === 'Overview' && <Overview data={data} profile={profile.data} navigate={navigate} purchase={() => setDialog('purchase')} add={add}/>}
-          {page === 'Transactions' && <TransactionsPage revision={revision} edit={edit} add={add} importCsv={() => setDialog('import')} changed={changed}/>}
+          {page === 'Overview' && <Overview changed={changed} revision={revision} data={data} profile={profile.data} navigate={navigate} purchase={() => setDialog('purchase')} add={add}/>}
+          {page === 'Transactions' && <TransactionsPage split={t=>{setSplitTransaction(t);navigate('Circles')}} revision={revision} edit={edit} add={add} importCsv={() => setDialog('import')} changed={changed}/>}
           {page === 'Budgets' && <BudgetsPage revision={revision} changed={changed} dashboard={data} settings={() => navigate('Settings')}/>}
           {page === 'AI Insights' && <InsightsPage revision={revision} changed={changed}/>}
           {page === 'Student Deals' && <DealsPage revision={revision}/>}
           {page === 'Subscriptions' && <SubscriptionsPage revision={revision} changed={changed}/>}
           {page === 'AI Assistant' && <AssistantPage/>}
+          {page === 'Circles' && <CirclesPage revision={revision} changed={changed} splitTransaction={splitTransaction} onLinked={()=>setSplitTransaction(undefined)}/>}
           {page === 'Settings' && <SettingsPage revision={revision} changed={changed}/>}
         </div>}
         <footer className="page-footer"><span>Moniq <span>·</span> Spending, Made Smarter.</span><span>Built for college life <TrendingUp size={13}/></span></footer>

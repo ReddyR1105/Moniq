@@ -14,3 +14,7 @@ Captured with Playwright against real local FastAPI/React services and synthetic
 10. 10-mobile-overview.png
 
 To regenerate, follow DEMO_WALKTHROUGH.md. The capture test uses isolated data and does not reset the normal app database.
+
+`11-circles-upgrade.png` shows the additional real Circles ledger after the $20 repayment, with both participants clear and settlement history. The ten original screenshots remain unchanged.
+
+Final assets add `12-final-dashboard.png` and `13-feature-walkthrough.png`, captured from isolated synthetic recording workspaces at 1920-pixel width. Original ten screenshots and the prior Circles screenshot are preserved. Synthetic-data caption overlays distinguish the recording context. No private email or financial record is included.

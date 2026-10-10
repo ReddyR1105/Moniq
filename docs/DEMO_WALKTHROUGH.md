@@ -36,3 +36,7 @@ Set `PLAYWRIGHT_BROWSERS_PATH` consistently for installation and capture if usin
 The included WebM recording is silent actual UI footage. Use `DEMO_SCRIPT.md` or the caption text for narration and upload a playable, accessible version manually. GitHub/Devpost links and submission have not been published automatically.
 
 For the single-origin session-isolated demo use scripts/start-public-demo.ps1 and http://127.0.0.1:8080. A separate browser profile/private context starts another visitor. Personal CSV/message input and model retraining remain local-only; the built-in synthetic CSV works in public mode. See DEPLOYMENT.md.
+
+## Additional SmartApprove + Circles walkthrough
+
+Follow the working $100 ? $60 ? $80 isolated scenario in [CIRCLES_SMARTAPPROVE.md](CIRCLES_SMARTAPPROVE.md). It records a controlled $40 alert, links one existing purchase, splits $20/$20 with Jordan, records a genuine synthetic repayment, and verifies $20 personal spending/$0 extra income/$0 debt. The original eight-step tour remains available. Additional recorded browser evidence is in `docs/demo/moniq-circles-demo.webm` and `docs/screenshots/11-circles-upgrade.png`.

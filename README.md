@@ -6,11 +6,18 @@ Moniq is a working financial companion for college students. It replaces manual 
 
 ## What works
 
-- Eight responsive pages: Overview, Transactions, Budgets, AI Insights, Student Deals, Subscriptions, AI Assistant, and Settings.
+- Nine responsive pages: Overview, Transactions, Budgets, AI Insights, Student Deals, Subscriptions, Circles, AI Assistant, and Settings.
 - Database-derived balances, income, net expenses, budgets, seven-day/category charts, upcoming bills, subscriptions, savings suggestions, and recent transactions.
 - Transaction creation, editing, deletion, search, category/type/date filters, pagination, and category corrections.
 - UTF-8 CSV preview and column mapping; signed amounts or separate debit/credit columns; US/UK and ISO dates; refunds via a type column; deduplication; atomic validation.
 - User-pasted alerts and a live sample-alert simulator, with editable confirmation before any database write.
+- Optional local Gmail read-only OAuth connection, encrypted backend tokens, registered personal accounts, and a confirmed financial-email review queue. [Exact Google setup and local testing](docs/GMAIL_SETUP.md).
+- Pending financial-email approvals on the main dashboard. The isolated scenario demonstrates $10 + $400 confirmed paycheck - $15 purchase = $395 using actual parsed fields and database records.
+- Checking and savings, linked debit-card aliases, separate credit debt, internal transfers/card payments, and auditable manual reconciliation. Transfers and reimbursements never become new paycheck income or spending.
+- Multiple savings goals, contribution history, monthly contribution plans and estimated completion dates. Progress records and forecasts never move money or create bank deposits.
+- **Moniq Circles:** original local expense sharing with equal/custom/percentage splits, linked cash transactions, partial repayments, and personal-share budgets.
+- **SmartApprove:** optional trusted-sender settings, strict sender/authentication/posted-event/account/limit policy, estimates, and auditable corrections/reversals.
+- [Feature decisions, accounting invariants, security limitations and isolated walkthrough](docs/CIRCLES_SMARTAPPROVE.md); [latest upgrade verification](docs/UPGRADE_QA.md). Google consent remains a local owner step; no real Gmail reads are claimed by synthetic tests.
 - Actual scikit-learn TF-IDF/logistic regression, saved locally, with prediction confidence, uncertain-description fallback, correction storage, retraining, and measured held-out results.
 - Independent weekly/monthly category budgets, overspending alerts, unusual spending flags, and financial goals.
 - A 30-day deterministic forecast, editable one-time/recurring bill and income schedules, and numerical purchase/spending/income/delay scenarios.
@@ -83,7 +90,7 @@ You may copy `.env.example` to `.env` for local overrides. No API credentials ar
 
 ```text
 frontend/                 React + TypeScript + Vite + Tailwind
-  src/pages/              Eight working screens
+  src/pages/              Nine working screens
   src/api.ts              API client and cancellable data fetching
   src/dialogs.tsx         Purchase confirmation and CSV mapping
   src/ScheduleManager.tsx Upcoming bills and income controls
@@ -96,7 +103,7 @@ backend/
   app/finance.py          Budgets, forecasts, subscriptions, deals, insights
   app/notifications.py    User-initiated purchase-alert extraction
   app/assistant.py        Local questions grounded in calculated evidence
-  app/integrations.py     Future provider interfaces; no active external services
+  app/integrations.py     Provider boundaries; optional local Gmail integration
   app/seed.py             Reproducible rolling 90-day student history
 data/                     Synthetic CSV, model evaluation, data-license notes
 tests/                    Backend calculation, persistence, API/security tests
@@ -190,9 +197,17 @@ This project was generated and integrated with OpenAI Codex assistance in this w
 
 ## Submission state
 
-Draft Devpost text, a 2–3 minute demo script, judging answers, an acceptance audit, API/integration documentation, and a manual submission checklist are in `docs/`. Origin is configured for [ReddyR1105/Moniq](https://github.com/ReddyR1105/Moniq). A reviewed local commit is prepared; final push approval, the first hosted CI run, optional Render account/deployment approval, and Devpost submission remain. No push or cloud deployment has occurred. The official deadline, rechecked October 10, is **October 11, 2026 at 9:00 AM EDT**. Check the [official rules](https://hacklanta.devpost.com/rules) and [submission requirements](https://hacklanta.devpost.com/) again before submitting.
+Draft Devpost text, a 2–3 minute demo script, judging answers, an acceptance audit, API/integration documentation, and a manual submission checklist are in `docs/`. The existing approved commit `8ac182f` was published to [ReddyR1105/Moniq](https://github.com/ReddyR1105/Moniq) with [passing hosted CI](https://github.com/ReddyR1105/Moniq/actions/runs/38068681424). The subsequent Gmail, SmartApprove and Circles upgrades are local working-tree updates and have not been pushed. Render deployment and Devpost submission have not occurred; both remain separate approval steps. Check the [official rules](https://hacklanta.devpost.com/rules) and [submission requirements](https://hacklanta.devpost.com/) before submitting.
 
 
 ## Submission artifacts
 
 See [demo walkthrough](docs/DEMO_WALKTHROUGH.md), [screenshots](docs/screenshots/), [demo recording](docs/demo/moniq-demo.webm), [submission checklist](docs/SUBMISSION_CHECKLIST.md), and [publication commands](docs/GITHUB_PUBLICATION.md). The video is silent actual browser footage; add narration or use its captions before a public upload. Source and media are packaged at `D:\Map\Moniq-submission.zip`, excluding dependencies, private runtime data and credentials. `scripts/package_submission.py` validates source paths, credential patterns, ZIP CRCs and file hashes. The package can be extracted and installed using the fresh-checkout commands above.
+
+## Final Hacklanta materials
+
+[Final presentation](docs/demo/Moniq_Hacklanta_Final.mp4), [complete feature walkthrough](docs/demo/Moniq_All_Features.mp4), and matching narration scripts, SRT and VTT captions are in `docs/demo/`. These are actual Chromium recordings of isolated synthetic app workspaces, with local Windows narration and no music. Original WebM and screenshot assets are preserved.
+
+[Current QA](docs/QA_REPORT.md), [Devpost description](docs/DEVPOST_SUBMISSION.md), [judges' pitch](docs/JUDGES_PITCH.md), [submission checklist](docs/SUBMISSION_CHECKLIST.md), and [recording instructions](docs/DEMO_SCRIPT.md). The final source/media package is `D:\Map\Moniq_Hacklanta_Final.zip`; `scripts/package_submission.py --output D:\Map\Moniq_Hacklanta_Final.zip` rebuilds it with source hashes and CRC verification.
+
+The published baseline remains `8ac182f`. The final local release requires owner approval before push. Hosted CI for new changes cannot run until publication is approved. Render and Devpost submission remain separate actions.

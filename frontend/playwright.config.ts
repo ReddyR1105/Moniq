@@ -20,7 +20,7 @@ export default defineConfig({
   webServer: [
     {command: `${process.platform === 'win32' ? '.venv\\Scripts\\python.exe' : '.venv/bin/python'} -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8001`,
       cwd: root, url: 'http://127.0.0.1:8001/api/health', reuseExistingServer: false, timeout:60000,
-      env: {DATABASE_URL: 'sqlite:///./.runtime/browser.db', MODEL_DIR: './.runtime/browser-models', CORS_ORIGINS:'http://127.0.0.1:5174'}},
+      env: {SCENARIO_DATABASE_URL:'sqlite:///./.runtime/browser-upgrade.db',DATABASE_URL: 'sqlite:///./.runtime/browser.db', PERSONAL_DATABASE_URL:'sqlite:///./.runtime/browser-personal.db', GMAIL_TOKEN_DIR:'./.runtime/browser-gmail', PERSONAL_MODEL_DIR:'./.runtime/browser-personal-models', MODEL_DIR: './.runtime/browser-models', CORS_ORIGINS:'http://127.0.0.1:5174', GMAIL_CLIENT_ID:'', GMAIL_CLIENT_SECRET:'', GMAIL_TOKEN_ENCRYPTION_KEY:''}},
     {command: 'npm run dev -- --port 5174', url:'http://127.0.0.1:5174', reuseExistingServer:false, timeout:60000,
       env: {MONIQ_API_TARGET:'http://127.0.0.1:8001'}},
   ],

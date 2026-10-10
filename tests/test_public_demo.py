@@ -21,6 +21,25 @@ def public_client(tmp_path, monkeypatch, ml):
         yield client
 
 
+def test_circles_rules_and_controlled_scenario_are_visitor_isolated(public_client):
+    client=public_client
+    a,b=new_visitor(client),new_visitor(client)
+    baseline=client.get("/api/dashboard",headers=b).json()["balance"]
+    assert client.post("/api/upgrade-demo/start",headers=a).status_code == 200
+    assert client.post("/api/upgrade-demo/alert",headers=a).json()["auto_approved"] is True
+    assert client.get("/api/dashboard",headers=a).json()["balance"] == 60
+    assert client.get("/api/dashboard",headers=b).json()["balance"] == baseline
+    c=client.post("/api/circles",headers=a,json={"name":"Campus friends","participants":["Jordan"]}).json()
+    payload={"title":"Shared dinner","date":client.get('/api/dashboard',headers=a).json()['as_of'],"amount":"40.00","payer_id":c['members'][0]['id'],"transaction_id":1,"shares":{str(m['id']):"0" for m in c['members']}}
+    assert client.post(f"/api/circles/{c['id']}/expenses",headers=b,json=payload).status_code == 404
+    assert client.post(f"/api/circles/{c['id']}/expenses",headers=a,json=payload).status_code == 201
+    assert client.get('/api/circles',headers=b).json() == []
+    assert client.get('/api/smartapprove/rules',headers=b).json() == []
+    assert client.get('/api/smartapprove/summary',headers=b).json()['auto_approved'] == 0
+    assert client.app.state.personal_engine is None and client.app.state.gmail is None
+    assert client.post('/api/circles',headers=a,json={"name":"My personal circle","participants":["Private Name"]}).status_code == 403
+
+
 def new_visitor(client):
     client.cookies.clear()
     response = client.get("/api/config")
@@ -28,6 +47,20 @@ def new_visitor(client):
     cookie = client.cookies.get(COOKIE_NAME)
     client.cookies.clear()
     return {"cookie": f"{COOKIE_NAME}={cookie}"}
+
+
+def test_public_sessions_cannot_access_gmail_or_personal_databases(public_client, monkeypatch):
+    from backend.app import gmail_routes
+
+    def forbidden(*args, **kwargs):
+        pytest.fail("Public requests must not instantiate a Gmail manager or read personal data.")
+
+    monkeypatch.setattr(gmail_routes, "manager", forbidden)
+    for path in ("/api/gmail/status", "/api/gmail/accounts", "/api/gmail/items", "/api/gmail/callback?code=synthetic"):
+        assert public_client.get(path, headers={"Cookie": "moniq_workspace=personal"}).status_code == 403
+    for path in ("/api/gmail/connect", "/api/gmail/sync", "/api/gmail/disconnect", "/api/workspace"):
+        assert public_client.post(path, json={"workspace": "personal"}).status_code == 403
+    assert public_client.app.state.personal_engine is None
 
 
 def test_visitors_purchase_reset_delete_and_export_are_isolated(public_client):

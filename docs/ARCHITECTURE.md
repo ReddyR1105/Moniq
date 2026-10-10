@@ -35,9 +35,11 @@ Transactions use signed integer cents; frontend money values are derived backend
 
 Pydantic validates requests. Financial helpers calculate before presentation. CSV imports validate all rows before writing; database uniqueness and normalized merchant/date/signed amount prevent duplicates. The duplicate heuristic can merge legitimately identical purchases and is disclosed. SQLAlchemy parameterizes queries. The local single-process demo serializes recurring detection to prevent duplicate candidate creation across concurrent UI requests. Production concurrency/authentication remain future work.
 
-## Future permission-based message integration
+## Local permission-based Gmail integration
 
-Keep manual paste/share as the first provider. A platform-supported share extension or user-authorized export can send a message to the same extraction endpoint, then require confirmation. Provider adapters need explicit consent, revocation, bounded payloads, provenance/idempotency identifiers, and platform-specific capability checks. There is no unrestricted iMessage synchronization or automatic phone access.
+Manual paste remains available. Gmail uses Authlib authorization code + PKCE S256, ten-minute browser-bound one-use state, and read-only official API calls. Tokens are Fernet-encrypted on the backend with owner permissions. Local registered accounts and structured email reviews live in a separate personal SQLite database, with a separate instance of the existing classifier for private correction training; public sessions are blocked before accessing this state. Sync is bounded and stores review items only. Posted confirmation reuses the existing ML/transaction service and deterministic financial calculations, with account-specific duplicate fingerprints that preserve legacy account-1 hashes. Disconnect revokes/removes tokens; deletion keeps a marker to prevent reseeding personal data. Personal mode requires loopback peer/host and allowed browser Origin for mutations; it has no production multi-user authentication. See [Gmail setup](GMAIL_SETUP.md). There is no unrestricted iMessage synchronization or automatic phone access.
+
+Local owner API: `POST /api/workspace`, `GET/POST /api/gmail/accounts`, `PUT /api/gmail/accounts/{id}`, `GET /api/gmail/status`, `POST /api/gmail/connect`, `GET /api/gmail/callback`, `POST /api/gmail/sync`, `POST /api/gmail/disconnect`, `GET /api/gmail/items`, and `POST /api/gmail/items/{id}/confirm|dismiss`. Confirm requires `posted_confirmed=true` and a registered account. No API response contains OAuth tokens or the client secret.
 
 ## Future Plaid Sandbox adapter — not implemented
 
@@ -58,3 +60,7 @@ Loopback-only launch scripts, restricted frontend origins and write Origin check
 ## Isolated public demo
 
 Optional public mode serves frontend/dist and the API from one FastAPI origin. GET /api/config establishes an opaque HttpOnly cookie before page requests. The middleware leases a per-visitor SQLite engine; get_db resolves that engine for every database endpoint. Each session has its own serialization lock, TTL and capacity limit. Reset/export/delete and classifier correction records are visitor-scoped. Public inference uses a separate immutable model; custom text/uploads and shared retraining are rejected by the backend. Static SPA fallbacks never turn unknown /api routes into frontend HTML. Registry/storage are ephemeral and require a single worker/instance. Docker/Render Free preparation and remaining account/deployment approval are in DEPLOYMENT.md.
+
+## Circles and SmartApprove additions
+
+Additive Circle/member/expense/share/settlement/audit tables preserve existing transaction rows. Integer cents and Decimal allocate exact personal shares while bank balance calculations continue summing the original cash ledger. Repayments have explicit reimbursement/settlement kinds excluded from paycheck income and personal spending. Forecast cash uses full bank charges without assuming receivables arrive. Sender rules, Gmail evidence and approval audits are separate additive tables. Real synchronization uses the personal database; the explicit synthetic walkthrough uses a third local database, or the visitor-owned public session. See [feature/accounting decisions](CIRCLES_SMARTAPPROVE.md).

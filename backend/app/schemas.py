@@ -36,9 +36,10 @@ class TransactionIn(BaseModel):
     description: str = Field(min_length=1, max_length=300)
     merchant: str | None = Field(default=None, max_length=160)
     amount: Decimal
-    kind: str = Field(default="expense", pattern="^(expense|income|refund)$")
+    kind: str = Field(default="expense", pattern="^(expense|income|refund|reimbursement|settlement)$")
     category: Category | None = None
     notification_text: str | None = Field(default=None, max_length=2000)
+    account_id: int = Field(default=1, ge=1)
 
     @field_validator("description", "merchant")
     @classmethod

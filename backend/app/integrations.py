@@ -1,4 +1,4 @@
-"""Provider boundaries. Live integrations are intentionally unimplemented."""
+"""Provider boundaries for the existing prototype and optional local Gmail."""
 from typing import Protocol
 
 
@@ -21,6 +21,8 @@ class ExplanationProvider(Protocol):
 
 
 def integration_status():
+    from .config import PUBLIC_DEMO
     return {"bank": "synthetic-demo", "assistant": "local-data-backed", "deals": "synthetic-samples",
+            "gmail": "disabled in public demo" if PUBLIC_DEMO else "optional authorized local read-only import",
             "plaid": "not implemented", "gemini": "not implemented",
             "message_import": "user-initiated paste; no SMS or iMessage access"}
