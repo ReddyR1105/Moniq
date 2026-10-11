@@ -197,7 +197,7 @@ This project was generated and integrated with OpenAI Codex assistance in this w
 
 ## Submission state
 
-Draft Devpost text, a 2–3 minute demo script, judging answers, an acceptance audit, API/integration documentation, and a manual submission checklist are in `docs/`. The existing approved commit `8ac182f` was published to [ReddyR1105/Moniq](https://github.com/ReddyR1105/Moniq) with [passing hosted CI](https://github.com/ReddyR1105/Moniq/actions/runs/38068681424). The subsequent Gmail, SmartApprove and Circles upgrades are local working-tree updates and have not been pushed. Render deployment and Devpost submission have not occurred; both remain separate approval steps. Check the [official rules](https://hacklanta.devpost.com/rules) and [submission requirements](https://hacklanta.devpost.com/) before submitting.
+Draft Devpost text, demo recordings, judging answers, an acceptance audit, API/integration documentation, and a manual submission checklist are in `docs/`. The Gmail, SmartApprove, Circles, PWA, presentation and final demo upgrades are published in commit [`7427f7e`](https://github.com/ReddyR1105/Moniq/commit/7427f7efb8e71210268fe77aa9462c5c8ff0c37d) on [ReddyR1105/Moniq](https://github.com/ReddyR1105/Moniq), with [passing hosted CI](https://github.com/ReddyR1105/Moniq/actions/runs/38109450542). See the [Render readiness audit](docs/RENDER_READINESS.md) for deployment checks and remaining container verification. Render deployment and Devpost submission have not occurred; both remain separate approval steps. Check the [official rules](https://hacklanta.devpost.com/rules) and [submission requirements](https://hacklanta.devpost.com/) before submitting.
 
 
 ## Submission artifacts

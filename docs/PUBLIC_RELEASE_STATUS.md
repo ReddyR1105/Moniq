@@ -2,7 +2,7 @@
 
 The existing app has been prepared locally for one Render Docker web service serving both FastAPI `/api` and the Vite production frontend on the same HTTPS origin. `render.yaml` selects **Free**, one instance and manual deployments. Gmail credentials are disabled unconditionally in public mode; private/scenario database helpers reject public access rather than falling back to owner data. Public writes require the service origin, responses have no-store headers, and static delivery has a same-origin CSP. The local owner's Gmail connection and databases are preserved.
 
-No new GitHub push, Render deployment, DNS change, public media upload or Devpost submission has occurred. There is no verified live application URL. Container tooling is unavailable, so a Docker image build and real Render startup remain unverified. The equivalent production frontend/backend path passes local automated browser checks. See `DEPLOYMENT.md` for the proposed deployment and `MOBILE_SETUP.md` for phone instructions.
+The Gmail, SmartApprove, Circles, PWA and final demo upgrades are published on GitHub in commit [`7427f7e`](https://github.com/ReddyR1105/Moniq/commit/7427f7efb8e71210268fe77aa9462c5c8ff0c37d), with [passing hosted CI](https://github.com/ReddyR1105/Moniq/actions/runs/38109450542). The [final demonstration video](https://youtu.be/rIDLt9c-UyA) was uploaded as unlisted. Render deployment, DNS changes and Devpost submission have not occurred. There is no verified live application URL. Container tooling is unavailable, so a Docker image build and real Render startup remain unverified. The equivalent production frontend/backend path passes local automated browser checks. See the [Render readiness audit](RENDER_READINESS.md), `DEPLOYMENT.md` for the proposed deployment, and `MOBILE_SETUP.md` for phone instructions.
 
 ## Costs to review before approval
 
@@ -12,7 +12,7 @@ No new GitHub push, Render deployment, DNS change, public media upload or Devpos
 
 ## Exact external actions still requiring approval
 
-1. Publish the verified local source changes to the existing `ReddyR1105/Moniq` repository, without force-push, after reviewing the final diff and checking remote history.
+1. Publish the verified local Docker hardening and publication-status documentation changes to the existing `ReddyR1105/Moniq` repository, without force-push, after reviewing the final diff and checking remote history.
 2. Authenticate the owner's Render account, create one **Free** Docker service from the approved main branch using root `render.yaml`, and trigger its deployment. Do not add a paid disk, paid instance, custom domain or Gmail credentials.
 3. Inspect build/start logs, verify `/api/health` and real HTTPS, then test independent visitors, public restrictions, reset and PWA/mobile behavior on the actual external URL. Only then enter the verified URL into submission materials.
 
