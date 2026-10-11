@@ -4,6 +4,8 @@
 .runtime
 .env
 .env.*
+**/.env
+**/.env.*
 frontend/node_modules
 frontend/dist
 frontend/test-results
@@ -14,6 +16,8 @@ frontend/playwright-report
 **/*.sqlite*
 **/*.joblib
 **/*.pyc
+**/*.log
+**/pytest-cache-files-*
 **/*.tsbuildinfo
 **/*.enc
 **/*client_secret*.json
