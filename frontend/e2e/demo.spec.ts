@@ -226,12 +226,28 @@ test('all eight pages render and budget/profile changes persist', async ({page})
 })
 
 test('subscription review, export, data deletion, and demo reset', async ({page}) => {
+  // Calendar-aligned charges in the rolling demo seed can have only two occurrences.
+  // Supply a complete recurring history for this review instead of assuming three seed candidates.
+  const merchant = 'Browser review subscription'
+  const { as_of } = await (await page.request.get('/api/dashboard')).json()
+  const [year, month] = (as_of as string).split('-').map(Number)
+  for (const offset of [3, 2, 1]) {
+    const date = new Date(Date.UTC(year, month - 1 - offset, 1)).toISOString().slice(0, 10)
+    const response = await page.request.post('/api/transactions', { data: {
+      date, merchant, description: merchant, amount: '5.99', kind: 'expense', category: 'subscriptions', account_id: 1,
+    } })
+    expect(response.status()).toBe(201)
+  }
   await navigate(page,'Subscriptions')
-  await expect(page.locator('.subscription-row')).toHaveCount(3)
-  await page.getByRole('button',{name:'Confirm Spotify premium',exact:true}).click()
-  await expect(page.locator('.subscription-row').filter({hasText:'Spotify premium'})).toContainText('Confirmed')
-  await page.getByRole('button',{name:'Mark Spotify premium incorrect',exact:true}).click()
-  await expect(page.locator('.subscription-row').filter({hasText:'Spotify premium'})).toContainText('Excluded')
+  const detected = await (await page.request.get('/api/subscriptions')).json()
+  expect(detected.items).toEqual(expect.arrayContaining([
+    expect.objectContaining({merchant, evidence_count: 3, status: 'candidate'}),
+  ]))
+  await expect(page.locator('.subscription-row')).toHaveCount(detected.items.length)
+  await page.getByRole('button',{name:`Confirm ${merchant}`,exact:true}).click()
+  await expect(page.locator('.subscription-row').filter({hasText:merchant})).toContainText('Confirmed')
+  await page.getByRole('button',{name:`Mark ${merchant} incorrect`,exact:true}).click()
+  await expect(page.locator('.subscription-row').filter({hasText:merchant})).toContainText('Excluded')
   await navigate(page,'Settings')
   const downloadPromise = page.waitForEvent('download')
   await page.getByRole('link',{name:'Export JSON',exact:true}).click()
