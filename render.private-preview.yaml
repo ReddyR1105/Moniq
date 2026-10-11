@@ -1,0 +1,31 @@
+# Optional separate FREE preview. Do not replace the existing live demo Blueprint.
+# No private accounts, Gmail credentials, databases or paid resources are created.
+services:
+  - type: web
+    name: moniq-private-preview
+    runtime: docker
+    plan: free
+    numInstances: 1
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    autoDeployTrigger: "off"
+    envVars:
+      - key: MONIQ_PUBLIC_DEMO
+        value: "true"
+      - key: MONIQ_HOSTED_APP
+        value: "true"
+      - key: MONIQ_SERVE_FRONTEND
+        value: "true"
+      - key: MONIQ_GMAIL_DISABLED
+        value: "true"
+      - key: MONIQ_COOKIE_SECURE
+        value: "true"
+      - key: MONIQ_PRIVATE_ACCOUNTS_ENABLED
+        value: "false"
+      - key: MONIQ_HOSTED_GMAIL_ENABLED
+        value: "false"
+      - key: MONIQ_PERSISTENCE_VERIFIED
+        value: "false"
+      - key: MONIQ_RECOVERY_VERIFIED
+        value: "false"

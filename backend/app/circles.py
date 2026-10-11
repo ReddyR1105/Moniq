@@ -14,6 +14,7 @@ from sqlalchemy import delete, select
 from sqlalchemy.orm import Session
 
 from . import config
+from .access import demo
 from .database import get_db
 from .models import (
     Account,
@@ -89,7 +90,7 @@ def add_member(circle_id: int, payload: MemberIn, request: Request, db: Session 
         members = list(db.scalars(select(CircleMember).where(CircleMember.circle_id == circle_id)))
         if not name or name.casefold() in {m.name.casefold() for m in members} or len(members) >= 20:
             raise HTTPException(422, "Use a distinct name; circles allow at most 20 participants.")
-        if request.app.state.public_demo and name not in SAMPLE_NAMES:
+        if demo(request) and name not in SAMPLE_NAMES:
             raise HTTPException(403, "Public participants must use sample names.")
         db.add(CircleMember(circle_id=circle_id, name=name, is_self=False))
         audit(db, "member-added", circle_id=circle_id, name=name)
@@ -260,7 +261,7 @@ def list_circles(db: Session = Depends(get_db)):
 
 @router.post("", status_code=201)
 def create_circle(payload: CircleIn, request: Request, db: Session = Depends(get_db)):
-    if request.app.state.public_demo and (
+    if demo(request) and (
         payload.name
         not in {
             "Campus friends",
@@ -287,7 +288,7 @@ def create_circle(payload: CircleIn, request: Request, db: Session = Depends(get
 def save_expense(db, circle, payload, request, existing=None):
     if payload.date > config.today() or not payload.title.strip() or payload.category == Category.income:
         raise HTTPException(422, "Use a posted date, title, and spending category.")
-    if request.app.state.public_demo and payload.title not in SAMPLE_TITLES:
+    if demo(request) and payload.title not in SAMPLE_TITLES:
         raise HTTPException(403, "Choose a sample expense title in the public demo.")
     members = {m.id: m for m in db.scalars(select(CircleMember).where(CircleMember.circle_id == circle.id))}
     if payload.payer_id not in members or not set(payload.shares).issubset(members):

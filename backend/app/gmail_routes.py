@@ -13,6 +13,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from . import config
+from .access import hosted, private
 from .database import get_personal_db
 from .gmail_parser import parse_financial_email
 from .gmail_service import STATE_COOKIE, GmailManager, configuration
@@ -23,6 +24,12 @@ from .workspace import personal_classifier
 
 
 def require_local(request: Request):
+    if hosted(request):
+        if request.url.path == "/api/workspace" and hasattr(request.state, "identity"):
+            return
+        if not private(request):
+            raise HTTPException(403, "Gmail requires an authenticated private workspace.")
+        return
     if request.cookies.get("moniq_workspace") == "scenario" and request.url.path.startswith("/api/gmail/"):
         raise HTTPException(403, "Real Gmail is unavailable inside the isolated synthetic scenario.")
     if getattr(request.app.state, "public_demo", config.PUBLIC_DEMO):
@@ -46,13 +53,17 @@ router = APIRouter(prefix="/api", dependencies=[Depends(require_local)])
 
 
 def manager(request):
+    if hosted(request):
+        from .hosted_gmail import HostedGmailManager
+        require_local(request)
+        return HostedGmailManager(request.app.state.identity_store, request.state.identity)
     if getattr(request.app.state, "gmail", None) is None:
         request.app.state.gmail = GmailManager()
     return request.app.state.gmail
 
 
 def validate_personal_transaction(request, payload, db):
-    if request.cookies.get("moniq_workspace") != "personal":
+    if not private(request):
         return
     details = db.get(AccountDetails, payload.account_id)
     if not details:
@@ -68,7 +79,17 @@ class WorkspaceIn(BaseModel):
 
 
 @router.post("/workspace")
-def switch_workspace(payload: WorkspaceIn, response: Response):
+def switch_workspace(payload: WorkspaceIn, request: Request, response: Response):
+    if hosted(request):
+        from .identity import MODE_COOKIE, SESSION_SECONDS
+        if not hasattr(request.state, "identity") or payload.workspace == "scenario":
+            raise HTTPException(403, "Choose your authenticated private workspace or the separate demo.")
+        if payload.workspace == "demo":
+            from .demo_sessions import COOKIE_NAME
+            token = request.app.state.demo_store.bootstrap(request.cookies.get(COOKIE_NAME))
+            response.set_cookie(COOKIE_NAME, token, httponly=True, secure=True, samesite="lax", max_age=config.SESSION_TTL_SECONDS)
+        response.set_cookie(MODE_COOKIE, payload.workspace, httponly=True, secure=True, samesite="lax", path="/", max_age=SESSION_SECONDS)
+        return {"workspace": payload.workspace}
     response.set_cookie("moniq_workspace", payload.workspace, httponly=True, samesite="lax", secure=False, max_age=2592000)
     return {"workspace": payload.workspace}
 
@@ -152,7 +173,7 @@ def edit_account(account_id: int, payload: RegisteredAccountIn, db: Session = De
 @router.get("/gmail/status")
 def status(request: Request):
     service = manager(request)
-    configured = configuration()
+    configured = service.configured() if hosted(request) else configuration()
     connection_error = None
     with service.lock:
         stored = None
@@ -163,21 +184,23 @@ def status(request: Request):
             except HTTPException as exc:
                 connection_error = exc.detail
     return {"configured": configured, "connected": bool(stored), "email": stored["email"] if stored else None,
-            "tokens_present": (config.GMAIL_TOKEN_DIR / "credentials.enc").exists(), "connection_error": connection_error,
-            "scope": config.GMAIL_SCOPE, "redirect_uri": config.GMAIL_REDIRECT_URI, "frontend_url": config.GMAIL_FRONTEND_URL}
+            "tokens_present": bool(stored) if hosted(request) else (config.GMAIL_TOKEN_DIR / "credentials.enc").exists(), "connection_error": connection_error,
+            "scope": config.GMAIL_SCOPE, "redirect_uri": service.settings.redirect_uri if hosted(request) else config.GMAIL_REDIRECT_URI,
+            "frontend_url": service.settings.origin if hosted(request) else config.GMAIL_FRONTEND_URL}
 
 
 @router.post("/gmail/connect")
 def connect(request: Request, response: Response):
     url, cookie = manager(request).begin()
-    response.set_cookie(STATE_COOKIE, cookie, path="/api/gmail/callback", max_age=600, httponly=True, secure=False, samesite="lax")
+    response.set_cookie(STATE_COOKIE, cookie, path="/api/gmail/callback", max_age=600, httponly=True, secure=hosted(request), samesite="lax")
     return {"authorization_url": url}
 
 
 @router.get("/gmail/callback")
 def callback(request: Request, code: str | None = None, state: str | None = None, error: str | None = None):
     result = manager(request).finish(state, request.cookies.get(STATE_COOKIE), code, error)
-    response = RedirectResponse(config.GMAIL_FRONTEND_URL.rstrip("/") + "/?gmail=" + result + "#settings", status_code=303)
+    frontend = request.app.state.hosted_settings.origin if hosted(request) else config.GMAIL_FRONTEND_URL.rstrip("/")
+    response = RedirectResponse(frontend + "/?gmail=" + result + "#settings", status_code=303)
     response.delete_cookie(STATE_COOKIE, path="/api/gmail/callback")
     response.headers["Referrer-Policy"] = "no-referrer"
     response.headers["Cache-Control"] = "no-store"
@@ -221,7 +244,7 @@ def match_account(db, values):
 
 @router.post("/gmail/sync")
 def sync(request: Request, db: Session = Depends(get_personal_db)):
-    if request.cookies.get("moniq_workspace") == "scenario":
+    if not hosted(request) and request.cookies.get("moniq_workspace") == "scenario":
         raise HTTPException(403, "Real Gmail synchronization is unavailable in the isolated scenario.")
     service = manager(request)
     with service.lock:

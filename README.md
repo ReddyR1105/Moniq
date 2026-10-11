@@ -2,6 +2,8 @@
 
 **Spending, Made Smarter.**
 
+The `feature/hosted-private-workspaces` upgrade prepares a welcome page, invitation-only verified accounts, server-managed sessions, per-user PostgreSQL financial schemas and encrypted, session-bound Gmail OAuth. It also adds a public simulated Gmail approval walkthrough. These private hosting changes are opt-in and have not been deployed. Existing `render.yaml` remains demo-only. See [private hosting setup and rollout gates](docs/HOSTED_PRIVATE_SETUP.md); general public registration stays closed.
+
 Moniq is a working financial companion for college students. It replaces manual spreadsheet upkeep with statement imports, purchase-alert extraction, a trained transaction classifier, editable budgets, and understandable cash-flow estimates. The default synthetic student attends Georgia State University. Primary Hacklanta 2026 track: **Fintech**; AI/ML is a technology focus, not a claimed additional track.
 
 ## What works

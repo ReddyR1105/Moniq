@@ -16,6 +16,20 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: moniq_test
+          POSTGRES_PASSWORD: synthetic-ci-only
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U moniq_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     env:
       CI: 'true'
       MONIQ_BROWSER: chromium
@@ -47,6 +61,10 @@ jobs:
           npm --prefix frontend run typecheck
           npm --prefix frontend run lint
           npm --prefix frontend run build
+      - name: PostgreSQL private account and Gmail isolation
+        env:
+          MONIQ_TEST_POSTGRES_URL: postgresql+psycopg://moniq_test:synthetic-ci-only@127.0.0.1:5432/postgres
+        run: .venv/bin/python -m pytest -q tests/test_hosted_accounts.py tests/test_hosted_migration.py
       - name: Install Chromium and system dependencies
         working-directory: frontend
         run: npx playwright install --with-deps chromium
@@ -54,6 +72,8 @@ jobs:
         run: npm --prefix frontend run test:e2e
       - name: Production public demo and visitor isolation
         run: npm --prefix frontend run test:public
+      - name: Hosted welcome, private login and simulated Gmail on desktop and mobile
+        run: npm --prefix frontend run test:hosted
       - name: Upload browser diagnostics
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
@@ -63,6 +83,8 @@ jobs:
             .runtime/browser-results.json
             .runtime/public-browser-results.json
             .runtime/public-test-results/
+            .runtime/hosted-browser-results.json
+            .runtime/hosted-test-results/
             frontend/test-results/
           if-no-files-found: ignore
           retention-days: 7

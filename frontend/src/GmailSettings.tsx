@@ -46,7 +46,7 @@ export function EmailReview({item,accounts,changed,active=false}: {item:EmailIte
 }
 
 export function GmailSettings({revision,changed}:Props) {
-  const {workspace} = useRuntime()
+  const {workspace,hosted_app} = useRuntime()
   const status = useResource<GmailStatus>('/gmail/status',revision)
   const accounts = useResource<Account[]>('/gmail/accounts',revision)
   const items = useResource<EmailItem[]>('/gmail/items',revision)
@@ -85,13 +85,13 @@ export function GmailSettings({revision,changed}:Props) {
   function edit(a:Account) {setEditing(a.id);setForm({name:a.name,account_type:a.account_type,last_four:a.last_four||'',opening_balance:String(a.opening_balance),balance_date:a.balance_date})}
   const pending = items.data?.filter(i=>i.status==='review') || []
   return <>
-    <Panel className="mt"><PanelHeading title="Gmail financial alerts" subtitle="Private local connection, separate from the synthetic demo" action={<Mail size={22}/>}/>
+    <Panel className="mt"><PanelHeading title="Gmail financial alerts" subtitle={hosted_app?"Private read-only connection, separate from the synthetic demo":"Private local connection, separate from the synthetic demo"} action={<Mail size={22}/>}/>
       <ErrorNotice message={error || status.error || status.data?.connection_error || accounts.error || items.error}/>{notice && <p className="success-note" role="status">{notice}</p>}
       <p>{status.data?.connected ? `Connected to ${status.data.email}.` : 'Connect your Google test account to review purchase, paycheck, refund, subscription and bill emails.'}</p>
       <div className="button-row mt"><button className="button primary" disabled={busy || !status.data?.configured} onClick={()=>void connect()}><Mail size={16}/> {status.data?.connected?'Reconnect Gmail':'Connect Gmail'}</button><button className="button secondary" disabled={busy || !status.data?.connected} onClick={()=>void sync()}><RefreshCw size={16}/> Sync Now</button><button className="button secondary" disabled={busy || !status.data?.tokens_present} onClick={()=>void disconnect()}><Unplug size={16}/> Disconnect Gmail</button></div>
-      {!status.data?.configured && <p className="fine-print">Setup needed: put GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET and GMAIL_TOKEN_ENCRYPTION_KEY in the backend .env, then restart. See docs/GMAIL_SETUP.md. Do not paste secrets into Moniq.</p>}
+      {!status.data?.configured && <p className="fine-print">{hosted_app?'Gmail has not been enabled for this private test release. You can register accounts and record confirmed transactions while setup is completed.':'Setup needed: put GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET and GMAIL_TOKEN_ENCRYPTION_KEY in the backend .env, then restart. See docs/GMAIL_SETUP.md. Do not paste secrets into Moniq.'}</p>}
       <p className="fine-print">Gmail read-only access. Tokens stay encrypted on this backend. No emails are sent, modified or deleted. SmartApprove may confirm eligible posted events only when you enable a trusted sender. All other items require manual confirmation. Gmail balances are estimates. Raw email bodies and attachments are not saved.</p>
-      <div className="data-controls"><div><h3>{workspace==='personal'?'Personal workspace is active':'Synthetic workspace is active'}</h3><p>Your personal account balances and email review queue are in a separate local database.</p></div><button className="button secondary" disabled={busy} onClick={()=>void switchWorkspace(workspace==='personal'?'demo':'personal')}>{workspace==='personal'?'Use synthetic demo':'Open personal workspace'}</button></div>
+      <div className="data-controls"><div><h3>{workspace==='personal'?'Personal workspace is active':'Synthetic workspace is active'}</h3><p>{hosted_app?"Your personal balances and email review queue belong only to your authenticated workspace.":"Your personal account balances and email review queue are in a separate local database."}</p></div><button className="button secondary" disabled={busy} onClick={()=>void switchWorkspace(workspace==='personal'?'demo':'personal')}>{workspace==='personal'?'Use synthetic demo':'Open personal workspace'}</button></div>
     </Panel>
     <Panel className="mt"><PanelHeading title="Registered personal accounts" subtitle="Register only the name, type, starting balance/date and optional last four digits"/>
       {accounts.data?.map(a=><div className="data-controls" key={a.id}><div><h3>{a.name} {a.last_four?`· ${a.last_four}`:''}</h3><p>{title(a.account_type)} · {dollars(a.balance)} estimated balance · starting {dollars(a.opening_balance)} on {a.balance_date}</p></div><button className="button secondary" onClick={()=>edit(a)}>Edit {a.name} account</button></div>)}

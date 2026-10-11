@@ -7,6 +7,7 @@ const recording = process.env.MONIQ_RECORD_DEMO === '1'
 const browserChannel = process.env.MONIQ_BROWSER || (process.platform === 'win32' && !process.env.CI ? 'msedge' : 'chromium')
 export default defineConfig({
   testDir: './e2e',
+  testIgnore: '**/hosted.spec.ts',
   fullyParallel: false,
   workers: 1,
   timeout: 60000,

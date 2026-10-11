@@ -10,6 +10,7 @@ from sqlalchemy.orm import Session
 from pydantic import BaseModel, Field, field_validator
 
 from . import config
+from .access import demo, private
 from .circles import ledger_lock
 from .database import get_db, scenario_engine
 from .gmail_routes import ConfirmIn, account_rows, confirm_item, match_account, require_local, serialize_item
@@ -66,7 +67,7 @@ def start(
 ):
     opening = cents((payload or StartIn()).starting_balance)
     with ledger_lock:
-        if request.app.state.public_demo:
+        if demo(request):
             seed_scenario(db, opening)  # The middleware holds this visitor's session lock.
         else:
             require_local(request)
@@ -107,7 +108,7 @@ approvals_router = APIRouter(prefix="/api/approvals")
 
 
 def active_approvals(request, db):
-    if not request.app.state.public_demo and request.cookies.get("moniq_workspace") == "personal":
+    if private(request):
         require_local(request)
         return list(db.scalars(select(GmailItem).order_by(GmailItem.id.desc())))
     account = db.get(Account, 1)
@@ -127,7 +128,7 @@ def confirm_active(item_id: int, payload: ConfirmIn, request: Request, db: Sessi
     item = next((i for i in active_approvals(request, db) if i.id == item_id), None)
     if not item:
         raise HTTPException(404, "Review item is not in this workspace.")
-    if request.app.state.public_demo:
+    if demo(request):
         from .demo_policy import require_sample
         require_sample(payload.description == item.merchant and payload.merchant == item.merchant and cents(payload.amount) == item.amount_cents and payload.date == item.date and payload.account_id == item.account_id and payload.kind == ("income" if item.event_type == "income" else "expense") and payload.category and payload.category.value == item.category)
     return confirm_item(item_id, payload, db, workspace_classifier(request))

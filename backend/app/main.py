@@ -6,6 +6,7 @@ from contextlib import asynccontextmanager
 import anyio
 from fastapi import Depends, FastAPI, File, Form, HTTPException, Query, Request, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
@@ -34,6 +35,11 @@ from .smartapprove import router as smart_router
 from .upgrade_scenario import approvals_router, router as upgrade_router
 from .account_tools import router as account_router
 from .goals import goal_rows, router as goal_router
+from .access import demo as demo_request, private as private_request
+from .auth_routes import router as auth_router
+from .hosted_settings import HostedSettings
+from .hosted_access import protect_hosted
+from .identity import AUTH_COOKIE, MODE_COOKIE, IdentityStore
 
 classifier = None
 
@@ -42,11 +48,18 @@ classifier = None
 async def lifespan(app):
     global classifier
     app.state.public_demo = PUBLIC_DEMO
+    app.state.hosted_settings = HostedSettings.load()
+    app.state.hosted_app = app.state.hosted_settings.enabled
+    app.state.identity_store = None
+    if app.state.hosted_app:
+        app.state.hosted_settings.validate()
+        if app.state.hosted_settings.private_enabled:
+            app.state.identity_store = IdentityStore(app.state.hosted_settings)
     app.state.gmail = None
     app.state.personal_engine = None
     app.state.scenario_engine = None
     app.state.personal_classifier = None
-    if PUBLIC_DEMO:
+    if PUBLIC_DEMO or app.state.hosted_app:
         classifier = Classifier(model_dir=PUBLIC_MODEL_DIR)
         classifier.train()  # Public inference uses a separate immutable synthetic baseline.
         app.state.demo_store = DemoSessionStore(RUNTIME / "public-sessions", SESSION_TTL_SECONDS, MAX_DEMO_SESSIONS)
@@ -61,7 +74,9 @@ async def lifespan(app):
         app.state.classifier = classifier
         yield
     finally:
-        if PUBLIC_DEMO:
+        if app.state.identity_store is not None:
+            app.state.identity_store.close()
+        if PUBLIC_DEMO or app.state.hosted_app:
             app.state.demo_store.close()
         else:
             if app.state.personal_engine is not None:
@@ -76,6 +91,12 @@ app.add_middleware(CORSMiddleware, allow_origins=[] if PUBLIC_DEMO else CORS_ORI
 Db = Depends(get_db)
 
 
+@app.exception_handler(RequestValidationError)
+async def safe_validation_error(request: Request, exc: RequestValidationError):
+    # Validation responses must not reflect passwords, OAuth codes or invitation secrets.
+    return JSONResponse({"detail": [{"loc": item["loc"], "msg": item["msg"], "type": item["type"]} for item in exc.errors()]}, status_code=422)
+
+
 @app.middleware("http")
 async def private_response_headers(request: Request, call_next):
     response = await protected_workspace_request(request, call_next)
@@ -84,19 +105,21 @@ async def private_response_headers(request: Request, call_next):
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["Referrer-Policy"] = "no-referrer"
     response.headers["X-Frame-Options"] = "DENY"
-    if PUBLIC_DEMO:
+    if PUBLIC_DEMO or getattr(request.app.state, "hosted_app", False):
         response.headers["Content-Security-Policy"] = (
             "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; "
             "img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; "
             "manifest-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'"
         )
         response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=(), payment=()"
-        if PUBLIC_ORIGIN.startswith("https://"):
+        if PUBLIC_ORIGIN.startswith("https://") or (getattr(request.app.state, "hosted_app", False) and request.app.state.hosted_settings.origin.startswith("https://")):
             response.headers["Strict-Transport-Security"] = "max-age=31536000"
     return response
 
 
 async def protected_workspace_request(request: Request, call_next):
+    if getattr(request.app.state, "hosted_app", False):
+        return await protect_hosted(request, call_next)
     if PUBLIC_DEMO and (request.url.path.startswith("/api/gmail/") or request.url.path == "/api/workspace"):
         return JSONResponse({"detail": "Gmail and personal workspaces are unavailable in public demo sessions."}, status_code=403)
     if not PUBLIC_DEMO and request.cookies.get("moniq_workspace") in {"personal", "scenario"}:
@@ -139,8 +162,8 @@ async def protected_workspace_request(request: Request, call_next):
 
 
 @app.get("/api/health")
-def health():
-    if not PUBLIC_DEMO:
+def health(request: Request):
+    if not PUBLIC_DEMO and not request.app.state.hosted_app:
         with Session(engine) as db:
             db.execute(select(Account.id).limit(1))
     return {"status": "ok", "prototype": True, "mode": "isolated synthetic sessions" if PUBLIC_DEMO else "synthetic single-user demo", "model_loaded": classifier is not None, "integrations": integration_status()}
@@ -148,9 +171,42 @@ def health():
 
 @app.get("/api/config")
 def runtime_config(request: Request):
+    if request.app.state.hosted_app:
+        service = request.app.state.identity_store
+        identity = getattr(request.state, "identity", None)
+        personal = private_request(request)
+        return {"hosted_app": True, "private_accounts_enabled": service is not None, "registration": "invitation-only" if service else "closed",
+                "authenticated": identity is not None, "email": identity.email if identity else None,
+                "csrf_token": service.csrf(request.state.auth_token) if identity else None,
+                "public_demo": not personal, "workspace": request.state.workspace,
+                "session_ttl_minutes": 30 if personal else SESSION_TTL_SECONDS // 60,
+                "upload_enabled": personal, "retrain_enabled": personal}
     return {"public_demo": PUBLIC_DEMO, "session_ttl_minutes": SESSION_TTL_SECONDS // 60,
             "upload_enabled": not PUBLIC_DEMO, "retrain_enabled": not PUBLIC_DEMO,
             "workspace": request.cookies.get("moniq_workspace", "demo") if not PUBLIC_DEMO and request.cookies.get("moniq_workspace") in {"personal", "scenario"} else "demo"}
+
+
+@app.post("/api/demo/start")
+def start_public_demo(request: Request, response: Response):
+    if not request.app.state.hosted_app:
+        raise HTTPException(404, "Use the existing demo entry point.")
+    token = request.app.state.demo_store.bootstrap(request.cookies.get(COOKIE_NAME))
+    response.set_cookie(COOKIE_NAME, token, httponly=True, secure=True, samesite="lax", max_age=SESSION_TTL_SECONDS)
+    response.set_cookie(MODE_COOKIE, "demo", path="/", httponly=True, secure=True, samesite="lax", max_age=SESSION_TTL_SECONDS)
+    # Explicitly discard an expired login when the visitor chooses a fresh demo.
+    if not hasattr(request.state, "identity"):
+        response.delete_cookie(AUTH_COOKIE, path="/", secure=True, httponly=True, samesite="lax")
+    return {"workspace": "demo", "synthetic": True}
+
+
+@app.post("/api/welcome", status_code=204)
+def return_welcome(request: Request, response: Response):
+    if not request.app.state.hosted_app:
+        raise HTTPException(404)
+    if hasattr(request.state, "identity"):
+        request.app.state.identity_store.logout(request.state.auth_token)
+    for cookie in (AUTH_COOKIE, MODE_COOKIE, COOKIE_NAME):
+        response.delete_cookie(cookie, path="/", secure=True, httponly=True, samesite="lax")
 
 
 @app.get("/api/dashboard")
@@ -187,7 +243,7 @@ def get_transactions(q: str = Query(default="", max_length=200), category: Categ
 @app.post("/api/transactions", status_code=201)
 def create_transaction(payload: TransactionIn, request: Request, db: Session = Db):
     validate_personal_transaction(request, payload, db)
-    if PUBLIC_DEMO:
+    if demo_request(request):
         check_transaction(payload)
     try:
         row = add_transaction(db, payload, workspace_classifier(request), "notification" if payload.notification_text else "manual")
@@ -206,7 +262,7 @@ def create_transaction(payload: TransactionIn, request: Request, db: Session = D
 @app.put("/api/transactions/{transaction_id}")
 def update_transaction(transaction_id: int, payload: TransactionIn, request: Request, db: Session = Db):
     validate_personal_transaction(request, payload, db)
-    if PUBLIC_DEMO:
+    if demo_request(request):
         check_transaction(payload)
     row = db.get(Transaction, transaction_id)
     if not row:
@@ -298,7 +354,7 @@ async def import_csv(request: Request, file: UploadFile = File(...), mapping: st
 
 @app.post("/api/classify")
 def classify(payload: ClassifyIn, request: Request):
-    if PUBLIC_DEMO:
+    if demo_request(request):
         require_sample(payload.description in descriptions())
     return workspace_classifier(request).classify(payload.description)
 
@@ -310,14 +366,14 @@ def model_metrics(request: Request, db: Session = Db):
 
 @app.post("/api/ml/retrain")
 def retrain(request: Request, db: Session = Db):
-    if PUBLIC_DEMO:
+    if demo_request(request):
         raise HTTPException(403, "Public predictions use an immutable baseline. Corrections stay in your session; retraining is available in local mode.")
     return workspace_classifier(request).train(list(db.scalars(select(Correction))))
 
 
 @app.post("/api/notifications/parse")
 def parse_notification(payload: MessageIn, request: Request):
-    if PUBLIC_DEMO:
+    if demo_request(request):
         require_sample(payload.text in sample_messages())
     try:
         return parse_message(payload.text, workspace_classifier(request))
@@ -332,7 +388,7 @@ def message_examples():
 
 @app.post("/api/demo/import-sample")
 def import_demo_statement(request: Request, db: Session = Db):
-    if request.cookies.get("moniq_workspace") == "personal":
+    if private_request(request):
         raise HTTPException(409, "Sample statements are available in the synthetic demo workspace only.")
     frame = read_csv((ROOT / "data/sample_statement.csv").read_bytes(), "sample_statement.csv")
     payloads = csv_payloads(frame, {"date": "Date", "description": "Description", "amount": "Amount", "kind": "Kind", "category": "Category"}, "negative_expense")
@@ -384,8 +440,8 @@ def get_schedules(db: Session = Db):
              "status": r.status} for r in db.scalars(select(RecurringPayment).order_by(RecurringPayment.next_due))]
 
 
-def schedule_values(payload):
-    if PUBLIC_DEMO:
+def schedule_values(payload, request):
+    if demo_request(request):
         require_sample(payload.merchant in SCHEDULE_MERCHANTS or payload.merchant in descriptions())
     from .config import today
     if payload.next_due <= today():
@@ -395,8 +451,8 @@ def schedule_values(payload):
 
 
 @app.post("/api/schedules", status_code=201)
-def create_schedule(payload: ScheduleIn, db: Session = Db):
-    values = schedule_values(payload)
+def create_schedule(payload: ScheduleIn, request: Request, db: Session = Db):
+    values = schedule_values(payload, request)
     if db.scalar(select(RecurringPayment.id).where(RecurringPayment.merchant == payload.merchant)):
         raise HTTPException(409, "A schedule for this merchant already exists. Edit it instead.")
     db.add(RecurringPayment(**values))
@@ -405,11 +461,11 @@ def create_schedule(payload: ScheduleIn, db: Session = Db):
 
 
 @app.put("/api/schedules/{schedule_id}")
-def update_schedule(schedule_id: int, payload: ScheduleIn, db: Session = Db):
+def update_schedule(schedule_id: int, payload: ScheduleIn, request: Request, db: Session = Db):
     row = db.get(RecurringPayment, schedule_id)
     if not row:
         raise HTTPException(404, "Schedule not found.")
-    values = schedule_values(payload)
+    values = schedule_values(payload, request)
     if db.scalar(select(RecurringPayment.id).where(RecurringPayment.merchant == payload.merchant, RecurringPayment.id != schedule_id)):
         raise HTTPException(409, "A schedule for this merchant already exists.")
     for key, value in values.items():
@@ -456,8 +512,8 @@ class AssistantIn(BaseModel):
 
 
 @app.post("/api/assistant")
-def assistant_question(payload: AssistantIn, db: Session = Db):
-    if PUBLIC_DEMO:
+def assistant_question(payload: AssistantIn, request: Request, db: Session = Db):
+    if demo_request(request):
         check_question(payload.question)
     return answer_question(db, payload.question)
 
@@ -476,8 +532,8 @@ def get_profile(db: Session = Db):
 
 
 @app.put("/api/profile")
-def save_profile(payload: ProfileIn, db: Session = Db):
-    if PUBLIC_DEMO:
+def save_profile(payload: ProfileIn, request: Request, db: Session = Db):
+    if demo_request(request):
         check_profile(payload)
     row = db.get(Profile, 1)
     if not row:
@@ -499,8 +555,8 @@ def get_goals(db: Session = Db):
 
 
 @app.put("/api/goals/{goal_id}")
-def save_goal(goal_id: int, payload: GoalIn, db: Session = Db):
-    if PUBLIC_DEMO:
+def save_goal(goal_id: int, payload: GoalIn, request: Request, db: Session = Db):
+    if demo_request(request):
         require_sample(payload.name in {"Emergency fund", "Laptop fund", "Tuition fund", "Travel fund"})
     row = db.get(Goal, goal_id)
     if not row:
@@ -532,7 +588,7 @@ def export_data(request: Request, format: str = Query(default="json", pattern="^
     payload = {"profile": serialize_profile(db.get(Profile, 1)), "accounts": rows(Account), "transactions": transactions,
                "budgets": rows(Budget), "goals": rows(Goal), "recurring_payments": rows(RecurringPayment),
                "deals": rows(Deal), "notifications": rows(Notification), "corrections": rows(Correction),
-               "synthetic": PUBLIC_DEMO or request.cookies.get("moniq_workspace") != "personal",
+               "synthetic": not private_request(request),
                "registered_account_details": rows(AccountDetails), "gmail_review_items": rows(GmailItem)}
     from .models import Circle, CircleMember, CircleExpense, CircleShare, CircleSettlement, LedgerAudit, TrustedSender, ApprovalAudit, GmailEvidence, DebitCard, AccountTransfer, GoalPlan, GoalContribution
     for model in (Circle, CircleMember, CircleExpense, CircleShare, CircleSettlement, LedgerAudit, TrustedSender, ApprovalAudit, GmailEvidence, DebitCard, AccountTransfer, GoalPlan, GoalContribution):
@@ -542,7 +598,7 @@ def export_data(request: Request, format: str = Query(default="json", pattern="^
 
 @app.delete("/api/data", status_code=204)
 def delete_data(request: Request, db: Session = Db):
-    if request.cookies.get("moniq_workspace") == "personal" and not PUBLIC_DEMO:
+    if private_request(request):
         from .gmail_routes import manager
         manager(request).disconnect()
     for table in reversed(Base.metadata.sorted_tables):
@@ -550,17 +606,17 @@ def delete_data(request: Request, db: Session = Db):
     # Retain an empty account as the persistent deletion marker.
     db.add(Account(id=1, name="Empty local account", opening_balance_cents=0))
     db.commit()
-    if not PUBLIC_DEMO:
+    if not demo_request(request):
         workspace_classifier(request).train()  # Reset only this workspace's correction-trained model.
     return Response(status_code=204)
 
 
 @app.post("/api/demo/reset")
 def reset_demo(request: Request, db: Session = Db):
-    if request.cookies.get("moniq_workspace") == "personal" and not PUBLIC_DEMO:
+    if private_request(request):
         raise HTTPException(409, "Switch to the synthetic workspace before Reset Demo. Personal records are preserved.")
     seed_demo(db, reset=True)
-    if not PUBLIC_DEMO:
+    if not demo_request(request):
         classifier.train()
     return {"status": "reset", "message": "Synthetic student demo restored. Personal changes and corrections removed."}
 
@@ -572,6 +628,7 @@ app.include_router(upgrade_router)
 app.include_router(approvals_router)
 app.include_router(account_router)
 app.include_router(goal_router)
+app.include_router(auth_router)
 
 
 class FrontendFiles(StaticFiles):
@@ -584,5 +641,5 @@ class FrontendFiles(StaticFiles):
             raise
 
 
-if SERVE_FRONTEND:
+if SERVE_FRONTEND or HostedSettings.load().enabled:
     app.mount("/", FrontendFiles(directory=ROOT / "frontend/dist", html=True), name="frontend")

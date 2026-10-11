@@ -9,6 +9,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from . import config
+from .access import demo, hosted, private
 from .circles import audit, ledger_lock
 from .database import get_db
 from .gmail_routes import RegisteredAccountIn, account_rows, edit_account, register_account, require_local
@@ -19,10 +20,10 @@ router = APIRouter(prefix="/api/accounts")
 
 
 def owner_workspace(request: Request, db: Session = Depends(get_db)):
-    if request.app.state.public_demo:
+    if demo(request):
         raise HTTPException(403, "Personal account management is disabled in public demo sessions.")
     require_local(request)
-    if request.cookies.get("moniq_workspace") not in {"personal", "scenario"}:
+    if not (private(request) if hosted(request) else request.cookies.get("moniq_workspace") in {"personal", "scenario"}):
         raise HTTPException(409, "Open your personal workspace or isolated scenario first.")
     return db
 

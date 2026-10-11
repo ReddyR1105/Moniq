@@ -11,6 +11,7 @@
     "preview": "vite preview --host 127.0.0.1",
     "test:e2e": "playwright test --grep-invert \"@demo|@public\"",
     "test:public": "playwright test --config playwright.public.config.ts",
+    "test:hosted": "playwright test --config playwright.hosted.config.ts",
     "demo:capture": "playwright test --grep @demo",
     "test:deployed": "playwright test --config playwright.deployed.config.ts"
   },

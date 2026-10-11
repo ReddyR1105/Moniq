@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
+let sessionCsrf = ''
+export function setSessionCsrf(value:string|null|undefined) {sessionCsrf=value||''}
 
 export class ApiError extends Error {}
 
 export async function api<T>(path: string, options: RequestInit = {}): Promise<T> {
   const response = await fetch(`/api${path}`, {
     ...options,
-    headers: options.body instanceof FormData ? options.headers : { 'Content-Type': 'application/json', ...options.headers },
+    headers: {...(options.body instanceof FormData ? {} : {'Content-Type':'application/json'}), ...(sessionCsrf?{'X-Moniq-CSRF':sessionCsrf}:{}), ...options.headers},
   })
   if (!response.ok) {
     let message = `Request failed (${response.status}).`

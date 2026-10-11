@@ -13,6 +13,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from . import config
+from .access import demo, hosted
 from .circles import guard_transaction, ledger_lock
 from .database import get_db, get_personal_db
 from .gmail_routes import require_local
@@ -24,6 +25,9 @@ router = APIRouter(prefix="/api/smartapprove")
 
 
 def smart_db(request: Request):
+    if hosted(request):
+        yield from get_db(request)
+        return
     # Public rules are synthetic and session-owned; never reach private Gmail storage.
     if (
         request.app.state.public_demo
@@ -111,7 +115,7 @@ def store_rule(db, payload, request, existing=None):
         or (payload.match_type == "domain" and "@" in sender)
     ):
         raise HTTPException(422, "Use an exact email address or domain, without wildcard or display name.")
-    if request.app.state.public_demo and (
+    if demo(request) and (
         domain != "bank.example.test" or payload.institution != "Synthetic Bank"
     ):
         raise HTTPException(403, "Public sender settings accept Synthetic Bank at bank.example.test only.")

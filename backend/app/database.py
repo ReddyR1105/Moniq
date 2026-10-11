@@ -1,6 +1,6 @@
 from fastapi import HTTPException, Request
 from threading import RLock
-from sqlalchemy import create_engine, select
+from sqlalchemy import create_engine, select, text
 from sqlalchemy.orm import Session, sessionmaker
 
 from . import config
@@ -13,7 +13,7 @@ _personal_lock = RLock()
 
 
 def personal_engine(app):
-    if app.state.public_demo:
+    if app.state.public_demo or getattr(app.state, "hosted_app", False):
         raise HTTPException(403, "Private databases are unavailable in public demo mode.")
     with _personal_lock:
         if getattr(app.state, "personal_engine", None) is None:
@@ -29,14 +29,23 @@ def personal_engine(app):
 
 
 def get_personal_db(request: Request):
+    if getattr(request.app.state, "hosted_app", False):
+        if not hasattr(request.state, "private_engine"):
+            raise HTTPException(403, "Authenticate in your private workspace first.")
+        yield from get_db(request)
+        return
     with Session(personal_engine(request.app), expire_on_commit=False) as db:
         yield db
 
 
 def get_db(request: Request):
-    if hasattr(request.state, "demo_engine"):
+    if hasattr(request.state, "private_engine"):
+        session = Session(request.state.private_engine, expire_on_commit=False)
+        if session.bind.dialect.name == "postgresql" and request.method in {"POST", "PUT", "DELETE"}:
+            session.execute(text("SELECT pg_advisory_xact_lock(hashtext(:owner))"), {"owner": request.state.identity.user_id})
+    elif hasattr(request.state, "demo_engine"):
         session = Session(request.state.demo_engine, expire_on_commit=False)
-    elif request.app.state.public_demo:
+    elif request.app.state.public_demo or getattr(request.app.state, "hosted_app", False):
         raise HTTPException(401, "Start your isolated synthetic session first.")
     elif request.cookies.get("moniq_workspace") == "personal":
         session = Session(personal_engine(request.app), expire_on_commit=False)
@@ -49,7 +58,7 @@ def get_db(request: Request):
 
 
 def scenario_engine(app):
-    if app.state.public_demo:
+    if app.state.public_demo or getattr(app.state, "hosted_app", False):
         raise HTTPException(403, "Owner scenario databases are unavailable in public demo mode.")
     with _personal_lock:
         if getattr(app.state, "scenario_engine", None) is None:

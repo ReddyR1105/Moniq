@@ -1,10 +1,12 @@
 import { StrictMode, Component, type ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App'
-import { useResource } from './api'
+import { setSessionCsrf, useResource } from './api'
+import { Welcome } from './Welcome'
 import { Loading, ErrorNotice } from './components'
 import { RuntimeContext, type RuntimeConfig } from './runtime'
 import './styles.css'
+import './welcome.css'
 import { registerSW } from 'virtual:pwa-register'
 
 if (import.meta.env.PROD && 'serviceWorker' in navigator && window.isSecureContext) {
@@ -20,6 +22,7 @@ function Bootstrap() {
   // Establish the isolated cookie before parallel dashboard/profile requests.
   const {data,error} = useResource<RuntimeConfig>('/config',0)
   if (error) return <main className="fatal-error"><h1>Connect to Moniq.</h1><ErrorNotice message={error}/><button className="button primary" onClick={() => window.location.reload()}>Retry connection</button></main>
-  return data ? <RuntimeContext.Provider value={data}><App/></RuntimeContext.Provider> : <main className="fatal-error"><Loading label="Opening your financial space…"/></main>
+  setSessionCsrf(data?.csrf_token)
+  return data ? <RuntimeContext.Provider value={data}>{data.hosted_app&&data.workspace==='welcome'?<Welcome/>:<App/>}</RuntimeContext.Provider> : <main className="fatal-error"><Loading label="Opening your financial space…"/></main>
 }
 createRoot(document.getElementById('root')!).render(<StrictMode><ErrorBoundary><Bootstrap/></ErrorBoundary></StrictMode>)

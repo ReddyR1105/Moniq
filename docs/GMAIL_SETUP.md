@@ -1,5 +1,7 @@
 # Moniq Gmail setup — local owner testing
 
+For the new authenticated PostgreSQL test release, use [Hosted private setup](HOSTED_PRIVATE_SETUP.md). Its exact current-domain callback is `https://moniq-80su.onrender.com/api/gmail/callback`, with separate backend-only `HOSTED_GMAIL_*` credentials and a stable hosted encryption key. The localhost instructions below remain valid and the existing local key must remain unchanged.
+
 This optional integration uses the backend OAuth authorization-code flow with PKCE S256, browser-bound one-time state, and the official Gmail API. Imported emails require review unless the local owner explicitly enables a trusted-sender SmartApprove policy and every conservative approval check passes. The existing synthetic demo is preserved. Private category corrections train a separate instance of the existing Moniq classifier. Public demo sessions cannot connect Gmail or access personal databases or tokens.
 
 ## Exact Google Cloud settings
