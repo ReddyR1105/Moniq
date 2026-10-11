@@ -2,10 +2,13 @@
 
 | File | Duration | Format |
 | --- | --- | --- |
+| [Moniq_Hacklanta_Premium_Final.mp4](Moniq_Hacklanta_Premium_Final.mp4) | 1:30 | New Andrew American neural narration, H.264, 1920x1080, 30 fps, AAC |
 | [Moniq_Hacklanta_Final.mp4](Moniq_Hacklanta_Final.mp4) | 2:21.32 | H.264, 1920x1080, 25 fps, narrated AAC |
 | [Moniq_All_Features.mp4](Moniq_All_Features.mp4) | 6:38.64 | H.264, 1920x1080, 25 fps, narrated AAC |
 
-Both are actual Chromium recordings of isolated synthetic app workspaces. They include feature captions, local Microsoft Zira narration, beginning/end fades and no music. Matching SRT/VTT and `_NARRATION.md` files are in this folder. The entire video/audio streams decode successfully; actual Chromium playback and seeking passed with no errors, and representative frames were inspected. No personal messages, real financial transactions, tokens or credentials are captured. The owner's separate Gmail connection remains intact.
+The two preserved earlier videos are actual Chromium recordings of isolated synthetic app workspaces. They include feature captions, local Microsoft Zira narration, beginning/end fades and no music. Matching SRT/VTT and `_NARRATION.md` files are in this folder. Their entire video/audio streams decode successfully; actual Chromium playback and seeking passed with no errors, and representative frames were inspected. No personal messages, real financial transactions, tokens or credentials are captured. The owner's separate Gmail connection remains intact.
+
+The **premium** file uses an entirely new neural soundtrack at +15% synthesis rate, a conversational script and a fresh app capture. It does not reuse Zira audio. Its sentence captions are regenerated from synthesis timestamps, with a reserved caption area below the application. Transactions are demonstrated with actual parser, classifier and ledger responses. The two earlier MP4 files above remain unchanged as original backups; the requested premium filename did not exist before this task. See [premium verification and reproduction](PREMIUM_VERIFICATION.md). Listening to the final cut and approving its voice/pronunciation remains the owner's review step.
 
 [Scripts and upload instructions](../DEMO_SCRIPT.md); [current QA and limitations](../QA_REPORT.md). Local files are verified and available. Public video upload and signed-out accessibility verification remain owner tasks; no public video URL is claimed.
 

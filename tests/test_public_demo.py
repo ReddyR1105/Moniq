@@ -172,3 +172,48 @@ def test_public_profile_goals_schedule_corrections_and_model_are_independent(pub
     assert client.get("/api/ml/metrics", headers=b).json() == baseline
     prediction = {"description": "Unknown synthetic demo purchase"}
     assert client.post("/api/classify", headers=a, json=prediction).json() == client.post("/api/classify", headers=b, json=prediction).json()
+
+
+def test_public_database_helpers_fail_closed_without_a_visitor_lease(public_client):
+    from backend.app.database import get_db, personal_engine, scenario_engine
+    from starlette.requests import Request
+
+    app = public_client.app
+    request = Request({"type": "http", "app": app, "headers": [(b"cookie", b"moniq_workspace=personal")]})
+    for helper in (personal_engine, scenario_engine):
+        with pytest.raises(HTTPException) as denied:
+            helper(app)
+        assert denied.value.status_code == 403
+    with pytest.raises(HTTPException) as denied:
+        next(get_db(request))
+    assert denied.value.status_code == 401
+    assert app.state.personal_engine is None and app.state.scenario_engine is None
+
+
+def test_public_rejections_and_success_have_private_cache_and_security_headers(public_client, monkeypatch):
+    client = public_client
+    visitor = new_visitor(client)
+    for path, code, headers in [("/api/dashboard", 200, visitor), ("/api/gmail/status", 403, visitor),
+                                ("/api/dashboard", 403, {**visitor, "Origin": "https://foreign.example"})]:
+        response = client.get(path, headers=headers)
+        assert response.status_code == code
+        assert response.headers["cache-control"] == "no-store"
+        assert response.headers["x-content-type-options"] == "nosniff"
+        assert "connect-src 'self'" in response.headers["content-security-policy"]
+        assert response.headers["permissions-policy"] == "camera=(), microphone=(), geolocation=(), payment=()"
+    monkeypatch.setattr(main, "PUBLIC_ORIGIN", "https://moniq.example.test")
+    response = client.get("/api/health")
+    assert response.headers["strict-transport-security"] == "max-age=31536000"
+
+
+def test_public_configuration_ignores_accidentally_present_gmail_secrets(tmp_path):
+    import json
+    import os
+    import subprocess
+    import sys
+
+    environment = {**os.environ, "MONIQ_PUBLIC_DEMO": "true", "MONIQ_GMAIL_DISABLED": "false",
+                   "GMAIL_CLIENT_ID": "synthetic-id", "GMAIL_CLIENT_SECRET": "synthetic-secret",
+                   "GMAIL_TOKEN_ENCRYPTION_KEY": "synthetic-key"}
+    result = subprocess.run([sys.executable, "-c", "import json; from backend.app import config; print(json.dumps([config.GMAIL_DISABLED, bool(config.GMAIL_CLIENT_ID), bool(config.GMAIL_CLIENT_SECRET), bool(config.GMAIL_TOKEN_ENCRYPTION_KEY)]))"], env=environment, check=True, capture_output=True, text=True)
+    assert json.loads(result.stdout) == [True, False, False, False]

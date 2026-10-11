@@ -12,6 +12,7 @@ import { Overview } from './pages/Overview'
 import { SettingsPage } from './pages/Settings'
 import { SubscriptionsPage } from './pages/Subscriptions'
 import { CirclesPage } from './pages/Circles'
+import { PwaInstall } from './PwaInstall'
 import { TransactionsPage } from './pages/Transactions'
 import type { Dashboard, Page, Profile, Transaction } from './types'
 
@@ -87,7 +88,7 @@ export default function App() {
           {page === 'Subscriptions' && <SubscriptionsPage revision={revision} changed={changed}/>}
           {page === 'AI Assistant' && <AssistantPage/>}
           {page === 'Circles' && <CirclesPage revision={revision} changed={changed} splitTransaction={splitTransaction} onLinked={()=>setSplitTransaction(undefined)}/>}
-          {page === 'Settings' && <SettingsPage revision={revision} changed={changed}/>}
+          {page === 'Settings' && <><SettingsPage revision={revision} changed={changed}/><PwaInstall/></>}
         </div>}
         <footer className="page-footer"><span>Moniq <span>·</span> Spending, Made Smarter.</span><span>Built for college life <TrendingUp size={13}/></span></footer>
       </main>

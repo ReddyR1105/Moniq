@@ -54,7 +54,7 @@ This is a local-owner financial prototype, not production-certified financial so
 
 ## Technology and attribution
 
-React, TypeScript, Vite, Tailwind CSS, Recharts, Lucide, Python, FastAPI, SQLAlchemy, SQLite, scikit-learn, pandas, joblib, Authlib, cryptography, pytest, Ruff, ESLint, Playwright and GitHub Actions. Media uses FFmpeg and local Windows speech synthesis. Training, statements, offers, profiles and recorded emails are synthetic. Dependency/data/media attribution is in `ATTRIBUTIONS.md` and `data/LICENSE.md`.
+React, TypeScript, Vite, Tailwind CSS, Recharts, Lucide, Workbox, Python, FastAPI, SQLAlchemy, SQLite, scikit-learn, pandas, joblib, Authlib, cryptography, pytest, Ruff, ESLint, Playwright and GitHub Actions. The premium video uses FFmpeg and new Microsoft Edge neural narration; earlier preserved videos use Windows speech synthesis. Training, statements, offers, profiles and recorded emails are synthetic. Dependency/data/media attribution is in `ATTRIBUTIONS.md` and `data/LICENSE.md`.
 
 ## AI assistance and work-window disclosure
 
@@ -64,4 +64,6 @@ OpenAI Codex assisted implementation, design, debugging, tests, documentation an
 
 Repository: https://github.com/ReddyR1105/Moniq (published baseline; final local commit awaits approval).
 
-Final video: `docs/demo/Moniq_Hacklanta_Final.mp4`; extended walkthrough: `docs/demo/Moniq_All_Features.mp4`. Upload instructions and captions are in `DEMO_SCRIPT.md`. Public video URLs and any approved hosted demo URL must be entered by the team after upload/verification. Local testing is fully documented in the README; no deployment or Devpost receipt is claimed.
+Premium video preparation: `docs/demo/Moniq_Hacklanta_Premium_Final.mp4`; preserved final video: `docs/demo/Moniq_Hacklanta_Final.mp4`; extended walkthrough: `docs/demo/Moniq_All_Features.mp4`. Complete the owner's premium listening review before public upload. Upload instructions and captions are in `DEMO_SCRIPT.md`. Public video URLs and any approved hosted demo URL must be entered by the team after upload/verification. Local testing is fully documented in the README; no deployment or Devpost receipt is claimed.
+
+The web app now has a static-only PWA installation path and automated mobile touch coverage. Financial APIs remain online-only; native Android/iOS builds are future work. No actual cloud demo URL or APK is available yet. See `MOBILE_SETUP.md` and `PUBLIC_RELEASE_STATUS.md`.

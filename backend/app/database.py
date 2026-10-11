@@ -1,4 +1,4 @@
-from fastapi import Request
+from fastapi import HTTPException, Request
 from threading import RLock
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import Session, sessionmaker
@@ -13,6 +13,8 @@ _personal_lock = RLock()
 
 
 def personal_engine(app):
+    if app.state.public_demo:
+        raise HTTPException(403, "Private databases are unavailable in public demo mode.")
     with _personal_lock:
         if getattr(app.state, "personal_engine", None) is None:
             owned = create_engine(config.PERSONAL_DATABASE_URL, connect_args={"check_same_thread": False})
@@ -34,6 +36,8 @@ def get_personal_db(request: Request):
 def get_db(request: Request):
     if hasattr(request.state, "demo_engine"):
         session = Session(request.state.demo_engine, expire_on_commit=False)
+    elif request.app.state.public_demo:
+        raise HTTPException(401, "Start your isolated synthetic session first.")
     elif request.cookies.get("moniq_workspace") == "personal":
         session = Session(personal_engine(request.app), expire_on_commit=False)
     elif request.cookies.get("moniq_workspace") == "scenario":
@@ -45,6 +49,8 @@ def get_db(request: Request):
 
 
 def scenario_engine(app):
+    if app.state.public_demo:
+        raise HTTPException(403, "Owner scenario databases are unavailable in public demo mode.")
     with _personal_lock:
         if getattr(app.state, "scenario_engine", None) is None:
             owned = create_engine(config.SCENARIO_DATABASE_URL, connect_args={"check_same_thread": False})

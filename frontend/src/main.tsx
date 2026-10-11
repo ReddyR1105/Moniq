@@ -5,6 +5,11 @@ import { useResource } from './api'
 import { Loading, ErrorNotice } from './components'
 import { RuntimeContext, type RuntimeConfig } from './runtime'
 import './styles.css'
+import { registerSW } from 'virtual:pwa-register'
+
+if (import.meta.env.PROD && 'serviceWorker' in navigator && window.isSecureContext) {
+  registerSW({ immediate: true, onRegisterError: () => { /* Browser installation is optional; app stays usable. */ } })
+}
 
 class ErrorBoundary extends Component<{children: ReactNode}, {failed: boolean}> {
   state = {failed:false}

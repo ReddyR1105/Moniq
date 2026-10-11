@@ -6,14 +6,14 @@ Verified October 10, 2026 on Windows with Python 3.14.7, Node 24.21.0, Vite 6.4.
 
 | Check | Result |
 | --- | --- |
-| Complete backend suite | **109 passed**, 34.10 seconds; two upstream httpx compatibility deprecation warnings |
-| Local Chromium | **16 passed**, 101.98 seconds; 0 failures, skips or flaky cases |
-| Production public Chromium | **3 passed**, 28.76 seconds; actual FastAPI-served frontend/dist |
+| Complete backend suite | **112 passed**, 42.05 seconds; two upstream httpx compatibility deprecation warnings |
+| Local Chromium | **16 passed**, approximately 2 minutes; 0 failures |
+| Production public Chromium | **8 passed**, approximately 1.1 minutes; actual FastAPI-served frontend/dist, mobile touch and PWA coverage |
 | TypeScript, ESLint, Ruff | **Passed** |
-| Production frontend build | **Passed**, 2,184 modules; CSS 50.96 kB, app JS 362.42 kB, charts 438.11 kB |
+| Production frontend build | **Passed**, 2,188 modules; CSS 51.89 kB, app JS 366.00 kB, charts 438.11 kB; static-only service worker with 10 precache entries |
 | Independent classifier evaluation | **Passed**, 250/264 raw correct and saved baseline reproduced |
 | Python dependency consistency | **Passed**, pip check |
-| npm vulnerability audit, production and all dependencies | **0 known vulnerabilities**; all-dependency report covers 301 packages |
+| npm vulnerability audit, all dependencies | **0 known vulnerabilities**, rerun after installing PWA build dependencies |
 | Locked Python vulnerability audit | **0 known vulnerabilities**, 43 packages via pip-audit |
 | GitHub Actions configuration | **Passed** actionlint; pinned actions, read-only permissions, locked installs, all application checks |
 | Original database rows | **Preserved**, each original row in both moniq.db and personal.db matched the pre-upgrade backups across 11 tables each |
@@ -68,4 +68,12 @@ A final financial review also caught a reversed-paycheck assistant edge case: an
 
 The final archive's 149 safe source/media files passed CRC and per-file SHA-256 checks and were extracted into a new ignored validation directory with path traversal checks and no .env. The extracted module path was verified, then **all 109 backend tests passed again (46.08 seconds)** using the existing locked Python environment; Ruff and independent ML reproduction also passed. A **fresh npm ci** installed the frontend lockfile in the extraction, with zero reported vulnerabilities; TypeScript, ESLint and production build passed. Every generated production file hash matched the workspace exactly. npm emitted only upstream ESLint deprecation/install-script policy notices; the build completed successfully.
 
-The delivery archive is rebuilt after this documentation update/local commit, and every archived source hash is checked against the final clean committed tree. Final ZIP hash/size and the local commit are provided in the handoff, avoiding self-referential archive hashes inside the package. No private runtime data, dependency directory or raw capture is included.
+That original delivery archive belongs to the previous local release and is preserved. It does not contain the subsequent presentation, PWA or premium narration changes. A separate premium archive can include the latest locally verified source/documents/media without overwriting that original ZIP; its manifest is checked against the working files rather than claimed to be a published commit. No private runtime data, dependency directory or raw capture is included.
+
+## Current mobile/public preparation addendum
+
+The current 112 backend and 24 browser tests supersede the earlier application counts in this document. The eight production tests include manifest/icon installability, a static-only cache audit, offline API rejection, touch-based paycheck/purchase confirmation ($10 → $410 → $395), controlled SmartApprove, Circles debt/cash accounting ($375 cash, $400 income, $35 personal spending), savings plans, assistant answers and narrow-screen chart/navigation checks. The browser installation prompt is mocked for its UI handler test; iPhone instructions use a simulated user agent, so physical phone installation remains unverified.
+
+No deployment, Docker image execution, native APK or new hosted CI is claimed. Public mode ignores Gmail credentials and refuses access to owner/scenario database helpers. Local private Gmail functionality remains covered by mocked regression tests. The final premium media has its own verification report and owner listening review; earlier Windows-narrated recordings and the original submission ZIP remain intact.
+
+The new premium file is 90.00 seconds, 1920×1080 H.264/30 fps with new Andrew neural audio at +15% and 37 aligned sentence captions. Full decode, 33 scene seeks, Chromium audio/frame decoding, playback to the ending and caption/volume/silence checks passed. The owner video player was opened for listening review. The separate `D:\Map\Moniq_Hacklanta_Premium.zip` contains the latest verified local source, presentation and media; its file hashes, CRCs and credential-pattern exclusions are verified by `scripts/package_submission.py`. This package includes local uncommitted updates and is not claimed to match a published GitHub release.

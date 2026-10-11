@@ -187,7 +187,7 @@ Default local mode is a **single-user, persistent prototype**. Public demo mode 
 
 Plaid Sandbox and Gemini are **not implemented**; provider interfaces are documented for later use. No SMS/iMessage access, supported cancellation integration, live discount feed, real student verification, push notifications, account authentication, or an actual cloud deployment is included. The local assistant supports specified intents, not unrestricted conversation. Forecasting is a transparent spending-average baseline, not an ML time-series predictor; all money math is deterministic. Subscription detection focuses on monthly services with three charges and stable amounts. CSV currency inputs currently support dollar/decimal-dot formats, not international decimal-comma currencies.
 
-The web manifest and responsive UI are PWA-ready; full offline financial functionality, a service worker, installability on every platform, and cached private financial data are not claimed. Source API fixtures and browser tests use synthetic records only.
+The production build includes an installable web manifest, Android/iPhone icons, a static-only service worker and mobile installation instructions. Financial/API data is never cached by that worker; offline navigation shows a connection-required page. Chromium installability and mobile touch flows pass automated checks; installation on physical Android/iPhone devices remains a manual check. See [phone setup](docs/MOBILE_SETUP.md) and [native roadmap](docs/CAPACITOR_ROADMAP.md). Source API fixtures and browser tests use synthetic records only.
 
 ## Data, licenses, and disclosure
 
@@ -211,3 +211,7 @@ See [demo walkthrough](docs/DEMO_WALKTHROUGH.md), [screenshots](docs/screenshots
 [Current QA](docs/QA_REPORT.md), [Devpost description](docs/DEVPOST_SUBMISSION.md), [judges' pitch](docs/JUDGES_PITCH.md), [submission checklist](docs/SUBMISSION_CHECKLIST.md), and [recording instructions](docs/DEMO_SCRIPT.md). The final source/media package is `D:\Map\Moniq_Hacklanta_Final.zip`; `scripts/package_submission.py --output D:\Map\Moniq_Hacklanta_Final.zip` rebuilds it with source hashes and CRC verification.
 
 The published baseline remains `8ac182f`. The final local release requires owner approval before push. Hosted CI for new changes cannot run until publication is approved. Render and Devpost submission remain separate actions.
+
+The latest local production/mobile checks pass **112 backend tests, 16 local Chromium tests and 8 production Chromium tests**. The public service remains prepared locally, with no verified cloud URL or APK. [Public release status and costs](docs/PUBLIC_RELEASE_STATUS.md) explain the exact external actions still requiring approval. [Judging presentation and PDF](docs/presentation/README.md) are preserved.
+
+[Premium 90-second product video](docs/demo/Moniq_Hacklanta_Premium_Final.mp4) has a new American neural voice, a rewritten script and matching regenerated captions. Earlier videos remain intact. See [premium verification](docs/demo/PREMIUM_VERIFICATION.md); the owner must listen and approve the cut before any public upload.

@@ -72,12 +72,31 @@ async def lifespan(app):
 
 app = FastAPI(title="Moniq", version="0.2.0", lifespan=lifespan, description="Student finance MVP with local persistence and isolated public synthetic sessions.",
               docs_url=None if PUBLIC_DEMO else "/docs", redoc_url=None if PUBLIC_DEMO else "/redoc", openapi_url=None if PUBLIC_DEMO else "/openapi.json")
-app.add_middleware(CORSMiddleware, allow_origins=CORS_ORIGINS, allow_methods=["GET", "POST", "PUT", "DELETE"], allow_headers=["Content-Type"], allow_credentials=False)
+app.add_middleware(CORSMiddleware, allow_origins=[] if PUBLIC_DEMO else CORS_ORIGINS, allow_methods=["GET", "POST", "PUT", "DELETE"], allow_headers=["Content-Type"], allow_credentials=False)
 Db = Depends(get_db)
 
 
 @app.middleware("http")
 async def private_response_headers(request: Request, call_next):
+    response = await protected_workspace_request(request, call_next)
+    # Cover rejected requests too; API responses never enter browser/SW caches.
+    response.headers["Cache-Control"] = "no-store"
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["Referrer-Policy"] = "no-referrer"
+    response.headers["X-Frame-Options"] = "DENY"
+    if PUBLIC_DEMO:
+        response.headers["Content-Security-Policy"] = (
+            "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; "
+            "img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; "
+            "manifest-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'"
+        )
+        response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=(), payment=()"
+        if PUBLIC_ORIGIN.startswith("https://"):
+            response.headers["Strict-Transport-Security"] = "max-age=31536000"
+    return response
+
+
+async def protected_workspace_request(request: Request, call_next):
     if PUBLIC_DEMO and (request.url.path.startswith("/api/gmail/") or request.url.path == "/api/workspace"):
         return JSONResponse({"detail": "Gmail and personal workspaces are unavailable in public demo sessions."}, status_code=403)
     if not PUBLIC_DEMO and request.cookies.get("moniq_workspace") in {"personal", "scenario"}:
@@ -116,10 +135,6 @@ async def private_response_headers(request: Request, call_next):
             response = await call_next(request)
     except HTTPException as exc:
         response = JSONResponse({"detail": exc.detail}, status_code=exc.status_code)
-    response.headers["Cache-Control"] = "no-store"
-    response.headers["X-Content-Type-Options"] = "nosniff"
-    response.headers["Referrer-Policy"] = "no-referrer"
-    response.headers["X-Frame-Options"] = "DENY"
     return response
 
 

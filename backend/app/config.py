@@ -23,7 +23,7 @@ PERSONAL_DATABASE_URL = os.getenv("PERSONAL_DATABASE_URL", f"sqlite:///{(RUNTIME
 PERSONAL_MODEL_DIR = Path(os.getenv("PERSONAL_MODEL_DIR", str(RUNTIME / "personal-models")))
 GMAIL_REDIRECT_URI = os.getenv("GMAIL_REDIRECT_URI", "http://127.0.0.1:8000/api/gmail/callback")
 GMAIL_FRONTEND_URL = os.getenv("GMAIL_FRONTEND_URL", "http://127.0.0.1:5173")
-GMAIL_DISABLED = os.getenv("MONIQ_GMAIL_DISABLED", "false").lower() == "true"
+GMAIL_DISABLED = PUBLIC_DEMO or os.getenv("MONIQ_GMAIL_DISABLED", "false").lower() == "true"
 GMAIL_CLIENT_ID = "" if GMAIL_DISABLED else os.getenv("GMAIL_CLIENT_ID", "")
 GMAIL_CLIENT_SECRET = "" if GMAIL_DISABLED else os.getenv("GMAIL_CLIENT_SECRET", "")
 GMAIL_TOKEN_ENCRYPTION_KEY = "" if GMAIL_DISABLED else os.getenv("GMAIL_TOKEN_ENCRYPTION_KEY", "")

@@ -5,12 +5,12 @@ async function nav(page: Page, name: string) {
   await page.getByRole('navigation',{name:'Main navigation'}).getByRole('button',{name,exact:true}).click()
 }
 
-test('production demo isolates two visitors and resets only the current session @public', async ({browser}) => {
-  const a = await browser.newContext(), b = await browser.newContext()
+test('production demo isolates two visitors and resets only the current session @public', async ({browser,baseURL}) => {
+  const a = await browser.newContext({baseURL}), b = await browser.newContext({baseURL})
   const alice = await a.newPage(), bob = await b.newPage()
   const errors: string[] = []
   alice.on('pageerror', e => errors.push(e.message))
-  await Promise.all([alice.goto('http://127.0.0.1:8003'), bob.goto('http://127.0.0.1:8003')])
+  await Promise.all([alice.goto('/'), bob.goto('/')])
   await expect(alice.getByTestId('balance')).toBeVisible()
   await expect(bob.getByTestId('balance')).toBeVisible()
   expect((await alice.request.get('/api/gmail/status')).status()).toBe(403)
@@ -67,10 +67,10 @@ test('production demo blocks uploads, provides a synthetic import and fits mobil
   }
 })
 
-test('public Circles walkthrough uses only the current visitor ledger @public',async({browser})=>{
-  const a=await browser.newContext(), b=await browser.newContext()
+test('public Circles walkthrough uses only the current visitor ledger @public',async({browser,baseURL})=>{
+  const a=await browser.newContext({baseURL}), b=await browser.newContext({baseURL})
   const alice=await a.newPage(), bob=await b.newPage()
-  await Promise.all([alice.goto('http://127.0.0.1:8003/#circles'),bob.goto('http://127.0.0.1:8003')])
+  await Promise.all([alice.goto('/#circles'),bob.goto('/')])
   await expect(bob.getByTestId('balance')).toBeVisible()
   const original=await bob.getByTestId('balance').innerText()
   alice.once('dialog',d=>d.accept())

@@ -118,7 +118,8 @@ def active_approvals(request, db):
 
 @approvals_router.get("")
 def approvals(request: Request, db: Session = Depends(get_db)):
-    return {"items": [serialize_item(i) for i in active_approvals(request, db) if i.status == "review"], "accounts": account_rows(db) if active_approvals(request, db) else []}
+    account = db.get(Account, 1)
+    return {"items": [serialize_item(i) for i in active_approvals(request, db) if i.status == "review"], "accounts": account_rows(db) if active_approvals(request, db) else [], "synthetic_scenario": bool(account and account.mode == "scenario")}
 
 
 @approvals_router.post("/{item_id}/confirm")

@@ -1,0 +1,162 @@
+﻿[
+    {
+        "slide":  1,
+        "text":  "TECHNICAL BACKUP · OUTSIDE TIMED PITCH",
+        "boxHeight":  20.16,
+        "textHeight":  14.81504,
+        "boxWidth":  720,
+        "textWidth":  258.025024
+    },
+    {
+        "slide":  1,
+        "text":  "moniq.",
+        "boxHeight":  32.4,
+        "textHeight":  27.16,
+        "boxWidth":  105.84,
+        "textWidth":  78.87504
+    },
+    {
+        "slide":  1,
+        "text":  "Hacklanta 2026  /  Fintech",
+        "boxHeight":  14.4,
+        "textHeight":  12.3450394,
+        "boxWidth":  424.8,
+        "textWidth":  117.125038
+    },
+    {
+        "slide":  1,
+        "text":  "01",
+        "boxHeight":  18.72,
+        "textHeight":  14.81504,
+        "boxWidth":  48.24,
+        "textWidth":  16.25
+    },
+    {
+        "slide":  1,
+        "text":  "ML evidence, with its limits.",
+        "boxHeight":  89.28,
+        "textHeight":  40.73504,
+        "boxWidth":  867.6,
+        "textWidth":  440.25
+    },
+    {
+        "slide":  1,
+        "text":  "792 train / 264 test",
+        "boxHeight":  43.2,
+        "textHeight":  38.27,
+        "boxWidth":  432,
+        "textWidth":  286.63
+    },
+    {
+        "slide":  1,
+        "text":  "11 categories · Disjoint merchant families\rWord uni/bigrams → logistic regression\r250 correct · Raw macro F1 0.9432",
+        "boxHeight":  118.8,
+        "textHeight":  90.21,
+        "boxWidth":  432,
+        "textWidth":  421.515045
+    },
+    {
+        "slide":  1,
+        "text":  "Confidence policy",
+        "boxHeight":  43.2,
+        "textHeight":  34.56504,
+        "boxWidth":  403.2,
+        "textWidth":  243.125046
+    },
+    {
+        "slide":  1,
+        "text":  "Below 45% → miscellaneous + review\r58.71% automatic coverage on this set\rConfidence is uncalibrated\rReal-bank performance not measured",
+        "boxHeight":  162,
+        "textHeight":  105.33,
+        "boxWidth":  403.2,
+        "textWidth":  345.605042
+    },
+    {
+        "slide":  1,
+        "text":  "Synthetic English examples have correlated formatting. No production accuracy claim.",
+        "boxHeight":  36,
+        "textHeight":  20.99,
+        "boxWidth":  864,
+        "textWidth":  645.265
+    },
+    {
+        "slide":  2,
+        "text":  "TECHNICAL BACKUP · OUTSIDE TIMED PITCH",
+        "boxHeight":  20.16,
+        "textHeight":  14.81504,
+        "boxWidth":  720,
+        "textWidth":  258.025024
+    },
+    {
+        "slide":  2,
+        "text":  "moniq.",
+        "boxHeight":  32.4,
+        "textHeight":  27.16,
+        "boxWidth":  105.84,
+        "textWidth":  78.87504
+    },
+    {
+        "slide":  2,
+        "text":  "Hacklanta 2026  /  Fintech",
+        "boxHeight":  14.4,
+        "textHeight":  12.3450394,
+        "boxWidth":  424.8,
+        "textWidth":  117.125038
+    },
+    {
+        "slide":  2,
+        "text":  "02",
+        "boxHeight":  18.72,
+        "textHeight":  14.81504,
+        "boxWidth":  48.24,
+        "textWidth":  16.25
+    },
+    {
+        "slide":  2,
+        "text":  "Permission, validation, exact-cent accounting.",
+        "boxHeight":  89.28,
+        "textHeight":  40.73504,
+        "boxWidth":  867.6,
+        "textWidth":  721.235046
+    },
+    {
+        "slide":  2,
+        "text":  "Gmail + privacy",
+        "boxHeight":  43.2,
+        "textHeight":  33.33504,
+        "boxWidth":  396,
+        "textWidth":  206.82
+    },
+    {
+        "slide":  2,
+        "text":  "OAuth code + PKCE + one-use state\rGmail read-only scope\rEncrypted backend tokens\rPrivate / public / scenario isolation",
+        "boxHeight":  180,
+        "textHeight":  110.6,
+        "boxWidth":  406.8,
+        "textWidth":  340.76
+    },
+    {
+        "slide":  2,
+        "text":  "Ledger + recovery",
+        "boxHeight":  43.2,
+        "textHeight":  33.33504,
+        "boxWidth":  396,
+        "textWidth":  238.96
+    },
+    {
+        "slide":  2,
+        "text":  "Posted records, integer cents\rDuplicate checks + idempotent requests\rAudit history + compensating reversals\rCircles preserves cash charge",
+        "boxHeight":  180,
+        "textHeight":  110.6,
+        "boxWidth":  406.8,
+        "textWidth":  378.77
+    },
+    {
+        "slide":  2,
+        "text":  "Local owner prototype; SQLite is unencrypted. Cloud identity and security review remain future work.",
+        "boxHeight":  40.32,
+        "textHeight":  19.75504,
+        "boxWidth":  864,
+        "textWidth":  713.395
+    }
+]

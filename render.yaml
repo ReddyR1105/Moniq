@@ -14,6 +14,8 @@ services:
         value: "true"
       - key: MONIQ_SERVE_FRONTEND
         value: "true"
+      - key: MONIQ_GMAIL_DISABLED
+        value: "true"
       - key: MONIQ_COOKIE_SECURE
         value: "true"
       - key: MONIQ_SESSION_TTL_SECONDS

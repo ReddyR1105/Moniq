@@ -15,6 +15,11 @@ frontend/playwright-report
 **/*.joblib
 **/*.pyc
 **/*.tsbuildinfo
+**/*.enc
+**/*client_secret*.json
+**/*credentials*.json
+**/*.pem
+**/*.key
 docs
 tests
 .pytest_cache

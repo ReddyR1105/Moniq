@@ -1,0 +1,938 @@
+﻿[
+    {
+        "slide":  1,
+        "text":  "SPENDING, MADE SMARTER.",
+        "boxHeight":  20.16,
+        "textHeight":  14.81504,
+        "boxWidth":  720,
+        "textWidth":  167.76
+    },
+    {
+        "slide":  1,
+        "text":  "moniq.",
+        "boxHeight":  32.4,
+        "textHeight":  27.16,
+        "boxWidth":  105.84,
+        "textWidth":  78.87504
+    },
+    {
+        "slide":  1,
+        "text":  "Hacklanta 2026  /  Fintech",
+        "boxHeight":  14.4,
+        "textHeight":  12.3450394,
+        "boxWidth":  424.8,
+        "textWidth":  117.125038
+    },
+    {
+        "slide":  1,
+        "text":  "01",
+        "boxHeight":  18.72,
+        "textHeight":  14.81504,
+        "boxWidth":  48.24,
+        "textWidth":  16.25
+    },
+    {
+        "slide":  1,
+        "text":  "moniq.",
+        "boxHeight":  100.8,
+        "textHeight":  101.23,
+        "boxWidth":  313.199921,
+        "textWidth":  293.75
+    },
+    {
+        "slide":  1,
+        "text":  "Spending,\rMade Smarter.",
+        "boxHeight":  90,
+        "textHeight":  82.51504,
+        "boxWidth":  302.4,
+        "textWidth":  229.73
+    },
+    {
+        "slide":  1,
+        "text":  "AI-powered personal finance\rfor college students.",
+        "boxHeight":  68.4,
+        "textHeight":  56.73,
+        "boxWidth":  309.6,
+        "textWidth":  285.38
+    },
+    {
+        "slide":  1,
+        "text":  "ACTUAL MONIQ DASHBOARD  ·  SYNTHETIC DATA",
+        "boxHeight":  21.6,
+        "textHeight":  14.81504,
+        "boxWidth":  536.4,
+        "textWidth":  288.69
+    },
+    {
+        "slide":  1,
+        "text":  "Presenter: [edit name / team]",
+        "boxHeight":  25.2,
+        "textHeight":  19.75504,
+        "boxWidth":  532.8,
+        "textWidth":  209.93
+    },
+    {
+        "slide":  2,
+        "text":  "THE PROBLEM",
+        "boxHeight":  20.16,
+        "textHeight":  14.81504,
+        "boxWidth":  720,
+        "textWidth":  85.13504
+    },
+    {
+        "slide":  2,
+        "text":  "moniq.",
+        "boxHeight":  32.4,
+        "textHeight":  27.16,
+        "boxWidth":  105.84,
+        "textWidth":  78.87504
+    },
+    {
+        "slide":  2,
+        "text":  "Hacklanta 2026  /  Fintech",
+        "boxHeight":  14.4,
+        "textHeight":  12.3450394,
+        "boxWidth":  424.8,
+        "textWidth":  117.125038
+    },
+    {
+        "slide":  2,
+        "text":  "02",
+        "boxHeight":  18.72,
+        "textHeight":  14.81504,
+        "boxWidth":  48.24,
+        "textWidth":  16.25
+    },
+    {
+        "slide":  2,
+        "text":  "College finances are\runnecessarily complicated.",
+        "boxHeight":  89.28,
+        "textHeight":  85.08504,
+        "boxWidth":  867.6,
+        "textWidth":  425.5
+    },
+    {
+        "slide":  2,
+        "text":  "01",
+        "boxHeight":  50.4,
+        "textHeight":  46.91,
+        "boxWidth":  86.4,
+        "textWidth":  54.25
+    },
+    {
+        "slide":  2,
+        "text":  "Money is scattered.",
+        "boxHeight":  66.24,
+        "textHeight":  27.16,
+        "boxWidth":  239.04,
+        "textWidth":  206.705032
+    },
+    {
+        "slide":  2,
+        "text":  "Bank alerts, spreadsheets,\rand separate apps.",
+        "boxHeight":  64.8,
+        "textHeight":  48.99504,
+        "boxWidth":  239.04,
+        "textWidth":  219.795044
+    },
+    {
+        "slide":  2,
+        "text":  "FIND THE RECORDS",
+        "boxHeight":  18,
+        "textHeight":  12.3450394,
+        "boxWidth":  239.04,
+        "textWidth":  96
+    },
+    {
+        "slide":  2,
+        "text":  "02",
+        "boxHeight":  50.4,
+        "textHeight":  46.91,
+        "boxWidth":  86.4,
+        "textWidth":  54.25
+    },
+    {
+        "slide":  2,
+        "text":  "Tracking takes effort.",
+        "boxHeight":  66.24,
+        "textHeight":  27.16,
+        "boxWidth":  239.04,
+        "textWidth":  225.92
+    },
+    {
+        "slide":  2,
+        "text":  "New income and purchases\rare easy to miss.",
+        "boxHeight":  64.8,
+        "textHeight":  48.99504,
+        "boxWidth":  239.04,
+        "textWidth":  235.25
+    },
+    {
+        "slide":  2,
+        "text":  "KEEP UP WITH ACTIVITY",
+        "boxHeight":  18,
+        "textHeight":  12.3450394,
+        "boxWidth":  239.04,
+        "textWidth":  118.375038
+    },
+    {
+        "slide":  2,
+        "text":  "03",
+        "boxHeight":  50.4,
+        "textHeight":  46.91,
+        "boxWidth":  86.4,
+        "textWidth":  54.25
+    },
+    {
+        "slide":  2,
+        "text":  "Planning adds stress.",
+        "boxHeight":  66.24,
+        "textHeight":  27.16,
+        "boxWidth":  239.04,
+        "textWidth":  222.29
+    },
+    {
+        "slide":  2,
+        "text":  "Shared bills, rent,\rand savings goals.",
+        "boxHeight":  64.8,
+        "textHeight":  48.99504,
+        "boxWidth":  239.04,
+        "textWidth":  157.25
+    },
+    {
+        "slide":  2,
+        "text":  "KNOW WHAT COMES NEXT",
+        "boxHeight":  18,
+        "textHeight":  12.3450394,
+        "boxWidth":  239.04,
+        "textWidth":  133.625046
+    },
+    {
+        "slide":  3,
+        "text":  "OUR SOLUTION",
+        "boxHeight":  20.16,
+        "textHeight":  14.81504,
+        "boxWidth":  720,
+        "textWidth":  91.88504
+    },
+    {
+        "slide":  3,
+        "text":  "moniq.",
+        "boxHeight":  32.4,
+        "textHeight":  27.16,
+        "boxWidth":  105.84,
+        "textWidth":  78.87504
+    },
+    {
+        "slide":  3,
+        "text":  "Hacklanta 2026  /  Fintech",
+        "boxHeight":  14.4,
+        "textHeight":  12.3450394,
+        "boxWidth":  424.8,
+        "textWidth":  117.125038
+    },
+    {
+        "slide":  3,
+        "text":  "03",
+        "boxHeight":  18.72,
+        "textHeight":  14.81504,
+        "boxWidth":  48.24,
+        "textWidth":  16.25
+    },
+    {
+        "slide":  3,
+        "text":  "One intelligent home for your money.",
+        "boxHeight":  89.28,
+        "textHeight":  40.73504,
+        "boxWidth":  867.6,
+        "textWidth":  594.73
+    },
+    {
+        "slide":  3,
+        "text":  "1",
+        "boxHeight":  25.2,
+        "textHeight":  24.69,
+        "boxWidth":  36,
+        "textWidth":  17
+    },
+    {
+        "slide":  3,
+        "text":  "Bring activity together",
+        "boxHeight":  36,
+        "textHeight":  28.39,
+        "boxWidth":  316.8,
+        "textWidth":  251.125046
+    },
+    {
+        "slide":  3,
+        "text":  "Gmail with consent · CSV imports",
+        "boxHeight":  51.84,
+        "textHeight":  20.99,
+        "boxWidth":  324,
+        "textWidth":  253.365036
+    },
+    {
+        "slide":  3,
+        "text":  "2",
+        "boxHeight":  25.2,
+        "textHeight":  24.69,
+        "boxWidth":  36,
+        "textWidth":  17
+    },
+    {
+        "slide":  3,
+        "text":  "Review and organize",
+        "boxHeight":  36,
+        "textHeight":  28.39,
+        "boxWidth":  316.8,
+        "textWidth":  229.96
+    },
+    {
+        "slide":  3,
+        "text":  "ML categories · Confirmed ledger",
+        "boxHeight":  51.84,
+        "textHeight":  20.99,
+        "boxWidth":  324,
+        "textWidth":  253.83
+    },
+    {
+        "slide":  3,
+        "text":  "3",
+        "boxHeight":  25.2,
+        "textHeight":  24.69,
+        "boxWidth":  36,
+        "textWidth":  17
+    },
+    {
+        "slide":  3,
+        "text":  "Plan your next decision",
+        "boxHeight":  36,
+        "textHeight":  28.39,
+        "boxWidth":  316.8,
+        "textWidth":  258.4
+    },
+    {
+        "slide":  3,
+        "text":  "Budgets · Goals · Forecasts · Circles",
+        "boxHeight":  51.84,
+        "textHeight":  20.99,
+        "boxWidth":  324,
+        "textWidth":  263.825043
+    },
+    {
+        "slide":  3,
+        "text":  "Confirmed activity refreshes the dashboard.",
+        "boxHeight":  25.2,
+        "textHeight":  20.99,
+        "boxWidth":  468,
+        "textWidth":  355.19
+    },
+    {
+        "slide":  4,
+        "text":  "THE WOW MOMENT",
+        "boxHeight":  20.16,
+        "textHeight":  14.81504,
+        "boxWidth":  720,
+        "textWidth":  120.5
+    },
+    {
+        "slide":  4,
+        "text":  "moniq.",
+        "boxHeight":  32.4,
+        "textHeight":  27.16,
+        "boxWidth":  105.84,
+        "textWidth":  78.87504
+    },
+    {
+        "slide":  4,
+        "text":  "Hacklanta 2026  /  Fintech",
+        "boxHeight":  14.4,
+        "textHeight":  12.3450394,
+        "boxWidth":  424.8,
+        "textWidth":  117.125038
+    },
+    {
+        "slide":  4,
+        "text":  "04",
+        "boxHeight":  18.72,
+        "textHeight":  14.81504,
+        "boxWidth":  48.24,
+        "textWidth":  16.25
+    },
+    {
+        "slide":  4,
+        "text":  "From an email alert to an updated balance.",
+        "boxHeight":  89.28,
+        "textHeight":  40.73504,
+        "boxWidth":  867.6,
+        "textWidth":  675.865051
+    },
+    {
+        "slide":  4,
+        "text":  "SYNTHETIC DEMONSTRATION  ·  ACTUAL PARSER + DATABASE UPDATES",
+        "boxHeight":  25.2,
+        "textHeight":  16.05,
+        "boxWidth":  864,
+        "textWidth":  450.335052
+    },
+    {
+        "slide":  4,
+        "text":  "$10",
+        "boxHeight":  54,
+        "textHeight":  51.85,
+        "boxWidth":  198,
+        "textWidth":  84
+    },
+    {
+        "slide":  4,
+        "text":  "Starting estimate",
+        "boxHeight":  21.6,
+        "textHeight":  18.51504,
+        "boxWidth":  201.6,
+        "textWidth":  116.70504
+    },
+    {
+        "slide":  4,
+        "text":  "$410",
+        "boxHeight":  54,
+        "textHeight":  51.85,
+        "boxWidth":  198,
+        "textWidth":  108.125038
+    },
+    {
+        "slide":  4,
+        "text":  "Paycheck confirmed",
+        "boxHeight":  21.6,
+        "textHeight":  18.51504,
+        "boxWidth":  201.6,
+        "textWidth":  135.91
+    },
+    {
+        "slide":  4,
+        "text":  "$395",
+        "boxHeight":  54,
+        "textHeight":  51.85,
+        "boxWidth":  198,
+        "textWidth":  108.125038
+    },
+    {
+        "slide":  4,
+        "text":  "Purchase confirmed",
+        "boxHeight":  21.6,
+        "textHeight":  18.51504,
+        "boxWidth":  201.6,
+        "textWidth":  134.77
+    },
+    {
+        "slide":  4,
+        "text":  "+ $400",
+        "boxHeight":  24.48,
+        "textHeight":  19.75504,
+        "boxWidth":  79.2,
+        "textWidth":  57.12496
+    },
+    {
+        "slide":  4,
+        "text":  "→",
+        "boxHeight":  31.68,
+        "textHeight":  27.16,
+        "boxWidth":  79.2,
+        "textWidth":  25.12504
+    },
+    {
+        "slide":  4,
+        "text":  "− $15",
+        "boxHeight":  24.48,
+        "textHeight":  19.75504,
+        "boxWidth":  79.2,
+        "textWidth":  47.87504
+    },
+    {
+        "slide":  4,
+        "text":  "→",
+        "boxHeight":  31.68,
+        "textHeight":  27.16,
+        "boxWidth":  79.2,
+        "textWidth":  25.12504
+    },
+    {
+        "slide":  4,
+        "text":  "Detect → Extract → Categorize → Assign account → Confirm → Recalculate",
+        "boxHeight":  25.2,
+        "textHeight":  20.99,
+        "boxWidth":  867.6,
+        "textWidth":  594.37
+    },
+    {
+        "slide":  4,
+        "text":  "Gmail-derived balances are estimates, not verified bank balances.",
+        "boxHeight":  18,
+        "textHeight":  16.05,
+        "boxWidth":  867.6,
+        "textWidth":  374.82
+    },
+    {
+        "slide":  5,
+        "text":  "SMARTAPPROVE + MONIQ CIRCLES",
+        "boxHeight":  20.16,
+        "textHeight":  14.81504,
+        "boxWidth":  720,
+        "textWidth":  205.315033
+    },
+    {
+        "slide":  5,
+        "text":  "moniq.",
+        "boxHeight":  32.4,
+        "textHeight":  27.16,
+        "boxWidth":  105.84,
+        "textWidth":  78.87504
+    },
+    {
+        "slide":  5,
+        "text":  "Hacklanta 2026  /  Fintech",
+        "boxHeight":  14.4,
+        "textHeight":  12.3450394,
+        "boxWidth":  424.8,
+        "textWidth":  117.125038
+    },
+    {
+        "slide":  5,
+        "text":  "05",
+        "boxHeight":  18.72,
+        "textHeight":  14.81504,
+        "boxWidth":  48.24,
+        "textWidth":  16.25
+    },
+    {
+        "slide":  5,
+        "text":  "Automation meets everyday student life.",
+        "boxHeight":  89.28,
+        "textHeight":  40.73504,
+        "boxWidth":  867.6,
+        "textWidth":  643.3
+    },
+    {
+        "slide":  5,
+        "text":  "SmartApprove",
+        "boxHeight":  32.4,
+        "textHeight":  30.86,
+        "boxWidth":  390.24,
+        "textWidth":  178.25
+    },
+    {
+        "slide":  5,
+        "text":  "Your sender rules. Your choice.\rAuthentication + amount checks.\rUncertain alerts stay in review.",
+        "boxHeight":  80.64,
+        "textHeight":  74.53,
+        "boxWidth":  390.24,
+        "textWidth":  282.25
+    },
+    {
+        "slide":  5,
+        "text":  "OPT-IN  ·  OFF BY DEFAULT",
+        "boxHeight":  19.44,
+        "textHeight":  14.81504,
+        "boxWidth":  390.24,
+        "textWidth":  154.055038
+    },
+    {
+        "slide":  5,
+        "text":  "Moniq Circles",
+        "boxHeight":  32.4,
+        "textHeight":  30.86,
+        "boxWidth":  390.24,
+        "textWidth":  166.9
+    },
+    {
+        "slide":  5,
+        "text":  "Split expenses; keep the full charge.\rTrack personal shares and repayments.\rReimbursements are not paycheck income.",
+        "boxHeight":  80.64,
+        "textHeight":  70.6,
+        "boxWidth":  390.24,
+        "textWidth":  343.565033
+    },
+    {
+        "slide":  5,
+        "text":  "$40 dinner = $20 your share + $20 owed",
+        "boxHeight":  19.44,
+        "textHeight":  17.28504,
+        "boxWidth":  390.24,
+        "textWidth":  270.49
+    },
+    {
+        "slide":  5,
+        "text":  "Synthetic example. Circles records debts and repayments; Moniq sends no money.",
+        "boxHeight":  22.32,
+        "textHeight":  17.28504,
+        "boxWidth":  864,
+        "textWidth":  508.88504
+    },
+    {
+        "slide":  6,
+        "text":  "THE TECHNOLOGY",
+        "boxHeight":  20.16,
+        "textHeight":  14.81504,
+        "boxWidth":  720,
+        "textWidth":  108.575043
+    },
+    {
+        "slide":  6,
+        "text":  "moniq.",
+        "boxHeight":  32.4,
+        "textHeight":  27.16,
+        "boxWidth":  105.84,
+        "textWidth":  78.87504
+    },
+    {
+        "slide":  6,
+        "text":  "Hacklanta 2026  /  Fintech",
+        "boxHeight":  14.4,
+        "textHeight":  12.3450394,
+        "boxWidth":  424.8,
+        "textWidth":  117.125038
+    },
+    {
+        "slide":  6,
+        "text":  "06",
+        "boxHeight":  18.72,
+        "textHeight":  14.81504,
+        "boxWidth":  48.24,
+        "textWidth":  16.25
+    },
+    {
+        "slide":  6,
+        "text":  "Real machine learning. Real financial logic.",
+        "boxHeight":  89.28,
+        "textHeight":  40.73504,
+        "boxWidth":  867.6,
+        "textWidth":  670.33
+    },
+    {
+        "slide":  6,
+        "text":  "Gmail API / User imports",
+        "boxHeight":  25.2,
+        "textHeight":  22.22,
+        "boxWidth":  403.2,
+        "textWidth":  215.52
+    },
+    {
+        "slide":  6,
+        "text":  "Secure FastAPI backend",
+        "boxHeight":  25.2,
+        "textHeight":  22.22,
+        "boxWidth":  403.2,
+        "textWidth":  204.715042
+    },
+    {
+        "slide":  6,
+        "text":  "Financial event extraction",
+        "boxHeight":  25.2,
+        "textHeight":  22.22,
+        "boxWidth":  403.2,
+        "textWidth":  222.45
+    },
+    {
+        "slide":  6,
+        "text":  "Scikit-learn classification",
+        "boxHeight":  25.2,
+        "textHeight":  22.22,
+        "boxWidth":  403.2,
+        "textWidth":  214.43
+    },
+    {
+        "slide":  6,
+        "text":  "Validation + account ledger",
+        "boxHeight":  25.2,
+        "textHeight":  22.22,
+        "boxWidth":  403.2,
+        "textWidth":  238.645035
+    },
+    {
+        "slide":  6,
+        "text":  "React dashboard, forecasts + Circles",
+        "boxHeight":  25.2,
+        "textHeight":  22.22,
+        "boxWidth":  403.2,
+        "textWidth":  308.665039
+    },
+    {
+        "slide":  6,
+        "text":  "ML suggests categories.",
+        "boxHeight":  36,
+        "textHeight":  28.39,
+        "boxWidth":  388.8,
+        "textWidth":  264.75
+    },
+    {
+        "slide":  6,
+        "text":  "TF-IDF + logistic regression\r94.70% raw synthetic accuracy",
+        "boxHeight":  68.4,
+        "textHeight":  54.15,
+        "boxWidth":  388.8,
+        "textWidth":  285.75
+    },
+    {
+        "slide":  6,
+        "text":  "250 / 264 held-out examples.\rReal-bank accuracy is unmeasured.",
+        "boxHeight":  54,
+        "textHeight":  41.26,
+        "boxWidth":  388.8,
+        "textWidth":  249.76
+    },
+    {
+        "slide":  6,
+        "text":  "Code calculates the money.",
+        "boxHeight":  36,
+        "textHeight":  28.39,
+        "boxWidth":  388.8,
+        "textWidth":  300.015045
+    },
+    {
+        "slide":  6,
+        "text":  "Integer cents · Deterministic forecasts",
+        "boxHeight":  32.4,
+        "textHeight":  22.22,
+        "boxWidth":  388.8,
+        "textWidth":  301.2
+    },
+    {
+        "slide":  6,
+        "text":  "React / TypeScript · Python / FastAPI · SQLite\rGoogle OAuth + Gmail API · pytest / Playwright",
+        "boxHeight":  48.96,
+        "textHeight":  36.1,
+        "boxWidth":  388.8,
+        "textWidth":  296.245026
+    },
+    {
+        "slide":  7,
+        "text":  "WORKING PROTOTYPE + VALIDATION",
+        "boxHeight":  20.16,
+        "textHeight":  14.81504,
+        "boxWidth":  720,
+        "textWidth":  218.705032
+    },
+    {
+        "slide":  7,
+        "text":  "moniq.",
+        "boxHeight":  32.4,
+        "textHeight":  27.16,
+        "boxWidth":  105.84,
+        "textWidth":  78.87504
+    },
+    {
+        "slide":  7,
+        "text":  "Hacklanta 2026  /  Fintech",
+        "boxHeight":  14.4,
+        "textHeight":  12.3450394,
+        "boxWidth":  424.8,
+        "textWidth":  117.125038
+    },
+    {
+        "slide":  7,
+        "text":  "07",
+        "boxHeight":  18.72,
+        "textHeight":  14.81504,
+        "boxWidth":  48.24,
+        "textWidth":  16.25
+    },
+    {
+        "slide":  7,
+        "text":  "Built, tested, and demonstrated.",
+        "boxHeight":  89.28,
+        "textHeight":  40.73504,
+        "boxWidth":  867.6,
+        "textWidth":  508.36
+    },
+    {
+        "slide":  7,
+        "text":  "109",
+        "boxHeight":  50.4,
+        "textHeight":  50.61504,
+        "boxWidth":  237.6,
+        "textWidth":  82.12504
+    },
+    {
+        "slide":  7,
+        "text":  "Backend tests passed",
+        "boxHeight":  22.32,
+        "textHeight":  19.75504,
+        "boxWidth":  237.6,
+        "textWidth":  162.43
+    },
+    {
+        "slide":  7,
+        "text":  "pytest",
+        "boxHeight":  17.28,
+        "textHeight":  12.3450394,
+        "boxWidth":  237.6,
+        "textWidth":  29.75
+    },
+    {
+        "slide":  7,
+        "text":  "19",
+        "boxHeight":  50.4,
+        "textHeight":  50.61504,
+        "boxWidth":  237.6,
+        "textWidth":  58.5
+    },
+    {
+        "slide":  7,
+        "text":  "Browser tests passed",
+        "boxHeight":  22.32,
+        "textHeight":  19.75504,
+        "boxWidth":  237.6,
+        "textWidth":  160.09
+    },
+    {
+        "slide":  7,
+        "text":  "16 local + 3 production · Chromium",
+        "boxHeight":  17.28,
+        "textHeight":  12.3450394,
+        "boxWidth":  237.6,
+        "textWidth":  159.875046
+    },
+    {
+        "slide":  7,
+        "text":  "94.70%",
+        "boxHeight":  50.4,
+        "textHeight":  50.61504,
+        "boxWidth":  237.6,
+        "textWidth":  152.375046
+    },
+    {
+        "slide":  7,
+        "text":  "Raw synthetic ML accuracy",
+        "boxHeight":  22.32,
+        "textHeight":  19.75504,
+        "boxWidth":  237.6,
+        "textWidth":  205.75
+    },
+    {
+        "slide":  7,
+        "text":  "250 / 264 · Held-out merchant families",
+        "boxHeight":  17.28,
+        "textHeight":  12.3450394,
+        "boxWidth":  237.6,
+        "textWidth":  172.25
+    },
+    {
+        "slide":  7,
+        "text":  "Verified prototype",
+        "boxHeight":  36,
+        "textHeight":  29.63,
+        "boxWidth":  410.4,
+        "textWidth":  214.095047
+    },
+    {
+        "slide":  7,
+        "text":  "Responsive dashboard and budgets\rGoals, forecasts, subscriptions, assistant\rSynthetic email → confirmation → ledger\rSharing, repayment and session isolation",
+        "boxHeight":  111.6,
+        "textHeight":  94.79,
+        "boxWidth":  410.4,
+        "textWidth":  327.53
+    },
+    {
+        "slide":  7,
+        "text":  "Clear boundaries",
+        "boxHeight":  36,
+        "textHeight":  29.63,
+        "boxWidth":  396,
+        "textWidth":  196.72
+    },
+    {
+        "slide":  7,
+        "text":  "Estimates; no bank verification\rGmail requires permission\rReal-email coverage needs broader testing\rNo payments; sample deals are fictional",
+        "boxHeight":  111.6,
+        "textHeight":  94.79,
+        "boxWidth":  396,
+        "textWidth":  343.285034
+    },
+    {
+        "slide":  7,
+        "text":  "Hackathon prototype  ·  Not a production banking product",
+        "boxHeight":  21.6,
+        "textHeight":  17.28504,
+        "boxWidth":  864,
+        "textWidth":  366.275024
+    },
+    {
+        "slide":  8,
+        "text":  "THE VISION",
+        "boxHeight":  20.16,
+        "textHeight":  14.81504,
+        "boxWidth":  720,
+        "textWidth":  70
+    },
+    {
+        "slide":  8,
+        "text":  "moniq.",
+        "boxHeight":  32.4,
+        "textHeight":  27.16,
+        "boxWidth":  105.84,
+        "textWidth":  78.87504
+    },
+    {
+        "slide":  8,
+        "text":  "Hacklanta 2026  /  Fintech",
+        "boxHeight":  14.4,
+        "textHeight":  12.3450394,
+        "boxWidth":  424.8,
+        "textWidth":  117.125038
+    },
+    {
+        "slide":  8,
+        "text":  "08",
+        "boxHeight":  18.72,
+        "textHeight":  14.81504,
+        "boxWidth":  48.24,
+        "textWidth":  16.25
+    },
+    {
+        "slide":  8,
+        "text":  "Make financial confidence\raccessible to every student.",
+        "boxHeight":  111.6,
+        "textHeight":  100.56,
+        "boxWidth":  864,
+        "textWidth":  514.78
+    },
+    {
+        "slide":  8,
+        "text":  "Less bookkeeping. Clearer decisions.\rSmarter savings. Easier roommate expenses.",
+        "boxHeight":  80.64,
+        "textHeight":  67.04,
+        "boxWidth":  860.4,
+        "textWidth":  511.62
+    },
+    {
+        "slide":  8,
+        "text":  "moniq.",
+        "boxHeight":  68.4,
+        "textHeight":  67.89504,
+        "boxWidth":  338.4,
+        "textWidth":  196.875046
+    },
+    {
+        "slide":  8,
+        "text":  "Spending, Made Smarter.",
+        "boxHeight":  34.56,
+        "textHeight":  30.86,
+        "boxWidth":  705.6,
+        "textWidth":  284.45
+    },
+    {
+        "slide":  8,
+        "text":  "https://github.com/ReddyR1105/Moniq",
+        "boxHeight":  28.8,
+        "textHeight":  22.22,
+        "boxWidth":  864,
+        "textWidth":  318.75
+    },
+    {
+        "slide":  8,
+        "text":  "AI-assisted build · Work history disclosed in repository",
+        "boxHeight":  15.84,
+        "textHeight":  13.58,
+        "boxWidth":  864,
+        "textWidth":  265.625031
+    }
+]

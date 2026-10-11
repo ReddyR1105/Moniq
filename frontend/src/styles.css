@@ -31,3 +31,15 @@
 
 /* Original Moniq Circles ledger layout. */
 .circles-layout{display:grid;grid-template-columns:minmax(220px,1fr) minmax(0,3fr);gap:24px;margin-top:24px;align-items:start}.circle-detail{display:grid;gap:24px;min-width:0}.circle-selector{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:transparent;border:1px solid var(--border,#e3e9e4);padding:16px;border-radius:14px;margin:10px 0}.circle-selector.selected{background:#eaf4ec;border-color:#176c54}.circle-selector span{display:grid;gap:5px}.circle-selector small,.circle-expense p{color:#68766c}.circle-totals{display:flex;flex-wrap:wrap;gap:24px;margin-bottom:24px}.circle-totals div{display:grid;gap:8px;flex:1;min-width:120px}.circle-totals span{font-size:13px;color:#68766c}.circle-totals strong{font-size:24px}.circle-expense{padding:18px 0;border-top:1px solid #e3e9e4}.circle-expense-heading{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.circle-expense-heading>div{flex:1}.circle-share{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;flex-wrap:wrap;border-top:1px solid #eef1ed;font-size:13px}.circle-participants{padding:14px;border:1px solid #e3e9e4;border-radius:12px;display:grid;gap:14px}.circle-detail label>select{width:100%;margin:8px 0 14px}.page-content>.panel{margin-bottom:24px}@media(max-width:800px){.circles-layout{grid-template-columns:1fr}.circle-totals strong{font-size:21px}.row-actions{flex-wrap:wrap}}
+/* Installed web app and touch layouts keep the existing desktop presentation. */
+.pwa-install{display:none}
+@media(max-width:760px){
+  .topbar{padding-top:env(safe-area-inset-top);height:calc(63px + env(safe-area-inset-top));padding-left:max(20px,env(safe-area-inset-left));padding-right:max(20px,env(safe-area-inset-right))}
+  main{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right));padding-bottom:env(safe-area-inset-bottom)}
+  .sidebar{padding-top:calc(28px + env(safe-area-inset-top));padding-bottom:calc(15px + env(safe-area-inset-bottom))}
+  .button,.nav-item,.icon-button,.text-button,.filter-chips .chip,.quick-questions>button{min-height:44px}
+  input:not([type=checkbox]):not([type=radio]),select,textarea{min-height:44px;font-size:16px}
+  .pwa-install{display:grid;gap:16px}.pwa-install>p{line-height:1.6}.pwa-install>.button{justify-self:start}
+  .toast{bottom:calc(16px + env(safe-area-inset-bottom))}
+  .chat-composer{padding-bottom:max(7px,env(safe-area-inset-bottom))}
+}

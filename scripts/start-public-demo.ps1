@@ -7,6 +7,7 @@ if ($portableNode) { $env:PATH = $portableNode.FullName + ';' + $env:PATH; $npmC
 if ($LASTEXITCODE -ne 0) { throw 'Production build failed.' }
 $env:MONIQ_PUBLIC_DEMO = 'true'
 $env:MONIQ_SERVE_FRONTEND = 'true'
+$env:MONIQ_GMAIL_DISABLED = 'true'
 $env:MONIQ_COOKIE_SECURE = 'false' # HTTP localhost only; Render uses Secure cookies.
 $env:MONIQ_PUBLIC_ORIGIN = 'http://127.0.0.1:8080'
 & '.\.venv\Scripts\python.exe' -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8080 --workers 1

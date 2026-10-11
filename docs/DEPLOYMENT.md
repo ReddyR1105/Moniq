@@ -37,7 +37,9 @@ After explicit GitHub push and deployment approval:
 4. Open the assigned HTTPS URL in two separate browser contexts. Complete Start Demo, save $15.75, verify the other visitor is unchanged, run a $150 scenario, use deals/assistant, import the synthetic CSV, export and reset. Check mobile and session expiry.
 5. Enter the real working URL into README/Devpost only after those checks. Wake the service shortly before judging. Keep local instructions available if free hosting sleeps or reaches quota.
 
-The exact external step awaiting the owner is account authentication/authorization and approval to create the service. No paid resources, cloud deployment, public URL, or persistence guarantee have been claimed. See [Render's FastAPI guide](https://render.com/docs/deploy-fastapi) and [Blueprint specification](https://render.com/docs/blueprint-spec).
+The exact external step awaiting the owner is account authentication/authorization and approval to create the service. No paid resources, cloud deployment, public URL, or persistence guarantee have been claimed. See [Render's FastAPI guide](https://render.com/docs/deploy-fastapi), [Blueprint specification](https://render.com/docs/blueprint-spec), and [current release status/cost review](PUBLIC_RELEASE_STATUS.md). A Free service can still lead to supplementary usage charges when a payment method is present; verify the account's limits or use an account without a payment method before any deployment. No charges are authorized.
+
+Public mode now ignores Gmail credentials even if accidentally present in the environment, rejects private database access, and applies a same-origin CSP and no-store headers to early API rejections as well as normal responses. Private local Gmail continues to use its existing configuration. [Phone installation](MOBILE_SETUP.md) and [future Capacitor work](CAPACITOR_ROADMAP.md) are documented; no APK or physical-device installation is claimed.
 
 With Docker installed, a local image smoke check can use:
 

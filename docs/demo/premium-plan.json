@@ -1,0 +1,19 @@
+{
+  "voice": "en-US-AndrewMultilingualNeural",
+  "rate": "+15%",
+  "target_seconds": 90,
+  "pronunciation": {"Moniq": "Monique", "SmartApprove": "Smart Approve", "Gmail": "G mail"},
+  "scenes": [
+    {"id": "intro", "title": "Spending, Made Smarter.", "text": "Meet Moniq. Your money, finally making sense. One clear view of your spending, your goals, and what comes next."},
+    {"id": "gmail", "title": "Your permission. Read-only access.", "text": "With your permission, Moniq reads financial alerts through Gmail. No bank passwords. No sending emails. Every account in this demo is synthetic."},
+    {"id": "paycheck", "title": "$10 + $400 = $410", "text": "Start with ten dollars. Confirm a four hundred dollar paycheck, and watch your balance reach four ten. Only confirmed income counts."},
+    {"id": "purchase", "title": "$410 − $15 = $395", "text": "Now, a fifteen dollar purchase. Merchant, amount, date, account, and a machine learning category, ready for review. Confirm, and your balance updates."},
+    {"id": "smartapprove", "title": "SmartApprove · Evidence before automation", "text": "Meet SmartApprove. Opt in for trusted senders, set limits, and keep uncertain alerts in review. This controlled forty dollar dinner passes the rules, with an audit trail."},
+    {"id": "circles", "title": "Circles · Split the bill", "text": "Dinner with friends? Create a Circle and split that forty dollars. Your share is twenty. Jordan owes twenty. The original bank charge stays intact."},
+    {"id": "repayment", "title": "Repayment ≠ paycheck income", "text": "Record Jordan's repayment, and the debt clears. Cash updates. Paycheck income stays the same. Clear numbers, no double counting."},
+    {"id": "forecast", "title": "See the impact before you spend", "text": "Budgets follow your share of spending. Test a purchase against your savings forecast, and see the tradeoff before you spend. Assumptions stay visible."},
+    {"id": "goals", "title": "Turn a goal into a plan", "text": "Set a savings goal. Record your progress, choose a monthly plan, and see an estimated finish date. A plan never becomes fake cash."},
+    {"id": "assistant", "title": "Answers grounded in your records", "text": "Ask your money questions. Moniq answers from your stored records, so the numbers match the dashboard."},
+    {"id": "closing", "title": "Moniq · Spending, Made Smarter.", "text": "Less guessing. More confidence. Moniq. Spending, Made Smarter."}
+  ]
+}

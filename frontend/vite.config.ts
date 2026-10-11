@@ -1,9 +1,21 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react(), tailwindcss(), VitePWA({
+    strategies: 'injectManifest',
+    srcDir: 'src', filename: 'sw.js',
+    manifest: false, injectRegister: null, registerType: 'prompt',
+    injectManifest: {
+      // Only public static resources: never HTML pages populated by an API,
+      // financial responses, exports, session cookies or OAuth routes.
+      globPatterns: ['assets/*.{js,css}', 'icons/*.png', 'icon.svg', 'offline.html'],
+      maximumFileSizeToCacheInBytes: 2 * 1024 * 1024,
+    },
+    devOptions: { enabled: false },
+  })],
   server: {
     port: 5173,
     strictPort: true,

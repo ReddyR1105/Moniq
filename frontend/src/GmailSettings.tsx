@@ -109,12 +109,13 @@ export function GmailSettings({revision,changed}:Props) {
 
 export function DashboardApprovals({revision,changed}:Props) {
   const {workspace,public_demo} = useRuntime()
-  const queue = useResource<{items:EmailItem[];accounts:Account[]}>('/approvals',revision)
+  const queue = useResource<{items:EmailItem[];accounts:Account[];synthetic_scenario:boolean}>('/approvals',revision)
   const [busy,setBusy] = useState(false), [error,setError] = useState('')
   async function simulate(event:'paycheck'|'purchase') {setBusy(true);setError('');try{await api('/upgrade-demo/financial-alert',{method:'POST',body:JSON.stringify({event})});changed('Synthetic email parsed. Review the extracted fields before confirming.')}catch(e){setError(errorText(e))}finally{setBusy(false)}}
-  if(workspace!=='personal'&&workspace!=='scenario'&&!queue.data?.items.length) return null
+  const synthetic = workspace==='scenario'||queue.data?.synthetic_scenario
+  if(workspace!=='personal'&&!synthetic&&!queue.data?.items.length) return null
   return <Panel><PanelHeading title="Pending transaction approvals" subtitle={workspace==='scenario'||public_demo?'Simulated emails - actual parser, classifier and ledger':'Your financial emails - confirm posted transactions before they change your balance'}/><ErrorNotice message={queue.error||error}/>
-    {workspace==='scenario'&&<div className="button-row"><button className="button secondary" disabled={busy} onClick={()=>void simulate('paycheck')}>Simulate $400 paycheck email</button><button className="button secondary" disabled={busy} onClick={()=>void simulate('purchase')}>Simulate $15 purchase email</button></div>}
+    {synthetic&&<div className="button-row"><button className="button secondary" disabled={busy} onClick={()=>void simulate('paycheck')}>Simulate $400 paycheck email</button><button className="button secondary" disabled={busy} onClick={()=>void simulate('purchase')}>Simulate $15 purchase email</button></div>}
     {queue.data?.items.length?queue.data.items.map(item=><EmailReview active key={item.id} item={item} accounts={queue.data?.accounts||[]} changed={changed}/>):<p className="fine-print">No transactions awaiting confirmation. Connection and sync controls are in Settings.</p>}
   </Panel>
 }

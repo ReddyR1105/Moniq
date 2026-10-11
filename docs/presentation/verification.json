@@ -1,0 +1,79 @@
+{
+  "application_commit": "d2ad5807e41e5533c6d4180ea1f1b1bed17e11e1",
+  "decks": [
+    {
+      "file": "Moniq_Hacklanta_2026_Pitch.pptx",
+      "slides": 8,
+      "format": "16:9",
+      "native_powerpoint_text_bounds": "no overflow",
+      "full_hd_renders": 8,
+      "pdf": "native PowerPoint export, text and embedded fonts verified",
+      "text_boxes": 156
+    },
+    {
+      "file": "Moniq_Technical_Backup.pptx",
+      "slides": 2,
+      "format": "16:9",
+      "native_powerpoint_text_bounds": "no overflow",
+      "full_hd_renders": 2,
+      "pdf": "native PowerPoint export, text and embedded fonts verified",
+      "text_boxes": 22
+    }
+  ],
+  "file_hashes": {
+    "Moniq_Hacklanta_2026_Pitch.pptx": {
+      "bytes": 446100,
+      "sha256": "36dccb5f4d2af03b4f2af55d0b511db1a12cf95d4183d593dd4c004ebcf264db"
+    },
+    "Moniq_Technical_Backup.pptx": {
+      "bytes": 37374,
+      "sha256": "e840af10d69f13dc3821a23f903f777d5ab02960ec36856ae76d63752fbc6803"
+    },
+    "Moniq_Hacklanta_2026_Pitch.pdf": {
+      "bytes": 339107,
+      "sha256": "1e68daf71279190b7af214bcf0dcaae2e39558b15fedfd9644e1867245d6a9f0"
+    },
+    "Moniq_Technical_Backup.pdf": {
+      "bytes": 58676,
+      "sha256": "b20fec19885f74e8260b57272e5171963d35fc02ab17e123d1b58f387ea5bf77"
+    }
+  },
+  "browser_tests": {
+    "local": {
+      "startTime": "2026-10-10T23:28:01.949Z",
+      "duration": 104017.708,
+      "expected": 16,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "production": {
+      "startTime": "2026-10-10T23:29:20.386Z",
+      "duration": 32447.472,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "ml_raw_accuracy": 0.946969696969697,
+  "backend_tests": {
+    "passed": 109,
+    "seconds": 32.9,
+    "source": "actual pytest -q run during presentation preparation; 2 upstream deprecation warnings"
+  },
+  "timing": {
+    "spoken_words": 373,
+    "allocated_seconds": 160,
+    "target_seconds_with_transitions": 160,
+    "estimated_seconds_at_150_wpm": 149.2,
+    "estimated_seconds_at_130_wpm": 172.2
+  },
+  "quick_pitch": {
+    "spoken_words": 143,
+    "seconds_at_150_wpm": 57.2
+  },
+  "application_diff": [
+    "docs/WORK_DISCLOSURE.md"
+  ]
+}

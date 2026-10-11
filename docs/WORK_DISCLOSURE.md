@@ -25,3 +25,11 @@ Do not submit a blanket assertion that all substantial work occurred during Hack
 ## Finalization disclosure
 
 The existing Gmail, SmartApprove and Circles upgrade was preserved. Finalization added dashboard approvals, explicit account movements/debit aliases, savings contributions/projections, grounded assistant intents, regression tests and actual narrated recordings. Codex produced code, tests, documentation and media using Playwright, FFmpeg and local Windows speech synthesis. The team must verify which changes occurred in the official hacking period before making eligibility claims.
+
+## Judging presentation disclosure
+
+On October 10, 2026, Codex generated the eight-slide editable Moniq pitch, two separate technical backup slides, speaker notes/scripts and judges' Q&A. Native Microsoft PowerPoint exported the PDFs and rendered every slide for inspection; python-pptx and Pillow generated the assets/layout. Screenshots are crops of the existing synthetic Moniq dashboard and verified demonstration video, with no real Gmail content. Backend/browser tests and independent synthetic ML evaluation were rerun before including their figures. Presenter names, team contributions and work-window eligibility remain manual fields. No GitHub push, deployment or Devpost submission was performed for this presentation.
+
+## Mobile and premium narration work
+
+Codex prepared the existing Vite application for static-only PWA installation, strengthened synthetic public-demo isolation, added mobile/PWA tests and wrote deployment/native-roadmap documentation. The existing controlled synthetic email parser/approval flow is accessible in the visitor-owned public walkthrough; real Gmail endpoints remain blocked. The premium narration uses new Microsoft Edge Andrew neural synthesis at +15%, a rewritten script and a fresh actual browser capture in separate synthetic databases. No owner email content or credentials are sent to the narration service. Existing videos, presentation and original submission ZIP are preserved. Subjective voice quality and final presentation approval require the owner's listening review. Public hosting, native builds and external publication are not claimed.
